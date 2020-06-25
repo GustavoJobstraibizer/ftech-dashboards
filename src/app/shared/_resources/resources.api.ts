@@ -7,4 +7,13 @@ export const ApiRoutes = {
       post: 'portal/autenticacao/refresh',
     },
   },
+  dashboards: {
+    franqueados: {
+      vendasTipoPagamento: 'dashboards/franqueados/vendasTipoPagamento',
+      vendasMensal: 'dashboards/franqueados/vendasMensal',
+      vendasAcumuladas: 'dashboards/franqueados/vendasAcumuladas',
+      vendasTopProdutos: 'dashboards/franqueados/vendasTopProdutos',
+      vendasHistorico: 'dashboards/franqueados/vendasHistorico',
+    },
+  },
 };

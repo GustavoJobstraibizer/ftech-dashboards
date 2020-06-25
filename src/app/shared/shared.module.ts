@@ -30,6 +30,11 @@ import { ScrollableDirective } from './directives/scrollable/scrollable.directiv
 import { SparklineDirective } from './directives/sparkline/sparkline.directive';
 import { VectormapDirective } from './directives/vectormap/vectormap.directive';
 import { CardComponent } from './_components/card/card.component';
+import { TipoPagamentoComponent } from './_components/charts/vendas/tipo-pagamento/tipo-pagamento.component';
+import { MensalComponent } from './_components/charts/vendas/mensal/mensal.component';
+import { HistoricoComponent } from './_components/charts/vendas/historico/historico.component';
+import { AcumuladosComponent } from './_components/charts/vendas/acumulados/acumulados.component';
+import { TopProdutosComponent } from './_components/charts/vendas/top-produtos/top-produtos.component';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -68,6 +73,11 @@ import { CardComponent } from './_components/card/card.component';
     ScrollableDirective,
     JqcloudDirective,
     CardComponent,
+    TipoPagamentoComponent,
+    MensalComponent,
+    HistoricoComponent,
+    AcumuladosComponent,
+    TopProdutosComponent,
   ],
   exports: [
     CommonModule,
