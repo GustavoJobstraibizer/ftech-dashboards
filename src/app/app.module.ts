@@ -1,4 +1,8 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -12,6 +16,8 @@ import { CoreModule } from './core/core.module';
 import { LayoutModule } from './layout/layout.module';
 import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -36,7 +42,11 @@ export function createTranslateLoader(http: HttpClient) {
       },
     }),
   ],
-  providers: [TranslateService],
+  providers: [
+    TranslateService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,9 +1,12 @@
+import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './../core/guards/auth.guard';
 import { LayoutComponent } from '../layout/layout.component';
 
 export const routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
@@ -14,6 +17,11 @@ export const routes = [
     ],
   },
 
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+
   // Not found
-  { path: '**', redirectTo: 'home' },
+  { path: '**', redirectTo: '' },
 ];

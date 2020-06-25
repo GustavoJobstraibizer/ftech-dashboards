@@ -1,3 +1,5 @@
+import { AuthenticationService } from './../../core/services/authentication.service';
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuService } from 'src/app/core/menu/menu.service';
 import { SettingsService } from 'src/app/core/settings/settings.service';
@@ -21,7 +23,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     public menu: MenuService,
     public userblockService: UserblockService,
-    public settings: SettingsService
+    public settings: SettingsService,
+    public authenticationService: AuthenticationService
   ) {
     // show only a few items on demo
     this.menuItems = menu.getMenu().slice(0, 4); // for horizontal layout
@@ -78,5 +81,9 @@ export class HeaderComponent implements OnInit {
     } else {
       el.children('em').removeClass('fa-compress').addClass('fa-expand');
     }
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
 }
