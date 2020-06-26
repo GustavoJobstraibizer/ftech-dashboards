@@ -3,10 +3,10 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-} from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { HelperService } from "../services/helper.service";
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HelperService } from '../services/helper.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -16,9 +16,9 @@ export class JwtInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-    if (currentUser && currentUser.accessToken) {
+    if (currentUser && currentUser.AccessToken) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${this._helperService.getAccessToken()}`,

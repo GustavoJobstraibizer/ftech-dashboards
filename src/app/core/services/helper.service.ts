@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class HelperService {
   constructor() {}
 
   getAccessToken(): string {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    return currentUser.accessToken;
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return currentUser.AccessToken;
   }
 }

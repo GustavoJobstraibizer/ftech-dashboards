@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IVendasMensal } from 'src/app/shared/interfaces/vendas-mensal.interface';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -20,10 +21,25 @@ export class FranqueadosService {
     );
   }
 
-  getVendasMensal(): Observable<IVendasMensal> {
-    return this.http.get<IVendasMensal>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasMensal}`
-    );
+  getVendasMensal(): Observable<any> {
+    return this.http
+      .get<IVendasMensal>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasMensal}`
+      )
+      .pipe(
+        map((data) => {
+          const vendas = data.Data.Vendas.reduce((acc, venda) => {
+            acc.push({
+              Mes: `${venda.Mes}/${venda.Ano}`,
+              Valor: venda.Venda,
+              Media: data.Data.Media,
+            });
+            return acc;
+          }, []);
+
+          return vendas;
+        })
+      );
   }
 
   getVendasAcumuladas(): Observable<IVendasAcumuladas> {
@@ -38,9 +54,29 @@ export class FranqueadosService {
     );
   }
 
-  getVendasHistorico(): Observable<IVendasHistorico> {
-    return this.http.get<IVendasHistorico>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasHistorico}`
-    );
+  getVendasHistorico(): Observable<any> {
+    return this.http
+      .get<IVendasHistorico>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasHistorico}`
+      )
+      .pipe(
+        map((data) => {
+          const historico = data.Data.Vendas.reduce((acc, venda) => {
+            acc.push({
+              Mes: venda.Mes,
+              VendaAnoAnterior: venda.VendaAnoAnterior,
+              VendaAnoAtual: venda.VendaAnoAtual,
+              MediaAnoAnterior: data.Data.MediaAnoAnterior,
+            });
+            return acc;
+          }, []);
+
+          return {
+            AnoAnterior: data.Data.AnoAnterior,
+            AnoAtual: data.Data.AnoAtual,
+            Vendas: historico,
+          };
+        })
+      );
   }
 }
