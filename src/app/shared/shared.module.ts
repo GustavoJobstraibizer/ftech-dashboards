@@ -35,6 +35,8 @@ import { MensalComponent } from './_components/charts/vendas/mensal/mensal.compo
 import { HistoricoComponent } from './_components/charts/vendas/historico/historico.component';
 import { AcumuladosComponent } from './_components/charts/vendas/acumulados/acumulados.component';
 import { TopProdutosComponent } from './_components/charts/vendas/top-produtos/top-produtos.component';
+import { IndicadoresComponent } from './_components/indicadores/indicadores.component';
+import { SkeletonLoaderComponent } from './_components/skeleton-loader/skeleton-loader.component';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -78,6 +80,8 @@ import { TopProdutosComponent } from './_components/charts/vendas/top-produtos/t
     HistoricoComponent,
     AcumuladosComponent,
     TopProdutosComponent,
+    IndicadoresComponent,
+    SkeletonLoaderComponent,
   ],
   exports: [
     CommonModule,
@@ -117,6 +121,8 @@ import { TopProdutosComponent } from './_components/charts/vendas/top-produtos/t
     HistoricoComponent,
     AcumuladosComponent,
     TopProdutosComponent,
+    IndicadoresComponent,
+    SkeletonLoaderComponent,
   ],
 })
 

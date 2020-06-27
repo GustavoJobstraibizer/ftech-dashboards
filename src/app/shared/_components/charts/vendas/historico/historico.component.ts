@@ -1,5 +1,12 @@
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChange,
+  SimpleChanges,
+} from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
@@ -13,65 +20,77 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './historico.component.html',
   styleUrls: ['./historico.component.scss'],
 })
-export class HistoricoComponent implements OnInit {
+export class HistoricoComponent implements OnInit, OnChanges {
+  @Input() carregarHistorico = false;
+
   public historicoVendas: any;
+
+  public chart: any;
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
   ngOnInit(): void {
+    this.chart = am4core.create('chartHistoricoVendas', am4charts.XYChart);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.carregarHistorico && changes.carregarHistorico.currentValue) {
+      this.getHistoricoVendas();
+    }
+  }
+
+  getHistoricoVendas() {
     this.franqueadosDashBoardsService
       .getVendasHistorico()
       .subscribe((response) => {
-        console.log('historico >>> ', response);
-
         this.historicoVendas = response.Vendas;
-        const chart = am4core.create('chartHistoricoVendas', am4charts.XYChart);
 
-        // let chart = am4core.create("chartdiv", am4charts.XYChart);
+        this.chart.paddingRight = 20;
+        this.chart.data = [...this.historicoVendas];
 
-        chart.paddingRight = 20;
-        chart.data = [...this.historicoVendas];
-
-        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        const categoryAxis = this.chart.xAxes.push(
+          new am4charts.CategoryAxis()
+        );
         categoryAxis.dataFields.category = 'Mes';
-        // categoryAxis.title.text = 'Vendas';
 
         // First value axis
-        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-        // valueAxis.title.text = 'Venda';
+        const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
 
         // Second value axis
-        var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
-        // valueAxis2.title.text = 'Media sold';
+        const valueAxis2 = this.chart.yAxes.push(new am4charts.ValueAxis());
         valueAxis2.renderer.opposite = true;
 
         // First series
-        var series = chart.series.push(new am4charts.ColumnSeries());
+        const series = this.chart.series.push(new am4charts.ColumnSeries());
         series.dataFields.valueY = 'VendaAnoAnterior';
         series.dataFields.categoryX = 'Mes';
         series.name = response.AnoAnterior;
         series.tooltipText = '{name}: [bold]{valueY}[/]';
+        series.stroke = am4core.color('#818181');
+        series.columns.template.fill = am4core.color('#818181');
 
-        var serie3 = chart.series.push(new am4charts.ColumnSeries());
+        const serie3 = this.chart.series.push(new am4charts.ColumnSeries());
         serie3.dataFields.valueY = 'VendaAnoAtual';
         serie3.dataFields.categoryX = 'Mes';
         serie3.name = response.AnoAtual;
         serie3.tooltipText = '{name}: [bold]{valueY}[/]';
+        serie3.stroke = am4core.color('#6fb142');
+        serie3.columns.template.fill = am4core.color('#6fb142');
 
         // Second series
-        var series2 = chart.series.push(new am4charts.LineSeries());
+        const series2 = this.chart.series.push(new am4charts.LineSeries());
         series2.dataFields.valueY = 'MediaAnoAnterior';
         series2.dataFields.categoryX = 'Mes';
         series2.name = `Média ${response.AnoAnterior}`;
         series2.tooltipText = '{name}: [bold]{valueY}[/]';
-        series2.strokeWidth = 3;
+        series2.strokeWidth = 5;
         series2.yAxis = valueAxis2;
 
-        // Add legend
-        chart.legend = new am4charts.Legend();
+        // Adiciona a legenda
+        this.chart.legend = new am4charts.Legend();
 
-        // Add cursor
-        chart.cursor = new am4charts.XYCursor();
+        // Adiciona os cursores
+        this.chart.cursor = new am4charts.XYCursor();
       });
   }
 }

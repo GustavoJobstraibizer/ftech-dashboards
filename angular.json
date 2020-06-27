@@ -51,10 +51,17 @@
               "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
               "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
               "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/brands.scss"
+              "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
+              {
+                "input": "src/app/shared/animations/ghost-animation.scss",
+                "lazy": true
+              }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/assets/scss/variables"]
+              "includePaths": [
+                "src/assets/scss/variables",
+                "src/app/shared/animations"
+              ]
             },
             "scripts": ["node_modules/jquery/dist/jquery.js"]
           },

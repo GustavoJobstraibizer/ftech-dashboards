@@ -1,25 +1,31 @@
 <div class="home-container">
-  <ft-card [title]="'Vendas por tipo de pagamento'">
+  <ft-indicadores></ft-indicadores>
+
+  <ft-card [title]="'Vendas por tipo de pagamento'" id="tipoPagto">
     <chart-tipo-pagamento></chart-tipo-pagamento>
   </ft-card>
 
-  <ft-card [title]="'Vendas Mensal'">
-    <chart-mensal></chart-mensal>
+  <ft-card [title]="'Vendas Mensal'" id="vendasMensal">
+    <chart-mensal
+      [(carregarVendasMensal)]="carregarValores.carregarVendasMensal"
+    ></chart-mensal>
   </ft-card>
 
-  <ft-card [title]="'Histórico de vendas'">
-    <chart-historico></chart-historico>
+  <ft-card [title]="'Histórico de vendas'" id="historicoVendas">
+    <chart-historico
+      [(carregarHistorico)]="carregarValores.carregarHistorico"
+    ></chart-historico>
   </ft-card>
 
-  <ft-card [title]="'Vendas Acumuladas 2020'">
-    <chart-acumulados></chart-acumulados>
+  <ft-card [title]="'Vendas Acumuladas 2020'" id="vendasAcumuladas">
+    <chart-acumulados
+      [(carregarVendasAcc)]="carregarValores.carregaVendasAcumuladas"
+    ></chart-acumulados>
   </ft-card>
 
-  <ft-card [title]="'Top 10 Produtos mais vendidos'">
-    <chart-top-produtos></chart-top-produtos>
+  <ft-card [title]="'Top 10 Produtos mais vendidos'" id="topProdutos">
+    <chart-top-produtos
+      [(carregarTopProdutos)]="carregarValores.carregaTopProdutos"
+    ></chart-top-produtos>
   </ft-card>
 </div>
-
-<!-- <ft-card [title]="'Primeiro gráfico teste'">
-  <div id="chartdiv" style="width: 100%; height: 500px;"></div>
-</ft-card> -->

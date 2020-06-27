@@ -10,4 +10,22 @@ export class HelperService {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return currentUser.AccessToken;
   }
+
+  getReferenceMonth(): string {
+    const MONTHS = [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro',
+    ];
+    return `${MONTHS[new Date().getMonth()]}/${new Date().getFullYear()}`;
+  }
 }

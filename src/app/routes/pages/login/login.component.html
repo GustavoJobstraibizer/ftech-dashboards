@@ -1,18 +1,20 @@
-<div class="wrapper">
-  <div class="block-center mt-4 wd-xl">
+<div class="wrapper h-100">
+  <div
+    class="block-center mt-4 d-flex justify-content-center align-items-center h-100"
+  >
     <!-- START card-->
-    <div class="card card-flat">
+    <div class="card card-flat shadow content-login">
       <div class="card-header text-center bg-dark">
         <a href="#">
           <img
             class="block-center rounded"
-            src="assets/img/logo.png"
+            src="assets/img/mini_logo.png"
             alt="Image"
           />
         </a>
       </div>
       <div class="card-body">
-        <p class="text-center py-2">SIGN IN TO CONTINUE.</p>
+        <p class="text-center py-2">Faça login para continuar.</p>
         <form
           [formGroup]="loginForm"
           class="form-validate mb-3"
@@ -22,26 +24,26 @@
           (ngSubmit)="submitForm($event)"
         >
           <div class="form-group">
-            <div class="input-group with-focus">
-              <input
-                class="form-control border-right-0"
-                id="exampleInputUsuario1"
-                type="text"
-                name="Usuario"
-                placeholder="Enter Usuario"
-                autocomplete="off"
-                formControlName="Usuario"
-                required=""
-              />
-              <div class="input-group-append">
+            <!-- <div class="input-group with-focus"> -->
+            <input
+              class="form-control"
+              id="exampleInputUsuario1"
+              type="text"
+              name="Usuario"
+              placeholder="Usuário"
+              autocomplete="off"
+              formControlName="Usuario"
+              required=""
+            />
+            <!-- <div class="input-group-append">
                 <span
                   class="input-group-text text-muted bg-transparent border-left-0"
                 >
                   <em class="fa fa-envelope"></em>
                 </span>
-              </div>
-            </div>
-            <div
+              </div> -->
+            <!-- </div> -->
+            <small
               class="text-danger"
               *ngIf="
                 loginForm.controls['Usuario'].hasError('required') &&
@@ -49,9 +51,9 @@
                   loginForm.controls['Usuario'].touched)
               "
             >
-              This field is required
-            </div>
-            <div
+              Preencha o campo E-mail
+            </small>
+            <small
               class="text-danger"
               *ngIf="
                 loginForm.controls['Usuario'].hasError('Usuario') &&
@@ -59,29 +61,41 @@
                   loginForm.controls['Usuario'].touched)
               "
             >
-              This field must be a valid Usuario address
-            </div>
+              É necessário que preencha um E-mail válido
+            </small>
           </div>
-          <div class="form-group">
-            <div class="input-group with-focus">
-              <input
-                class="form-control border-right-0"
-                id="exampleInputPassword1"
-                type="password"
-                name="password"
-                placeholder="Password"
-                formControlName="Senha"
-                required=""
-              />
-              <div class="input-group-append">
+          <div class="form-group p-relative">
+            <!-- <div class="input-group with-focus"> -->
+            <input
+              #inputPasswd
+              class="form-control"
+              id="exampleInputPassword1"
+              type="password"
+              name="password"
+              placeholder="Senha"
+              formControlName="Senha"
+              required=""
+            />
+            <i
+              class="fas see-pass"
+              [ngClass]="{
+                'fa-eye': inputPasswd.type == 'password',
+                'fa-eye-slash': inputPasswd.type == 'text'
+              }"
+              (click)="
+                inputPasswd.type =
+                  inputPasswd.type == 'text' ? 'password' : 'text'
+              "
+            ></i>
+            <!-- <div class="input-group-append">
                 <span
                   class="input-group-text text-muted bg-transparent border-left-0"
                 >
                   <em class="fa fa-lock"></em>
                 </span>
               </div>
-            </div>
-            <div
+            </div> -->
+            <small
               class="text-danger"
               *ngIf="
                 loginForm.controls['Senha'].hasError('required') &&
@@ -89,31 +103,31 @@
                   loginForm.controls['Senha'].touched)
               "
             >
-              This field is required
-            </div>
+              Preencha o campo Senha
+            </small>
           </div>
           <div class="clearfix">
             <div class="checkbox c-checkbox float-left mt0">
               <label>
                 <input type="checkbox" value="" name="account_remember" />
-                <span class="fa fa-check"></span>Remember Me</label
+                <span class="fa fa-check"></span>Lembre-me</label
               >
             </div>
-            <div class="float-right">
+            <!-- <div class="float-right">
               <a class="text-muted" [routerLink]="'/recover'"
                 >Forgot your password?</a
               >
-            </div>
+            </div> -->
           </div>
           <button class="btn btn-block btn-primary mt-3" type="submit">
-            Login
+            Entrar
           </button>
         </form>
         <!-- <div class="alert alert-danger text-center" ></div> -->
-        <p class="pt-3 text-center">Need to Signup?</p>
+        <!-- <p class="pt-3 text-center">Need to Signup?</p>
         <a class="btn btn-block btn-secondary" [routerLink]="'/register'"
           >Register Now</a
-        >
+        > -->
       </div>
     </div>
     <!-- END card-->

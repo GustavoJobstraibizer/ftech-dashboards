@@ -3,24 +3,26 @@ import { Component, OnInit } from '@angular/core';
 import { UserblockService } from './userblock.service';
 
 @Component({
-    selector: 'app-userblock',
-    templateUrl: './userblock.component.html',
-    styleUrls: ['./userblock.component.scss']
+  selector: 'app-userblock',
+  templateUrl: './userblock.component.html',
+  styleUrls: ['./userblock.component.scss'],
 })
 export class UserblockComponent implements OnInit {
-    user: any;
-    constructor(public userblockService: UserblockService) {
+  user: any;
 
-        this.user = {
-            picture: 'assets/img/user/01.jpg'
-        };
-    }
+  public userLogged;
 
-    ngOnInit() {
-    }
+  constructor(public userblockService: UserblockService) {
+    this.user = {
+      picture: 'assets/img/user/unnamed.png',
+    };
+  }
 
-    userBlockIsVisible() {
-        return this.userblockService.getVisibility();
-    }
+  ngOnInit() {
+    this.userLogged = this.userblockService.getUserInfo();
+  }
 
+  userBlockIsVisible() {
+    return this.userblockService.getVisibility();
+  }
 }

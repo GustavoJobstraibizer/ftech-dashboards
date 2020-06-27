@@ -1,7 +1,7 @@
 @import "variables";
 
 .card {
-  margin: 0 0 4px;
+  margin: 0 0 10px;
   box-shadow: $box-shadow;
   border-radius: 10px;
   width: auto;
@@ -16,12 +16,15 @@
     font-size: 18px;
     font-family: $ft-font-default;
     color: $ft-black-solid;
+    font-weight: bold;
   }
 
   .card-body {
+    text-align: center;
     // display: flex;
     // justify-content: center;
     // align-items: center;
-    position: relative;
+    // width: auto;
+    // position: relative;
   }
 }

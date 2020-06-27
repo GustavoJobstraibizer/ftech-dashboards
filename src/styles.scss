@@ -21,3 +21,7 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 //== Application
 @import "./app/shared/styles/app.scss";
+
+.c-pointer {
+  cursor: pointer;
+}

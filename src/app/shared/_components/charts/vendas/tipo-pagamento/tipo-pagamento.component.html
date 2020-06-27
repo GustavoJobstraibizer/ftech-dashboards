@@ -1,1 +1,36 @@
-<div id="chartTipoPagamento" style="width: 100%; height: 500px;"></div>
+<div
+  class="chartTipoPagamento"
+  [ngStyle]="{ display: vendasTipoPagamento ? 'block' : 'none' }"
+  style="width: 100%; height: 500px;"
+></div>
+
+<div
+  *ngIf="!vendasTipoPagamento"
+  class="d-flex justify-content-center align-items-center flex-column p-absolute"
+  style="height: 500px;"
+>
+  <ft-skeleton-loader
+    [appearance]="'circle'"
+    [theme]="{
+      'max-width': '300px',
+      width: '300px',
+      height: '300px',
+      'margin-bottom': '40px'
+    }"
+  ></ft-skeleton-loader>
+
+  <div class="d-flex justify-content-between legend-skeleton">
+    <ft-skeleton-loader
+      [theme]="{ width: '30px', height: '30px' }"
+    ></ft-skeleton-loader>
+    <ft-skeleton-loader
+      [theme]="{ width: '30px', height: '30px' }"
+    ></ft-skeleton-loader>
+    <ft-skeleton-loader
+      [theme]="{ width: '30px', height: '30px' }"
+    ></ft-skeleton-loader>
+    <ft-skeleton-loader
+      [theme]="{ width: '30px', height: '30px' }"
+    ></ft-skeleton-loader>
+  </div>
+</div>

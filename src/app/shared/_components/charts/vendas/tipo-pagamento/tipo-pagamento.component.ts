@@ -7,6 +7,13 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 
 am4core.useTheme(am4themes_animated);
 
+const colors = {
+  Dinheiro: '#6fb142',
+  Crédito: '#4472c4',
+  Débito: '#ffc54b',
+  Cortesia: '#5f7b53',
+};
+
 @Component({
   selector: 'chart-tipo-pagamento',
   templateUrl: './tipo-pagamento.component.html',
@@ -18,18 +25,24 @@ export class TipoPagamentoComponent implements OnInit {
   public vendasTipoPagamento: IVendasTipoPagamento;
 
   ngOnInit(): void {
-    const chart = am4core.create('chartTipoPagamento', am4charts.PieChart);
-
-    const series = chart.series.push(new am4charts.PieSeries());
-    series.dataFields.value = 'Valor';
-    series.dataFields.category = 'FormaPagamento';
-
     this.franqueadosDashBoardsService
       .getVendasTipoPagamento()
       .subscribe((response) => {
-        console.log(response);
         this.vendasTipoPagamento = response;
+
+        const chart = am4core.create('chartTipoPagamento', am4charts.PieChart);
+
+        this.vendasTipoPagamento.Data.map(
+          (formPag) =>
+            (formPag.color = am4core.color(colors[formPag.FormaPagamento]))
+        );
+
         chart.data = [...this.vendasTipoPagamento.Data];
+
+        const pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = 'Valor';
+        pieSeries.dataFields.category = 'FormaPagamento';
+        pieSeries.slices.template.propertyFields.fill = 'color';
 
         chart.legend = new am4charts.Legend();
       });
