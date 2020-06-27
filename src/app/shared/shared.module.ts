@@ -115,6 +115,8 @@ import { TopProdutosComponent } from './_components/charts/vendas/top-produtos/t
     TipoPagamentoComponent,
     MensalComponent,
     HistoricoComponent,
+    AcumuladosComponent,
+    TopProdutosComponent,
   ],
 })
 
