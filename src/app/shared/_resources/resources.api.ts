@@ -14,6 +14,11 @@ export const ApiRoutes = {
       vendasAcumuladas: 'dashboards/franqueados/vendasAcumuladas',
       vendasTopProdutos: 'dashboards/franqueados/vendasTopProdutos',
       vendasHistorico: 'dashboards/franqueados/vendasHistorico',
+      vendasPorHora: 'dashboards/franqueados/vendasPorHora',
     },
+  },
+  adm: {
+    listaPessoaFranqueado:
+      'administracao/franqueados/recuperarListaPessoaFranqueadoPerfil',
   },
 };

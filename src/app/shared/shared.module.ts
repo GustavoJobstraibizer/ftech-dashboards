@@ -37,6 +37,10 @@ import { AcumuladosComponent } from './_components/charts/vendas/acumulados/acum
 import { TopProdutosComponent } from './_components/charts/vendas/top-produtos/top-produtos.component';
 import { IndicadoresComponent } from './_components/indicadores/indicadores.component';
 import { SkeletonLoaderComponent } from './_components/skeleton-loader/skeleton-loader.component';
+import { PageTitleComponent } from './_components/page-title/page-title.component';
+import { ComboFranquiasComponent } from './_components/filter/combo-franquias/combo-franquias.component';
+import { PeriodoComponent } from './_components/filter/periodo/periodo.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -62,6 +66,7 @@ import { SkeletonLoaderComponent } from './_components/skeleton-loader/skeleton-
     TooltipModule.forRoot(),
     PopoverModule.forRoot(),
     TypeaheadModule.forRoot(),
+    NgSelectModule,
     // ToasterModule
   ],
   providers: [ColorsService],
@@ -82,6 +87,9 @@ import { SkeletonLoaderComponent } from './_components/skeleton-loader/skeleton-
     TopProdutosComponent,
     IndicadoresComponent,
     SkeletonLoaderComponent,
+    PageTitleComponent,
+    ComboFranquiasComponent,
+    PeriodoComponent,
   ],
   exports: [
     CommonModule,
@@ -123,6 +131,9 @@ import { SkeletonLoaderComponent } from './_components/skeleton-loader/skeleton-
     TopProdutosComponent,
     IndicadoresComponent,
     SkeletonLoaderComponent,
+    PageTitleComponent,
+    PeriodoComponent,
+    ComboFranquiasComponent,
   ],
 })
 

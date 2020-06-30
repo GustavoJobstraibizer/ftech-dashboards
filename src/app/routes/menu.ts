@@ -6,7 +6,7 @@ const Home = {
 
 const VendasHora = {
   text: 'Vendas / Hora',
-  link: '#',
+  link: '/franqueado/vendas-por-hora',
   icon: 'fas fa-hourglass-half',
 };
 

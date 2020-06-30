@@ -22,6 +22,9 @@
 //== Application
 @import "./app/shared/styles/app.scss";
 
+// ng-select
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 .c-pointer {
   cursor: pointer;
 }

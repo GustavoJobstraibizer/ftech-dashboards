@@ -1,0 +1,28 @@
+<form [formGroup]="formPeriodo" role="form">
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label for="inputEmail4">Data Início</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="dataInicio"
+        bsDatepicker
+        [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+      />
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="inputEmail4">Data Fim</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="dataFim"
+        bsDatepicker
+        [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+      />
+    </div>
+
+    <ft-combo-franquias formControlName="codigoFranqueado"></ft-combo-franquias>
+  </div>
+  <button class="btn btn-primary" (click)="handleFilter()">Filtrar</button>
+</form>

@@ -1,3 +1,4 @@
+import { IVendasHora } from './../../../shared/interfaces/vendas-hora.interface';
 import { IVendasHistorico } from './../../../shared/interfaces/vendas-historico.interface';
 import { IVendasTopProdutos } from './../../../shared/interfaces/vendas-top-produtos.interface';
 import { IVendasAcumuladas } from './../../../shared/interfaces/vendas-acumuladas.interface';
@@ -78,5 +79,21 @@ export class FranqueadosService {
           };
         })
       );
+  }
+
+  getVendasPorHora(
+    dataInicio: string,
+    dataFim: string,
+    codigoFranqueado: number
+  ): Observable<IVendasHora> {
+    const queryParams = new URLSearchParams({
+      dataInicio,
+      dataFim,
+      codigoFranqueado: codigoFranqueado.toString(),
+    }).toString();
+    console.log(queryParams);
+    return this.http.get<IVendasHora>(
+      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasPorHora}?${queryParams}`
+    );
   }
 }

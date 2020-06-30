@@ -14,6 +14,13 @@ export const routes = [
         loadChildren: () =>
           import('./home/home.module').then((h) => h.HomeModule),
       },
+      {
+        path: 'franqueado',
+        loadChildren: () =>
+          import('./pages/reports/franqueado/franqueado.module').then(
+            (f) => f.FranqueadoModule
+          ),
+      },
     ],
   },
 

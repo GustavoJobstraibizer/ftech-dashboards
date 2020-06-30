@@ -1,0 +1,8 @@
+<ft-page-title
+  [title]="'Vendas por Hora'"
+  [subTitle]="
+    'Selecione um período para visualizar as vendas agredadas por horário e por dia da semana'
+  "
+></ft-page-title>
+<!-- <ft-card [title]="'Vendas por hora'"></ft-card> -->
+<ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
