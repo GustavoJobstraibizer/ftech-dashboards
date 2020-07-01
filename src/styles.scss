@@ -4,6 +4,8 @@
   src: url("/assets/fonts/Circular Std Book.ttf");
 }
 
+@import "variables";
+
 //== Vendor
 // @import '~@fortawesome/fontawesome-free-webfonts/webfonts';
 // @import '../node_modules/~@fortawesome/fontawesome-free-webfonts/scss/regular.css';
@@ -27,4 +29,24 @@
 
 .c-pointer {
   cursor: pointer;
+}
+
+label {
+  margin-bottom: 4px;
+  color: $ft-black-solid;
+  font-family: $ft-font-default;
+}
+
+tspan {
+  font-family: $ft-font-default;
+}
+
+// .content-wrapper {
+//   height: calc(100vh - 115px) !important;
+// }
+
+input.form-control {
+  border: 2px solid #dbe9f5;
+  box-shadow: 0 4px 6px 0 rgba(31, 70, 88, 0.04);
+  height: 40px;
 }

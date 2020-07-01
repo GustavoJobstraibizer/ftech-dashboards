@@ -11,6 +11,7 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import am4themes_kelly from '@amcharts/amcharts4/themes/animated';
+import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
 
 am4core.useTheme(am4themes_kelly);
 am4core.useTheme(am4themes_animated);
@@ -25,6 +26,7 @@ export class MensalComponent implements OnInit, OnChanges {
 
   public vendasMensal: any;
   private chart: am4charts.XYChart;
+  public filtroFranqueado = new FiltroFranqueado(0);
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
@@ -43,7 +45,7 @@ export class MensalComponent implements OnInit, OnChanges {
 
   getVendasMensal() {
     this.franqueadosDashBoardsService
-      .getVendasMensal()
+      .getVendasMensal(this.filtroFranqueado)
       .subscribe((response) => {
         this.vendasMensal = response;
 
@@ -59,8 +61,8 @@ export class MensalComponent implements OnInit, OnChanges {
         const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
 
         // Second value axis
-        const valueAxis2 = this.chart.yAxes.push(new am4charts.ValueAxis());
-        valueAxis2.renderer.opposite = true;
+        // const valueAxis2 = this.chart.yAxes.push(new am4charts.ValueAxis());
+        // valueAxis2.renderer.opposite = true;
 
         // First series
         const series = this.chart.series.push(new am4charts.ColumnSeries());
@@ -79,7 +81,7 @@ export class MensalComponent implements OnInit, OnChanges {
         series2.tooltipText = '{name}: [bold]{valueY}[/]';
         series2.stroke = am4core.color('#4472c4');
         series2.strokeWidth = 5;
-        series2.yAxis = valueAxis2;
+        // series2.yAxis = valueAxis2;
 
         // Add legend
         this.chart.legend = new am4charts.Legend();

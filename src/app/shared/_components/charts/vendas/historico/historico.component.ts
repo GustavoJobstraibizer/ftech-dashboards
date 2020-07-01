@@ -11,6 +11,7 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import am4themes_kelly from '@amcharts/amcharts4/themes/animated';
+import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
 
 am4core.useTheme(am4themes_kelly);
 am4core.useTheme(am4themes_animated);
@@ -26,6 +27,7 @@ export class HistoricoComponent implements OnInit, OnChanges {
   public historicoVendas: any;
 
   public chart: any;
+  public filtroFranqueado = new FiltroFranqueado(0);
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
@@ -41,7 +43,7 @@ export class HistoricoComponent implements OnInit, OnChanges {
 
   getHistoricoVendas() {
     this.franqueadosDashBoardsService
-      .getVendasHistorico()
+      .getVendasHistorico(this.filtroFranqueado)
       .subscribe((response) => {
         this.historicoVendas = response.Vendas;
 
@@ -57,8 +59,8 @@ export class HistoricoComponent implements OnInit, OnChanges {
         const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
 
         // Second value axis
-        const valueAxis2 = this.chart.yAxes.push(new am4charts.ValueAxis());
-        valueAxis2.renderer.opposite = true;
+        // const valueAxis2 = this.chart.yAxes.push(new am4charts.ValueAxis());
+        // valueAxis2.renderer.opposite = true;
 
         // First series
         const series = this.chart.series.push(new am4charts.ColumnSeries());
@@ -84,7 +86,7 @@ export class HistoricoComponent implements OnInit, OnChanges {
         series2.name = `Média ${response.AnoAnterior}`;
         series2.tooltipText = '{name}: [bold]{valueY}[/]';
         series2.strokeWidth = 5;
-        series2.yAxis = valueAxis2;
+        // series2.yAxis = valueAxis2;
 
         // Adiciona a legenda
         this.chart.legend = new am4charts.Legend();

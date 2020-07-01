@@ -1,8 +1,25 @@
 <div class="home-container">
-  <ft-indicadores></ft-indicadores>
+  <div class="d-flex flex-column">
+    <h2 class="home-title">
+      Indicadores do franqueado - Mês de referência <strong>{{ month }}</strong>
+    </h2>
+
+    <div class="content-indicador">
+      <ft-indicadores></ft-indicadores>
+      <div
+        class="pl-0 pr-0 col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 ml-0 ml-md-2 ml-lg-2 ml-xl-2"
+      >
+        <ft-combo-franquias
+          (handleChangeEmit)="getCodigoFranqueado($event)"
+        ></ft-combo-franquias>
+      </div>
+    </div>
+  </div>
 
   <ft-card [title]="'Vendas por tipo de pagamento'" id="tipoPagto">
-    <chart-tipo-pagamento></chart-tipo-pagamento>
+    <chart-tipo-pagamento
+      [(codigoFranqueado)]="codigoFranqueado"
+    ></chart-tipo-pagamento>
   </ft-card>
 
   <ft-card [title]="'Vendas Mensal'" id="vendasMensal">

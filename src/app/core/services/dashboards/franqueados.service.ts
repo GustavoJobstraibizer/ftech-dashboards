@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IVendasMensal } from 'src/app/shared/interfaces/vendas-mensal.interface';
 import { map } from 'rxjs/operators';
+import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,16 +17,18 @@ import { map } from 'rxjs/operators';
 export class FranqueadosService {
   constructor(private http: HttpClient) {}
 
-  getVendasTipoPagamento(): Observable<IVendasTipoPagamento> {
+  getVendasTipoPagamento(
+    filtroFranqueado: FiltroFranqueado
+  ): Observable<IVendasTipoPagamento> {
     return this.http.get<IVendasTipoPagamento>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasTipoPagamento}`
+      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasTipoPagamento}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
     );
   }
 
-  getVendasMensal(): Observable<any> {
+  getVendasMensal(filtroFranqueado: FiltroFranqueado): Observable<any> {
     return this.http
       .get<IVendasMensal>(
-        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasMensal}`
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasMensal}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
       )
       .pipe(
         map((data) => {
@@ -43,22 +46,26 @@ export class FranqueadosService {
       );
   }
 
-  getVendasAcumuladas(): Observable<IVendasAcumuladas> {
+  getVendasAcumuladas(
+    filtroFranqueado: FiltroFranqueado
+  ): Observable<IVendasAcumuladas> {
     return this.http.get<IVendasAcumuladas>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasAcumuladas}`
+      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasAcumuladas}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
     );
   }
 
-  getVendasTopProdutos(): Observable<IVendasTopProdutos> {
+  getVendasTopProdutos(
+    filtroFranqueado: FiltroFranqueado
+  ): Observable<IVendasTopProdutos> {
     return this.http.get<IVendasTopProdutos>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasTopProdutos}`
+      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasTopProdutos}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
     );
   }
 
-  getVendasHistorico(): Observable<any> {
+  getVendasHistorico(filtroFranqueado: FiltroFranqueado): Observable<any> {
     return this.http
       .get<IVendasHistorico>(
-        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasHistorico}`
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasHistorico}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
       )
       .pipe(
         map((data) => {

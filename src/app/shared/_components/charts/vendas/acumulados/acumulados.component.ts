@@ -10,6 +10,7 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import am4themes_kelly from '@amcharts/amcharts4/themes/animated';
+import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
 
 am4core.useTheme(am4themes_kelly);
 am4core.useTheme(am4themes_animated);
@@ -22,6 +23,7 @@ am4core.useTheme(am4themes_animated);
 export class AcumuladosComponent implements OnInit, OnChanges {
   public acumulados: any;
   public chart: any;
+  public filtroFranqueado = new FiltroFranqueado(0);
 
   @Input() carregarVendasAcc = false;
 
@@ -39,7 +41,7 @@ export class AcumuladosComponent implements OnInit, OnChanges {
 
   getVendasAcumuladas() {
     this.franqueadosDashBoardsService
-      .getVendasAcumuladas()
+      .getVendasAcumuladas(this.filtroFranqueado)
       .subscribe((response) => {
         this.acumulados = response?.Data || [];
 
@@ -64,20 +66,20 @@ export class AcumuladosComponent implements OnInit, OnChanges {
 
         // Create series
         const series = this.chart.series.push(new am4charts.ColumnSeries());
-        series.dataFields.valueY = 'ValorVenda';
+        series.dataFields.valueY = 'ValorAcumulado';
         series.dataFields.categoryX = 'Mes';
-        series.name = 'Valor Venda';
+        series.name = 'Valor Acumulado';
         series.tooltipText = '{name}: [bold]{valueY}[/]';
         series.stacked = true;
-        series.stroke = am4core.color('#6fb142');
-        series.columns.template.fill = am4core.color('#6fb142');
 
         const series2 = this.chart.series.push(new am4charts.ColumnSeries());
-        series2.dataFields.valueY = 'ValorAcumulado';
+        series2.dataFields.valueY = 'ValorVenda';
         series2.dataFields.categoryX = 'Mes';
-        series2.name = 'Valor Acumulado';
+        series2.name = 'Valor Venda';
         series2.tooltipText = '{name}: [bold]{valueY}[/]';
         series2.stacked = true;
+        series2.stroke = am4core.color('#6fb142');
+        series2.columns.template.fill = am4core.color('#6fb142');
 
         // Add cursor
         this.chart.cursor = new am4charts.XYCursor();

@@ -1,5 +1,13 @@
 import { AdministracaoService } from './../../../../core/services/administracao.service';
-import { Component, OnInit, Renderer2, ElementRef, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ElementRef,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, SelectControlValueAccessor } from '@angular/forms';
 import { IListaFranqueadoPerfil } from 'src/app/shared/interfaces/lista-franqueado-perfil.interface';
 
@@ -19,6 +27,7 @@ export class ComboFranquiasComponent extends SelectControlValueAccessor
   implements OnInit {
   private innerValue: any;
   public items: IListaFranqueadoPerfil[];
+  @Output() handleChangeEmit = new EventEmitter();
 
   constructor(
     _renderer: Renderer2,

@@ -1,3 +1,6 @@
+import { IListaFranqueadoPerfil } from './../../../shared/interfaces/lista-franqueado-perfil.interface';
+import { FiltroFranqueado } from './../../../shared/models/filtro-indicadores.model';
+import { HelperService } from './../../../core/services/helper.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
@@ -7,6 +10,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private onScrollEvent;
+  public month: string;
+  public codigoFranqueado = 0;
 
   public carregarValores = {
     carregarHistorico: false,
@@ -15,7 +20,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     carregarVendasMensal: false,
   };
 
-  constructor() {
+  constructor(private _helperService: HelperService) {
+    this.month = this._helperService.getReferenceMonth();
+
     this.onScrollEvent = () => {
       this.checkTheTopOfCardChart('historicoVendas', 'carregarHistorico');
       this.checkTheTopOfCardChart(
@@ -38,6 +45,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.carregarValores[control] = true;
       }
     }
+  }
+
+  getCodigoFranqueado(franqueado: IListaFranqueadoPerfil) {
+    if (franqueado) {
+      this.codigoFranqueado = franqueado.codigo;
+    }
+    console.log(this.codigoFranqueado);
   }
 
   ngOnInit() {}

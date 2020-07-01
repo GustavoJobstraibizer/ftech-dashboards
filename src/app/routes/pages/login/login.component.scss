@@ -2,14 +2,30 @@
   position: relative;
 }
 
+.container-login {
+  overflow-y: hidden;
+  background: #f1f1f1;
+}
+
 .content-login {
   max-width: 300px;
   width: 100%;
+  border-radius: 10px;
 }
 
 .see-pass {
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 12px;
   cursor: pointer;
+}
+
+.card-header {
+  background: linear-gradient(45deg, #23b7e5, #6190e8);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.btn-signin {
+  height: 40px;
 }

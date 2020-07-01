@@ -10,6 +10,7 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import am4themes_kelly from '@amcharts/amcharts4/themes/animated';
+import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
 
 am4core.useTheme(am4themes_animated);
 
@@ -23,6 +24,9 @@ export class TopProdutosComponent implements OnInit, OnChanges {
 
   public topProdutos: any;
   public chart: any;
+  public filtroFranqueado = new FiltroFranqueado(0);
+
+  // @TODO Incluir tipo parametro top 10, 20, 30, 40
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
@@ -39,11 +43,22 @@ export class TopProdutosComponent implements OnInit, OnChanges {
     }
   }
 
+  sortByValor(a, b) {
+    if (a.Valor < b.Valor) {
+      return -1;
+    } else if (a.Valor > b.Valor) {
+      return 1;
+    }
+    return 0;
+  }
+
   getTopProdutos() {
     this.franqueadosDashBoardsService
-      .getVendasTopProdutos()
+      .getVendasTopProdutos(this.filtroFranqueado)
       .subscribe((response) => {
         this.topProdutos = response?.Data || [];
+
+        this.topProdutos.sort(this.sortByValor);
 
         this.chart.data = this.topProdutos;
 
@@ -57,10 +72,7 @@ export class TopProdutosComponent implements OnInit, OnChanges {
         const valueAxis = this.chart.xAxes.push(new am4charts.ValueAxis());
         valueAxis.renderer.grid.template.disabled = true;
 
-        valueAxis.renderer.labels.template.adapter.add(
-          'text',
-          (text) => `R$ ${text}`
-        );
+        valueAxis.renderer.labels.template.adapter.add('text', (text) => ``);
 
         const series = this.chart.series.push(new am4charts.ColumnSeries());
         series.dataFields.valueX = 'Valor';

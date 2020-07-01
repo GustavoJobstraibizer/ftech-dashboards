@@ -3,21 +3,29 @@
 @import "../../../shared/styles/bootstrap/_mixins";
 @import "../../../shared/styles/app/variables.scss";
 
+@import "variables";
+
 .home-container {
-  // margin: 0 auto;
-  // max-width: map-get($container-max-widths, "lg");
+}
 
-  // .home-logo {
-  //   width: 240px;
-  // }
+.content-indicador {
+  display: flex;
+  flex-direction: column;
+}
 
-  // .home-text {
-  //   text-align: center;
-  //   @include media-breakpoint-up(lg) {
-  //     text-align: left;
-  //   }
-  // }
-  // .home-text-big {
-  //   font-size: 3.9375rem;
-  // }
+.home-title {
+  margin-bottom: 30px;
+  font-weight: 500;
+  font-family: $ft-font-default;
+}
+
+@media screen and (min-width: 768px) {
+  .home-title {
+    font-size: 28px;
+  }
+
+  .content-indicador {
+    flex-direction: row;
+    align-items: flex-end;
+  }
 }
