@@ -1,7 +1,10 @@
 import { AdministracaoService } from './../../../../core/services/administracao.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import {
+  BsLocaleService,
+  DatepickerDateCustomClasses,
+} from 'ngx-bootstrap/datepicker';
 import { defineLocale, ptBrLocale } from 'ngx-bootstrap/chronos';
 import * as moment from 'moment/moment';
 import { IListaFranqueadoPerfil } from 'src/app/shared/interfaces/lista-franqueado-perfil.interface';

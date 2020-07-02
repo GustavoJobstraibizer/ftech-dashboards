@@ -1,0 +1,30 @@
+.btn-filter {
+  width: 100%;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+::ng-deep .theme-green {
+  .bs-datepicker-head {
+    background-color: #007bff;
+  }
+  .bs-datepicker-body table td.week span {
+    color: #007bff;
+  }
+
+  .bs-datepicker-body table td span.selected {
+    background-color: #007bff;
+  }
+}
+
+::ng-deep span.selected {
+  background: #007bff;
+}
+
+@media screen and (min-width: 768px) {
+  .btn-filter {
+    width: 120px;
+    margin: 0;
+  }
+}

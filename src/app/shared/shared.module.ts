@@ -1,3 +1,4 @@
+import { MaskDateDirective } from './../core/directives/mask-date.directive';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -90,6 +91,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PageTitleComponent,
     ComboFranquiasComponent,
     PeriodoComponent,
+    MaskDateDirective,
   ],
   exports: [
     CommonModule,
@@ -134,6 +136,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PageTitleComponent,
     PeriodoComponent,
     ComboFranquiasComponent,
+    MaskDateDirective,
   ],
 })
 

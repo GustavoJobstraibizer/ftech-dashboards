@@ -4,5 +4,77 @@
     'Selecione um período para visualizar as vendas agredadas por horário e por dia da semana'
   "
 ></ft-page-title>
-<!-- <ft-card [title]="'Vendas por hora'"></ft-card> -->
 <ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+
+<ft-card>
+  <div class="table-responsive">
+    <table class="table table-sm table-striped table-borderless">
+      <thead class="thead-bg">
+        <tr>
+          <th scope="col">HORA</th>
+          <th scope="col">SEGUNDA</th>
+          <th scope="col">TERÇA</th>
+          <th scope="col">QUARTA</th>
+          <th scope="col">QUINTA</th>
+          <th scope="col">SEXTA</th>
+          <th scope="col">SABADO</th>
+          <th scope="col">DOMINGO</th>
+          <th scope="col">TOTAL</th>
+          <th scope="col">%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of vendas">
+          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
+            <span
+              [ngClass]="{ 'total-result': item?.ResultadoHorizontal }"
+              class="td-hour"
+              >{{ item?.Hora }}</span
+            >
+          </td>
+          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
+            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
+              item?.Segunda | currency: "BRL"
+            }}</span>
+          </td>
+          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
+            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
+              item?.Terca | currency: "BRL"
+            }}</span>
+          </td>
+          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
+            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
+              item?.Quarta | currency: "BRL"
+            }}</span>
+          </td>
+          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
+            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
+              item?.Quinta | currency: "BRL"
+            }}</span>
+          </td>
+          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
+            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
+              item?.Sexta | currency: "BRL"
+            }}</span>
+          </td>
+          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
+            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
+              item?.Sabado | currency: "BRL"
+            }}</span>
+          </td>
+          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
+            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
+              item?.Domingo | currency: "BRL"
+            }}</span>
+          </td>
+          <td class="td-total">
+            <span class="total-result">{{
+              item?.Total | currency: "BRL"
+            }}</span>
+          </td>
+          <td class="td-percent">{{ item?.Percentual }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ft-card>

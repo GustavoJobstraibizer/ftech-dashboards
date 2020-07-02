@@ -12,6 +12,8 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import am4themes_kelly from '@amcharts/amcharts4/themes/animated';
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
+import { formatNumber } from '@angular/common';
+import am4lang_pt_BR from '@amcharts/amcharts4/lang/pt_BR';
 
 am4core.useTheme(am4themes_kelly);
 am4core.useTheme(am4themes_animated);
@@ -32,6 +34,7 @@ export class MensalComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.chart = am4core.create('chartVendasMensal', am4charts.XYChart);
+    this.chart.language.locale = am4lang_pt_BR;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -59,6 +62,12 @@ export class MensalComponent implements OnInit, OnChanges {
 
         // First value axis
         const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
+        // valueAxis.numberFormatter.numberFormat = '#.00';
+
+        // valueAxis.renderer.labels.template.adapter.add(
+        //   'text',
+        //   (text) => `${formatNumber(+text, 'pt-BR', '1.3-3')}`
+        // );
 
         // Second value axis
         // const valueAxis2 = this.chart.yAxes.push(new am4charts.ValueAxis());

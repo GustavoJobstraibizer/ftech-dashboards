@@ -7,6 +7,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  AfterViewInit,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, SelectControlValueAccessor } from '@angular/forms';
 import { IListaFranqueadoPerfil } from 'src/app/shared/interfaces/lista-franqueado-perfil.interface';
@@ -24,7 +25,7 @@ import { IListaFranqueadoPerfil } from 'src/app/shared/interfaces/lista-franquea
   ],
 })
 export class ComboFranquiasComponent extends SelectControlValueAccessor
-  implements OnInit {
+  implements AfterViewInit {
   private innerValue: any;
   public items: IListaFranqueadoPerfil[];
   @Output() handleChangeEmit = new EventEmitter();
@@ -37,7 +38,7 @@ export class ComboFranquiasComponent extends SelectControlValueAccessor
     super(_renderer, _elementRef);
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.admService.getListaFranqueado().subscribe((response) => {
       this.items = response['Data'];
 

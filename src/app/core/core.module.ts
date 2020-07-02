@@ -8,8 +8,6 @@ import { TranslatorService } from './translator/translator.service';
 @NgModule({
   imports: [],
   providers: [SettingsService, ThemesService, TranslatorService, MenuService],
-  declarations: [],
-  exports: [],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

@@ -8,6 +8,7 @@
         formControlName="dataInicio"
         bsDatepicker
         [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+        maskDate
       />
     </div>
 
@@ -19,14 +20,22 @@
         formControlName="dataFim"
         bsDatepicker
         [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+        maskDate
       />
     </div>
 
-    <div class="col-4">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
       <ft-combo-franquias
         formControlName="codigoFranqueado"
       ></ft-combo-franquias>
     </div>
+
+    <button
+      class="btn btn-lg btn-primary align-self-center mt-2 btn-filter"
+      (click)="handleFilter()"
+    >
+      <i class="fas fa-filter mr-2"></i>
+      Filtrar
+    </button>
   </div>
-  <button class="btn btn-primary" (click)="handleFilter()">Filtrar</button>
 </form>

@@ -92,15 +92,17 @@ export class FranqueadosService {
     dataInicio: string,
     dataFim: string,
     codigoFranqueado: number
-  ): Observable<IVendasHora> {
+  ): Observable<IVendasHora[]> {
     const queryParams = new URLSearchParams({
       dataInicio,
       dataFim,
       codigoFranqueado: codigoFranqueado.toString(),
     }).toString();
     console.log(queryParams);
-    return this.http.get<IVendasHora>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasPorHora}?${queryParams}`
-    );
+    return this.http
+      .get<IVendasHora[]>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasPorHora}?${queryParams}`
+      )
+      .pipe(map((vendas) => vendas['Data'] || []));
   }
 }

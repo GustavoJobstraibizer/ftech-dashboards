@@ -1,0 +1,36 @@
+@import "variables";
+
+$blue-alpha: rgba(0, 123, 255, 0.5);
+$blue-solid: #007bff;
+
+.td-total {
+  // background-color: $blue-alpha;
+  color: #fff;
+}
+
+.total-result {
+  background-color: $blue-alpha;
+  padding: 2px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thead-bg {
+  background-color: #0e6ba8;
+  color: #fff;
+}
+
+td {
+  color: #8498ae;
+}
+
+.td-hour {
+  color: $ft-black-solid;
+  font-weight: bold;
+}
+
+.td-percent {
+  color: $blue-solid;
+}

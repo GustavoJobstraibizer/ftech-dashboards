@@ -11,6 +11,7 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import am4themes_kelly from '@amcharts/amcharts4/themes/animated';
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
+import am4lang_pt_BR from '@amcharts/amcharts4/lang/pt_BR';
 
 am4core.useTheme(am4themes_kelly);
 am4core.useTheme(am4themes_animated);
@@ -31,6 +32,7 @@ export class AcumuladosComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.chart = am4core.create('chartVendasAcumuladas', am4charts.XYChart);
+    this.chart.language.locale = am4lang_pt_BR;
   }
 
   ngOnChanges(changes: SimpleChanges) {
