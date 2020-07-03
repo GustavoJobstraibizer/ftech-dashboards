@@ -24,7 +24,7 @@ const DetalhementoVendas = {
 
 const VendasPorCategoriaProdutos = {
   text: 'Categoria de Produto',
-  link: '#',
+  link: '/franqueado/vendas-por-categoria-produto',
   icon: 'fas fa-cart-arrow-down',
 };
 

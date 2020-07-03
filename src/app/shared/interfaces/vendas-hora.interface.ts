@@ -10,4 +10,6 @@ export interface IVendasHora {
   Total: number;
   Percentual: number;
   ResultadoHorizontal: boolean;
+  UltimaLinha?: boolean;
+  PenultimaLinha?: boolean;
 }

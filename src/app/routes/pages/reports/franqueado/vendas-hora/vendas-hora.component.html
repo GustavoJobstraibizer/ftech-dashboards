@@ -25,54 +25,93 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of vendas">
-          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
+          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
             <span
-              [ngClass]="{ 'total-result': item?.ResultadoHorizontal }"
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha,
+                'td-percent': item.UltimaLinha
+              }"
               class="td-hour"
               >{{ item?.Hora }}</span
             >
           </td>
-          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
-            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
-              item?.Segunda | currency: "BRL"
-            }}</span>
+          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+            <span
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha,
+                'td-percent': item.UltimaLinha
+              }"
+              >{{ item?.Segunda | currency: "BRL" }}</span
+            >
           </td>
-          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
-            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
-              item?.Terca | currency: "BRL"
-            }}</span>
+          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+            <span
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha,
+                'td-percent': item.UltimaLinha
+              }"
+              >{{ item?.Terca | currency: "BRL" }}</span
+            >
           </td>
-          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
-            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
-              item?.Quarta | currency: "BRL"
-            }}</span>
+          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+            <span
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha,
+                'td-percent': item.UltimaLinha
+              }"
+              >{{ item?.Quarta | currency: "BRL" }}</span
+            >
           </td>
-          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
-            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
-              item?.Quinta | currency: "BRL"
-            }}</span>
+          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+            <span
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha,
+                'td-percent': item.UltimaLinha
+              }"
+              >{{ item?.Quinta | currency: "BRL" }}</span
+            >
           </td>
-          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
-            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
-              item?.Sexta | currency: "BRL"
-            }}</span>
+          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+            <span
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha,
+                'td-percent': item.UltimaLinha
+              }"
+              >{{ item?.Sexta | currency: "BRL" }}</span
+            >
           </td>
-          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
-            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
-              item?.Sabado | currency: "BRL"
-            }}</span>
+          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+            <span
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha,
+                'td-percent': item.UltimaLinha
+              }"
+              >{{ item?.Sabado | currency: "BRL" }}</span
+            >
           </td>
-          <td [ngClass]="{ 'td-total': item?.ResultadoHorizontal }">
-            <span [ngClass]="{ 'total-result': item?.ResultadoHorizontal }">{{
-              item?.Domingo | currency: "BRL"
-            }}</span>
+          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+            <span
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha,
+                'td-percent': item.UltimaLinha
+              }"
+              >{{ item?.Domingo | currency: "BRL" }}</span
+            >
           </td>
           <td class="td-total">
-            <span class="total-result">{{
-              item?.Total | currency: "BRL"
-            }}</span>
+            <span
+              [ngClass]="{
+                'total-result': !item?.ResultadoHorizontal,
+                'td-percent': item.UltimaLinha
+              }"
+              >{{ item?.Total | currency: "BRL" }}</span
+            >
           </td>
-          <td class="td-percent">{{ item?.Percentual }}</td>
+          <td class="td-percent">
+            <span *ngIf="!item?.ResultadoHorizontal">
+              {{ item?.Percentual | number: "1.2-2" }}%
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>

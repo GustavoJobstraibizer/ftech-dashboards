@@ -32,12 +32,24 @@ export class VendasHoraComponent implements OnInit {
       )
       .subscribe((response) => {
         this.vendas = response;
+        this.vendas.map(this.ultimaLinha.bind(this));
       });
+  }
+
+  ultimaLinha(venda: IVendasHora, index: number) {
+    if (index + 1 >= this.vendas.length) {
+      venda.UltimaLinha = true;
+      return venda;
+    }
+
+    if (index + 1 >= this.vendas.length - 1) {
+      venda.PenultimaLinha = true;
+      return venda;
+    }
   }
 
   filtroPeriodo(filter: any) {
     this.periodo = filter;
-    console.log('periodo >> ', this.periodo);
     this.getVendasPorHora();
   }
 }

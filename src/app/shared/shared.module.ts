@@ -68,7 +68,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PopoverModule.forRoot(),
     TypeaheadModule.forRoot(),
     NgSelectModule,
-    // ToasterModule
   ],
   providers: [ColorsService],
   declarations: [

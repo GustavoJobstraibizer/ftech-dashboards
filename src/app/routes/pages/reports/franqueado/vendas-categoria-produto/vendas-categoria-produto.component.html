@@ -1,0 +1,61 @@
+<ft-page-title
+  [title]="'Vendas por Categoria de Produto'"
+  [subTitle]="
+    'Selecione um período para visualizar as vendas agredadas por categoria do produto'
+  "
+></ft-page-title>
+<ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+
+<ft-card>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-bg">
+        <tr>
+          <th scope="col">Categoria/Produto</th>
+          <th scope="col">Volume</th>
+          <th scope="col">Valor</th>
+          <th scope="col">%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td (click)="showItems = !showItems">
+            <div class="d-flex align-items-center justify-content-center">
+              <button type="button" class="btn-expand" ripple>
+                <em
+                  [ngClass]="{
+                    'icon-arrow-right': !showItems,
+                    'icon-arrow-down': showItems
+                  }"
+                  class="icon-arrow"
+                ></em>
+              </button>
+              <span>teste1</span>
+            </div>
+          </td>
+          <td>teste2</td>
+          <td>teste3</td>
+          <td>teste4</td>
+        </tr>
+        <tr *ngIf="showItems">
+          <td>item1</td>
+          <td>teste2</td>
+          <td>teste3</td>
+          <td>teste4</td>
+        </tr>
+        <tr *ngIf="showItems">
+          <td>item2</td>
+          <td>teste2</td>
+          <td>teste3</td>
+          <td>teste4</td>
+        </tr>
+        <tr>
+          <td>teste1</td>
+          <td>teste2</td>
+          <td>teste3</td>
+          <td>teste4</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ft-card>

@@ -1,3 +1,4 @@
+import { AngularRippleModule } from 'angular-ripple-effect-lib';
 import {
   HttpClient,
   HttpClientModule,
