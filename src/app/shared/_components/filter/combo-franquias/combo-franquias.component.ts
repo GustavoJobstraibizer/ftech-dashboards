@@ -9,7 +9,12 @@ import {
   EventEmitter,
   AfterViewInit,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, SelectControlValueAccessor } from '@angular/forms';
+import {
+  NG_VALUE_ACCESSOR,
+  SelectControlValueAccessor,
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
 import { IListaFranqueadoPerfil } from 'src/app/shared/interfaces/lista-franqueado-perfil.interface';
 
 @Component({
@@ -25,9 +30,12 @@ import { IListaFranqueadoPerfil } from 'src/app/shared/interfaces/lista-franquea
   ],
 })
 export class ComboFranquiasComponent extends SelectControlValueAccessor
-  implements AfterViewInit {
+  implements OnInit, AfterViewInit {
   private innerValue: any;
   public items: IListaFranqueadoPerfil[];
+  // @Input() submitted: boolean;
+  // @Input() formControl: string;
+  // @Input() formGroup: FormGroup;
   @Output() handleChangeEmit = new EventEmitter();
 
   constructor(
@@ -36,6 +44,10 @@ export class ComboFranquiasComponent extends SelectControlValueAccessor
     public admService: AdministracaoService
   ) {
     super(_renderer, _elementRef);
+  }
+
+  ngOnInit() {
+    // console.log(this.formGroup.get(this.formControl).valid);
   }
 
   ngAfterViewInit() {

@@ -1,33 +1,58 @@
 <form [formGroup]="formPeriodo" role="form">
   <div class="form-row">
-    <div class="form-group col-md-2">
-      <label for="inputEmail4">Data Início</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="dataInicio"
-        bsDatepicker
-        [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
-        maskDate
-      />
+    <div
+      class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 p-relative mb-2 mb-sm-2 mb-md-0 mb-lg-0 mb-xl-0"
+    >
+      <div class="form-group">
+        <label for="inputEmail4">Data Início *</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="dataInicio"
+          bsDatepicker
+          [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+          maskDate
+        />
+        <span
+          class="invalid-tltip"
+          *ngIf="submitted && !formPeriodo.get('dataInicio').valid"
+        >
+          Informe a Data Início
+        </span>
+      </div>
     </div>
 
-    <div class="form-group col-md-2">
-      <label for="inputEmail4">Data Fim</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="dataFim"
-        bsDatepicker
-        [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
-        maskDate
-      />
+    <div
+      class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 p-relative mb-2 mb-sm-2 mb-md-0 mb-lg-0 mb-xl-0"
+    >
+      <div class="form-group">
+        <label for="inputEmail4">Data Fim *</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="dataFim"
+          bsDatepicker
+          [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+          maskDate
+        />
+        <span
+          class="invalid-tltip"
+          *ngIf="submitted && !formPeriodo.get('dataFim').valid"
+        >
+          Informe a Data Fim
+        </span>
+      </div>
     </div>
 
-    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+    <div
+      class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-relative mb-2 mb-sm-2 mb-md-0 mb-lg-0 mb-xl-0"
+    >
       <ft-combo-franquias
         formControlName="codigoFranqueado"
       ></ft-combo-franquias>
+      <span class="invalid-tltip" *ngIf="isFieldValid('codigoFranqueado')">
+        É necessário informar a Unidade
+      </span>
     </div>
 
     <button

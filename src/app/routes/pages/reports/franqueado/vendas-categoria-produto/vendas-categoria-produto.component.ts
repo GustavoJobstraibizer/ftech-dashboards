@@ -30,7 +30,6 @@ export class VendasCategoriaProdutoComponent implements OnInit {
         this.periodo.codigoFranqueado
       )
       .subscribe((response) => {
-        console.log(response);
         this.listaVendasPorCategoria = response;
       });
   }

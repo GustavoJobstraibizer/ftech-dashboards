@@ -1,5 +1,5 @@
 import { AdministracaoService } from './../../../../core/services/administracao.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   BsLocaleService,
@@ -20,27 +20,42 @@ export class PeriodoComponent implements OnInit {
 
   public formPeriodo: FormGroup;
   public items: IListaFranqueadoPerfil[];
+  public submitted = false;
 
   constructor(private localeService: BsLocaleService) {}
 
   ngOnInit(): void {
     this.formPeriodo = new FormGroup({
-      dataInicio: new FormControl(moment(new Date()).format('DD/MM/YYYY')),
+      dataInicio: new FormControl(moment(new Date()).format('DD/MM/YYYY'), [
+        Validators.required,
+      ]),
       dataFim: new FormControl(
-        moment(new Date()).add(1, 'M').format('DD/MM/YYYY')
+        moment(new Date()).add(1, 'M').format('DD/MM/YYYY'),
+        [Validators.required]
       ),
-      codigoFranqueado: new FormControl(),
+      codigoFranqueado: new FormControl(null, [Validators.required]),
     });
 
     this.localeService.use('pt-br');
   }
 
   handleFilter() {
+    this.submitted = true;
+    if (!this.formPeriodo.valid) {
+      return;
+    }
+
+    this.submitted = false;
+
     const { dataInicio, dataFim, codigoFranqueado } = this.formPeriodo.value;
     this.periodoFilterEmit.emit({
       dataInicio: moment(dataInicio, 'DD/MM/YYYY').format('MM/DD/YYYY'),
       dataFim: moment(dataFim, 'DD/MM/YYYY').format('MM/DD/YYYY'),
       codigoFranqueado,
     });
+  }
+
+  isFieldValid(field: string) {
+    return !this.formPeriodo.get(field).valid && this.submitted;
   }
 }
