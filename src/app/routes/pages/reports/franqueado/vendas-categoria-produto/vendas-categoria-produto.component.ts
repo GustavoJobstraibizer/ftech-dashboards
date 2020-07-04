@@ -1,4 +1,6 @@
+import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service';
 import { Component, OnInit } from '@angular/core';
+import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface';
 
 @Component({
   selector: 'ft-vendas-categoria-produto',
@@ -6,14 +8,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vendas-categoria-produto.component.scss'],
 })
 export class VendasCategoriaProdutoComponent implements OnInit {
-  constructor() {}
+  public periodo: IPeriodoBusca = {
+    dataInicio: null,
+    dataFim: null,
+    codigoFranqueado: 0,
+  };
 
-  public showItems = false;
+  public listaVendasPorCategoria = [];
 
-  ngOnInit(): void {}
+  constructor(public franqueadoService: FranqueadosService) {}
+
+  ngOnInit(): void {
+    this.getVendasCategoriaProduto();
+  }
+
+  getVendasCategoriaProduto() {
+    this.franqueadoService
+      .getVendasPorCategoriaProduto(
+        this.periodo.dataInicio,
+        this.periodo.dataFim,
+        this.periodo.codigoFranqueado
+      )
+      .subscribe((response) => {
+        console.log(response);
+        this.listaVendasPorCategoria = response;
+      });
+  }
 
   filtroPeriodo(filter: any) {
-    // this.periodo = filter;
-    // this.getVendasPorHora();
+    this.periodo = filter;
+    this.getVendasCategoriaProduto();
   }
 }

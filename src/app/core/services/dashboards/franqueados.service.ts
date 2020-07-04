@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { IVendasMensal } from 'src/app/shared/interfaces/vendas-mensal.interface';
 import { map } from 'rxjs/operators';
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
+import { IVendaCategoriaProduto } from 'src/app/shared/interfaces/venda-categoria-produto.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -88,6 +89,37 @@ export class FranqueadosService {
       );
   }
 
+  getVendasPorCategoriaProduto(
+    dataInicio: string,
+    dataFim: string,
+    codigoFranqueado: number
+  ): Observable<IVendaCategoriaProduto[]> {
+    const queryParams = new URLSearchParams({
+      dataInicio,
+      dataFim,
+      codigoFranqueado: codigoFranqueado.toString(),
+    }).toString();
+    console.log(queryParams);
+    return this.http
+      .get<IVendaCategoriaProduto[]>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasPorCategoriaProduto}?${queryParams}`
+      )
+      .pipe(
+        map((vendas) => {
+          vendas['Data'].map((venda) => {
+            if (!venda.Categoria) {
+              venda.Visible = true;
+            } else {
+              venda.Expanded = true;
+            }
+            return venda;
+          });
+
+          return vendas['Data'];
+        })
+      );
+  }
+
   getVendasPorHora(
     dataInicio: string,
     dataFim: string,
@@ -98,7 +130,6 @@ export class FranqueadosService {
       dataFim,
       codigoFranqueado: codigoFranqueado.toString(),
     }).toString();
-    console.log(queryParams);
     return this.http
       .get<IVendasHora[]>(
         `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasPorHora}?${queryParams}`

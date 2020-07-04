@@ -42,6 +42,7 @@ import { PageTitleComponent } from './_components/page-title/page-title.componen
 import { ComboFranquiasComponent } from './_components/filter/combo-franquias/combo-franquias.component';
 import { PeriodoComponent } from './_components/filter/periodo/periodo.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { TreeTableComponent } from './_components/tree-table/tree-table.component';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -91,6 +92,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ComboFranquiasComponent,
     PeriodoComponent,
     MaskDateDirective,
+    TreeTableComponent,
   ],
   exports: [
     CommonModule,
@@ -136,6 +138,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PeriodoComponent,
     ComboFranquiasComponent,
     MaskDateDirective,
+    TreeTableComponent,
   ],
 })
 
