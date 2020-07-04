@@ -1,0 +1,147 @@
+<ft-page-title
+  [title]="'Detalhamento das vendas'"
+  [subTitle]="'Selecione um período para visualizar as vendas detalhadas'"
+></ft-page-title>
+<ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+
+<ft-card>
+  <!-- <div class="table-responsive" style="overflow: auto;">
+    <table class="table table-sm table-striped table-borderless">
+      <thead class="thead-bg">
+        <tr class="tr-sticky">
+          <th scope="row">DATA</th>
+          <th scope="row">VALOR BRUTO</th>
+          <th scope="row">DESCONTO</th>
+          <th scope="row">VALOR LÍQUIDO</th>
+          <th scope="row">CPF CLIENTE</th>
+          <th scope="row">NOME CLIENTE</th>
+          <th scope="row">NÚMERO SAT</th>
+          <th scope="row">VENDEDOR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of vendasFranqueado">
+          <td>{{ item?.Data }}</td>
+          <td>{{ item?.ValorBruto }}</td>
+          <td>{{ item?.ValorDesconto }}</td>
+          <td>{{ item?.ValorLiquido }}</td>
+          <td>{{ item?.CPFCliente }}</td>
+          <td>{{ item?.NomeCliente }}</td>
+          <td></td>
+          <td>{{ item?.Vendedor }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-condensed">
+      <thead class="thead-bg">
+        <tr>
+          <th class="text-center"></th>
+          <th class="text-center">DATA</th>
+          <th class="text-center">VALOR BRUTO</th>
+          <th class="text-center">DESCONTO</th>
+          <th class="text-center">VALOR LÍQUIDO</th>
+
+          <!-- <th *ngIf="showItemsOnDesktopVersion" class="text-center">
+            CPF CLIENTE
+          </th>
+          <th *ngIf="showItemsOnDesktopVersion" class="text-center">
+            NOME CLIENTE
+          </th>
+          <th *ngIf="showItemsOnDesktopVersion" class="text-center">NÚMERO</th>
+          <th *ngIf="showItemsOnDesktopVersion" class="text-center">
+            VENDEDOR
+          </th> -->
+        </tr>
+      </thead>
+    </table>
+    <div class="bodycontainer scrollable">
+      <table
+        class="table table-hover table-striped table-condensed table-scrollable"
+      >
+        <tbody class="tbody-data">
+          <ng-container *ngFor="let item of vendasFranqueado">
+            <tr>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="btn-detail-sale"
+                  (click)="openModalItens(item?.CodigoDocumento)"
+                >
+                  <em class="icon-info"></em>
+                </button>
+                <button
+                  type="button"
+                  class="btn-detail-sale btn-expand"
+                  (click)="item?.Cliente.Expanded = !item?.Cliente.Expanded"
+                >
+                  <em class="icon-eye"></em>
+                </button>
+              </td>
+              <td class="text-center">{{ item?.Data }}</td>
+              <td class="text-center">
+                {{ item?.ValorBruto }}
+              </td>
+              <td class="text-center">
+                {{ item?.ValorDesconto }}
+              </td>
+              <td class="text-center">
+                {{ item?.ValorLiquido }}
+              </td>
+              <!-- <td
+                *ngIf="showItemsOnDesktopVersion"
+                class="text-center item-client"
+              >
+                {{ item?.Cliente.CPFCliente }}
+              </td>
+              <td
+                *ngIf="showItemsOnDesktopVersion"
+                class="text-center item-client"
+              >
+                {{ item?.Cliente.NomeCliente }}
+              </td>
+              <td
+                *ngIf="showItemsOnDesktopVersion"
+                class="text-center item-client"
+              >
+                {{ item?.Cliente.NumeroNF }}
+              </td>
+              <td
+                *ngIf="showItemsOnDesktopVersion"
+                class="text-center item-client"
+              >
+                {{ item?.Cliente.Vendedor }}
+              </td> -->
+            </tr>
+
+            <tr *ngIf="item?.Cliente && item?.Cliente.Expanded">
+              <td colspan="5" style="padding: 35px 0px;">
+                <ft-cliente-detalhes
+                  style="width: 100%;"
+                  [cliente]="item?.Cliente"
+                ></ft-cliente-detalhes>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <ft-empty-content [(items)]="vendasFranqueado.length"></ft-empty-content>
+    </div>
+    <table class="table table-hover table-striped table-condensed">
+      <tfoot class="tfoot-data">
+        <tr *ngFor="let item of vendasFranqueadoTotal">
+          <td></td>
+          <td>{{ item?.Data }}</td>
+          <td>{{ item?.ValorBruto | currency: "BRL" }}</td>
+          <td>
+            {{ item?.ValorDesconto | currency: "BRL" }}
+          </td>
+          <td>
+            {{ item?.ValorLiquido | currency: "BRL" }}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</ft-card>

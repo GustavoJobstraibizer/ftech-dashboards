@@ -18,7 +18,7 @@ const ConsumoInterno = {
 
 const DetalhementoVendas = {
   text: 'Det. Vendas',
-  link: '#',
+  link: '/franqueado/detalhamento-vendas',
   icon: 'fas fa-list-ol',
 };
 

@@ -11,6 +11,8 @@ import { IVendasMensal } from 'src/app/shared/interfaces/vendas-mensal.interface
 import { map } from 'rxjs/operators';
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
 import { IVendaCategoriaProduto } from 'src/app/shared/interfaces/venda-categoria-produto.interface';
+import { IVendasFranqueado } from 'src/app/shared/interfaces/vendas-franqueado.interface';
+import { IVendasFranqueadoDetalhes } from 'src/app/shared/interfaces/vendas-franqueado-detalhes.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -118,6 +120,62 @@ export class FranqueadosService {
           return vendas['Data'];
         })
       );
+  }
+
+  getVendasFranqueado(
+    dataInicio: string,
+    dataFim: string,
+    codigoFranqueado: number
+  ): Observable<IVendasFranqueado[]> {
+    const queryParams = new URLSearchParams({
+      dataInicio,
+      dataFim,
+      codigoFranqueado: codigoFranqueado.toString(),
+    }).toString();
+    return this.http
+      .get<IVendasFranqueado[]>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasFranqueado}?${queryParams}`
+      )
+      .pipe(
+        map((vendasFranqueado) => {
+          if (!vendasFranqueado['Data']) {
+            return [];
+          }
+          const vendasFranqueadoNew = vendasFranqueado['Data'].reduce(
+            (acc, venda) => {
+              acc.push({
+                Cliente: {
+                  CPFCliente: venda.CPFCliente,
+                  NomeCliente: venda.NomeCliente,
+                  NumeroNF: venda.NumeroNF,
+                  Vendedor: venda.Vendedor,
+                  Expanded: false,
+                },
+                CodigoDocumento: venda.CodigoDocumento,
+                Data: venda.Data,
+                ValorBruto: venda.ValorBruto,
+                ValorDesconto: venda.ValorDesconto,
+                ValorLiquido: venda.ValorLiquido,
+                ResultadoHorizontal: venda.ResultadoHorizontal,
+                Total: venda.Total,
+              });
+
+              return acc;
+            },
+            []
+          );
+
+          return vendasFranqueadoNew;
+        })
+      );
+  }
+
+  getVendasFranqueadoDetalhado(
+    codigoDocumento: string
+  ): Observable<IVendasFranqueadoDetalhes> {
+    return this.http.get<IVendasFranqueadoDetalhes>(
+      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasFranqueado}?codigoDocumento=${codigoDocumento}`
+    );
   }
 
   getVendasPorHora(
