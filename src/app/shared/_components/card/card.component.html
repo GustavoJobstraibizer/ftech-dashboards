@@ -1,5 +1,7 @@
 <div class="card">
-  <span *ngIf="title" class="card-title">{{ title }}</span>
+  <span *ngIf="title" class="card-title">
+    <i *ngIf="icon" [class]="'mr-2 fw-600 ' + icon"></i>{{ title }}
+  </span>
 
   <div class="card-body">
     <ng-content></ng-content>

@@ -1,0 +1,38 @@
+@import "variables";
+
+.thead-bg {
+  background-color: #0e6ba8;
+  color: #fff;
+}
+
+.table-scrollable {
+  margin: 0;
+  padding: 0;
+}
+
+.tfoot-data {
+  background-color: rgba(0, 123, 255, 0.1);
+  tr {
+    td:not(:first-child) {
+      width: calc(100% / 5);
+    }
+
+    td:first-of-type {
+      width: 10% !important;
+    }
+  }
+}
+:host ::ng-deep .content-table-price .card {
+  background: rgba(0, 123, 255, 0.6);
+}
+.table-price-title {
+  font-family: "Circular std", sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+}
+.table-price-subtitle {
+  font-family: "Circular std", sans-serif;
+  color: #fff;
+}
+
+@media screen and(min-width: 768px) {
+}

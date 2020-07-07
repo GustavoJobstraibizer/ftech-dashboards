@@ -174,7 +174,7 @@ export class FranqueadosService {
     codigoDocumento: string
   ): Observable<IVendasFranqueadoDetalhes> {
     return this.http.get<IVendasFranqueadoDetalhes>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasFranqueado}?codigoDocumento=${codigoDocumento}`
+      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasFranqueadoDetalhado}?codigoDocumento=${codigoDocumento}`
     );
   }
 

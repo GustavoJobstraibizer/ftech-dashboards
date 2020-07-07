@@ -64,6 +64,9 @@ export class DetalhamentoVendasComponent implements OnInit {
     const initialState = {
       codigoDocumento,
     };
-    this.bsModalRef = this.modalService.show(ItensComponent, { initialState });
+    this.bsModalRef = this.modalService.show(ItensComponent, {
+      initialState,
+      class: 'modal-lg',
+    });
   }
 }
