@@ -39,7 +39,6 @@ export class DetalhamentoVendasComponent implements OnInit {
         this.periodo.codigoFranqueado
       )
       .subscribe((response) => {
-        console.log(response);
         this.vendasFranqueado = response;
         this.vendasFranqueado = this.vendasFranqueado.filter(
           (venda) => !venda.Total
@@ -59,7 +58,6 @@ export class DetalhamentoVendasComponent implements OnInit {
     this.getVendasFranqueado();
   }
 
-  // ItensComponent
   openModalItens(codigoDocumento: string) {
     const initialState = {
       codigoDocumento,

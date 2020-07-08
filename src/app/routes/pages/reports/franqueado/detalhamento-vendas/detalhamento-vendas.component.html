@@ -14,20 +14,10 @@
           <th class="text-center">VALOR BRUTO</th>
           <th class="text-center">DESCONTO</th>
           <th class="text-center">VALOR LÍQUIDO</th>
-
-          <!-- <th *ngIf="showItemsOnDesktopVersion" class="text-center">
-            CPF CLIENTE
-          </th>
-          <th *ngIf="showItemsOnDesktopVersion" class="text-center">
-            NOME CLIENTE
-          </th>
-          <th *ngIf="showItemsOnDesktopVersion" class="text-center">NÚMERO</th>
-          <th *ngIf="showItemsOnDesktopVersion" class="text-center">
-            VENDEDOR
-          </th> -->
         </tr>
       </thead>
     </table>
+
     <div class="bodycontainer scrollable">
       <table
         class="table table-hover table-striped table-condensed table-scrollable"
@@ -61,30 +51,6 @@
               <td class="text-center">
                 {{ item?.ValorLiquido }}
               </td>
-              <!-- <td
-                *ngIf="showItemsOnDesktopVersion"
-                class="text-center item-client"
-              >
-                {{ item?.Cliente.CPFCliente }}
-              </td>
-              <td
-                *ngIf="showItemsOnDesktopVersion"
-                class="text-center item-client"
-              >
-                {{ item?.Cliente.NomeCliente }}
-              </td>
-              <td
-                *ngIf="showItemsOnDesktopVersion"
-                class="text-center item-client"
-              >
-                {{ item?.Cliente.NumeroNF }}
-              </td>
-              <td
-                *ngIf="showItemsOnDesktopVersion"
-                class="text-center item-client"
-              >
-                {{ item?.Cliente.Vendedor }}
-              </td> -->
             </tr>
 
             <tr *ngIf="item?.Cliente && item?.Cliente.Expanded">
@@ -98,8 +64,9 @@
           </ng-container>
         </tbody>
       </table>
-      <ft-empty-content [(items)]="vendasFranqueado.length"></ft-empty-content>
+      <ft-empty-content *ngIf="!vendasFranqueado.length"></ft-empty-content>
     </div>
+
     <table class="table table-hover table-striped table-condensed">
       <tfoot class="tfoot-data">
         <tr *ngFor="let item of vendasFranqueadoTotal">

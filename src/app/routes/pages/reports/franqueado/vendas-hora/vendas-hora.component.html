@@ -116,5 +116,5 @@
       </tbody>
     </table>
   </div>
-  <ft-empty-content [(items)]="vendas.length"></ft-empty-content>
+  <ft-empty-content *ngIf="!vendas?.length"></ft-empty-content>
 </ft-card>

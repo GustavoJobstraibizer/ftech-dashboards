@@ -83,6 +83,42 @@ input.form-control {
   border-radius: 0.2rem;
 }
 
-.fw-600 {
-  font-weight: 600;
+@for $i from 1 through 9 {
+  .fw-#{$i * 100} {
+    font-weight: $i * 100;
+  }
+}
+
+//------------------------------------------
+// Tables (header, footer)
+//------------------------------------------
+
+.thead-bg {
+  background-color: #0e6ba8;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.tfoot-data {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.modal-detalhes-consumo {
+  width: 100%;
+  max-width: 1140px !important;
+}
+
+//---------------------------------------------
+// Tables responsive fixed height
+// --------------------------------------------
+
+.bodycontainer {
+  max-height: 500px;
+  width: 100%;
+  margin: 0;
+  overflow-y: auto;
+}
+.table-scrollable {
+  margin: 0;
+  padding: 0;
 }

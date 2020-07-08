@@ -1,3 +1,5 @@
+import { IVendasConsumoInternoDetalhado } from './../../../shared/interfaces/vendas-consumo-interno-detalhado.interface';
+import { IVendasConsumoInterno } from './../../../shared/interfaces/vendas-consumo-interno.interface';
 import { IVendasHora } from './../../../shared/interfaces/vendas-hora.interface';
 import { IVendasHistorico } from './../../../shared/interfaces/vendas-historico.interface';
 import { IVendasTopProdutos } from './../../../shared/interfaces/vendas-top-produtos.interface';
@@ -176,6 +178,42 @@ export class FranqueadosService {
     return this.http.get<IVendasFranqueadoDetalhes>(
       `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasFranqueadoDetalhado}?codigoDocumento=${codigoDocumento}`
     );
+  }
+
+  getVendasConsumoInterno(
+    dataInicio: string,
+    dataFim: string,
+    codigoFranqueado: number
+  ): Observable<IVendasConsumoInterno[]> {
+    const queryParams = new URLSearchParams({
+      dataInicio,
+      dataFim,
+      codigoFranqueado: codigoFranqueado.toString(),
+    }).toString();
+    return this.http
+      .get<IVendasConsumoInterno[]>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasConsumoInterno}?${queryParams}`
+      )
+      .pipe(map((response) => response['Data'] || []));
+  }
+
+  getVendasConsumoInternoDetalhado(
+    dataInicio: string,
+    dataFim: string,
+    codigoFranqueado: number,
+    codigoRecebedor: number
+  ): Observable<IVendasConsumoInternoDetalhado[]> {
+    const queryParams = new URLSearchParams({
+      dataInicio,
+      dataFim,
+      codigoFranqueado: codigoFranqueado.toString(),
+      codigoRecebedor: codigoRecebedor.toString(),
+    }).toString();
+    return this.http
+      .get<IVendasConsumoInternoDetalhado[]>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasConsumoInternoDetalhado}?${queryParams}`
+      )
+      .pipe(map((response) => response['Data'] || []));
   }
 
   getVendasPorHora(

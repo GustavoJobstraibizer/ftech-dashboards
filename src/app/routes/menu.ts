@@ -12,7 +12,7 @@ const VendasHora = {
 
 const ConsumoInterno = {
   text: 'Consumo Interno',
-  link: '#',
+  link: '/franqueado/consumo-interno',
   icon: 'icon-login',
 };
 

@@ -20,6 +20,9 @@ export const ApiRoutes = {
       vendasFranqueado: 'dashboards/franqueados/vendasFranqueado',
       vendasFranqueadoDetalhado:
         'dashboards/franqueados/VendasFranqueadoDetalhado',
+      vendasConsumoInterno: 'dashboards/franqueados/vendasConsumoInterno',
+      vendasConsumoInternoDetalhado:
+        'dashboards/franqueados/vendasConsumoInternoDetalhado',
     },
   },
   adm: {

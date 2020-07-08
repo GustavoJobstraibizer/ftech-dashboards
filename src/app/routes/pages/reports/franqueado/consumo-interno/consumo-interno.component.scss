@@ -1,0 +1,66 @@
+@import "variables";
+
+.td-btn-detail {
+  width: 10%;
+}
+
+.btn-detail {
+  outline: none;
+  border: 1px solid #e3eaf1;
+  background-color: #fff;
+  border-radius: 5px;
+  transition: $transition;
+  width: 28px;
+  height: 28px;
+  box-shadow: $box-shadow;
+
+  &:hover {
+    background-color: $ft-blue-light;
+  }
+}
+
+.thead-bg {
+  background-color: #0e6ba8;
+  color: #fff;
+
+  tr {
+    th:not(:first-child) {
+      width: calc(100% / 2);
+    }
+
+    th:first-of-type {
+      width: 10% !important;
+    }
+  }
+}
+
+.tbody-data {
+  tr {
+    td:not(:first-child) {
+      width: calc(100% / 2);
+    }
+
+    td:first-of-type {
+      width: 10% !important;
+    }
+  }
+}
+
+.tfoot-data {
+  background-color: rgba(0, 123, 255, 0.1);
+  tr {
+    td:not(:first-child) {
+      width: calc(100% / 2);
+    }
+
+    td:first-of-type {
+      width: 10% !important;
+    }
+  }
+}
+
+@media screen and(min-width: 768px) {
+  :host ::ng-deep .card-person .card {
+    width: 50%;
+  }
+}

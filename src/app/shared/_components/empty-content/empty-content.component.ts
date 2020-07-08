@@ -6,8 +6,6 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./empty-content.component.scss'],
 })
 export class EmptyContentComponent implements OnInit {
-  @Input() items: any;
-
   constructor() {}
 
   ngOnInit(): void {}

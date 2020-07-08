@@ -35,17 +35,6 @@ th[scope="row"] {
   }
 }
 
-.bodycontainer {
-  max-height: 450px;
-  width: 100%;
-  margin: 0;
-  overflow-y: auto;
-}
-.table-scrollable {
-  margin: 0;
-  padding: 0;
-}
-
 .tfoot-data {
   background-color: rgba(0, 123, 255, 0.1);
   tr {
@@ -57,6 +46,17 @@ th[scope="row"] {
       width: 10% !important;
     }
   }
+}
+
+.bodycontainer {
+  max-height: 450px;
+  width: 100%;
+  margin: 0;
+  overflow-y: auto;
+}
+.table-scrollable {
+  margin: 0;
+  padding: 0;
 }
 
 .btn-detail-sale {
@@ -89,32 +89,6 @@ th[scope="row"] {
 .icon-eye {
   color: #818181;
 }
-// table {
-//   width: 100%;
-//   display: block;
-// }
-
-// thead {
-//   display: inline-block;
-//   width: 100%;
-// }
-
-// tbody {
-//   max-height: 450px;
-//   height: 100%;
-//   display: inline-block;
-//   width: 100%;
-//   overflow: auto;
-// }
-
-// th,
-// td {
-//   width: 20%;
-//   text-align: center;
-// }
 
 @media screen and(min-width: 768px) {
-  // .btn-expand {
-  //   display: none;
-  // }
 }

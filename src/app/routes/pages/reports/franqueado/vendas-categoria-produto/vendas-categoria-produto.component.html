@@ -8,7 +8,5 @@
 
 <ft-card>
   <ft-tree-table [listValues]="listaVendasPorCategoria"></ft-tree-table>
-  <ft-empty-content
-    [(items)]="listaVendasPorCategoria.length"
-  ></ft-empty-content>
+  <ft-empty-content *ngIf="!listaVendasPorCategoria.length"></ft-empty-content>
 </ft-card>

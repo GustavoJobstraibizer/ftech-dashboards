@@ -1,0 +1,92 @@
+<div class="modal-header">
+  <button
+    type="button"
+    class="close pull-right"
+    aria-label="Close"
+    (click)="closeModal()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="container mt-3">
+  <ft-periodo
+    #cmpnentfiltroPeriodo
+    (periodoFilterEmit)="filtroPeriodo($event)"
+  ></ft-periodo>
+  <ft-card>
+    <div class="table-responsive">
+      <div class="bodycontainer scrollable">
+        <table class="table table-scrollable">
+          <thead class="thead-bg">
+            <tr>
+              <th></th>
+              <th class="text-center">DATA</th>
+              <th class="text-center">VALOR BRUTO</th>
+              <th class="text-center">DESCONTO</th>
+              <th class="text-center">VALOR LÍQUIDO</th>
+              <th class="text-center">CPF CLIENTE</th>
+              <th class="text-center">NOME CLIENTE</th>
+              <th class="text-center">NÚMERO SAT</th>
+              <th class="text-center">VENDEDOR</th>
+            </tr>
+          </thead>
+          <tbody class="tbody-data">
+            <ng-container *ngFor="let item of vendasConsumoInternoDetalhes">
+              <tr *ngIf="!item?.Total">
+                <td class="td-btn-detail">
+                  <button
+                    type="button"
+                    class="btn-detail"
+                    (click)="openModalItens(item?.CodigoDocumento)"
+                  >
+                    <em class="icon-plus"></em>
+                  </button>
+                </td>
+                <td class="text-center">
+                  {{ item?.Data }}
+                </td>
+                <td class="text-center">
+                  {{ item?.ValorBruto | currency: "BRL" }}
+                </td>
+                <td class="text-center">
+                  {{ item?.ValorDesconto | currency: "BRL" }}
+                </td>
+                <td class="text-center">
+                  {{ item?.ValorLiquido | currency: "BRL" }}
+                </td>
+                <td class="text-center">
+                  {{ item?.CPFCliente }}
+                </td>
+                <td class="text-center">
+                  {{ item?.NomeCliente }}
+                </td>
+                <td class="text-center">
+                  {{ item?.NumeroNF }}
+                </td>
+                <td class="text-center">
+                  {{ item?.Vendedor }}
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+          <tfoot class="tfoot-data">
+            <ng-container *ngFor="let item of vendasConsumoInternoDetalhes">
+              <tr *ngIf="item?.Total">
+                <td></td>
+                <td>{{ item?.Data }}</td>
+                <td>{{ item?.ValorBruto | currency: "BRL" }}</td>
+                <td>{{ item?.ValorDesconto | currency: "BRL" }}</td>
+                <td>{{ item?.ValorLiquido | currency: "BRL" }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </ng-container>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </ft-card>
+</div>

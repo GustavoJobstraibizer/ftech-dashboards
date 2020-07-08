@@ -22,9 +22,7 @@ export class PeriodoComponent implements OnInit {
   public items: IListaFranqueadoPerfil[];
   public submitted = false;
 
-  constructor(private localeService: BsLocaleService) {}
-
-  ngOnInit(): void {
+  constructor(private localeService: BsLocaleService) {
     this.formPeriodo = new FormGroup({
       dataInicio: new FormControl(moment(new Date()).format('DD/MM/YYYY'), [
         Validators.required,
@@ -35,7 +33,9 @@ export class PeriodoComponent implements OnInit {
       ),
       codigoFranqueado: new FormControl(null, [Validators.required]),
     });
+  }
 
+  ngOnInit(): void {
     this.localeService.use('pt-br');
   }
 

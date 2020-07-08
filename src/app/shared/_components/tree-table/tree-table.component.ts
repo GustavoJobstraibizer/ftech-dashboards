@@ -13,7 +13,9 @@ export class TreeTableComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.listValues);
+  }
 
   toggleItems(item: IVendaCategoriaProduto) {
     item.Expanded = !item.Expanded;
