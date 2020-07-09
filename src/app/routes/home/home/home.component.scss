@@ -8,15 +8,26 @@
 .home-container {
 }
 
+.home-title {
+  font-size: 20px;
+}
+
 .content-indicador {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .home-title {
   margin-bottom: 30px;
   font-weight: 500;
   font-family: $ft-font-default;
+}
+
+.content-filter {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -27,5 +38,15 @@
   .content-indicador {
     flex-direction: row;
     align-items: flex-end;
+  }
+
+  .content-filter {
+    flex-direction: row;
+  }
+
+  .btn-filter-custom {
+    display: flex;
+    margin-top: 9px;
+    margin-left: 5px;
   }
 }

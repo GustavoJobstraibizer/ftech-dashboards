@@ -20,6 +20,7 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 registerLocaleData(localePt);
 
@@ -44,6 +45,14 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: createTranslateLoader,
         deps: [HttpClient],
       },
+    }),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+      timeOut: 3000,
+      autoDismiss: true,
+      closeButton: true,
+      progressBar: true,
     }),
   ],
   providers: [

@@ -2,11 +2,6 @@
 
 $blue-alpha: rgba(0, 123, 255, 0.1);
 
-th {
-  // color: #586067;
-  // font-size: 11px;
-}
-
 .thead-bg {
   background-color: #0e6ba8;
   color: #fff;
@@ -79,6 +74,7 @@ td {
 .item-category {
   font-size: 10px;
   color: #656565;
+  text-align: left;
 }
 
 .item-td-category {

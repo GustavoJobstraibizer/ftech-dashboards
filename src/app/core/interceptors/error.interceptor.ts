@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../services/authentication.service';
 import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
@@ -10,22 +11,24 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+  constructor(public authService: AuthenticationService) {}
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(
-      catchError((err) => {
-        // const serverError = this.transformObjectKeysToLower(err.error);
+    if (req.url.includes('portal/autenticacao/refresh')) {
+      return next.handle(req);
+    } else {
+      return next.handle(req).pipe(
+        catchError((err) => {
+          if (err.status === 401) {
+            this.authService.logout();
+          }
 
-        // if (this.httpStatusCodeErrorObj[err.status]) {
-        //   this.httpStatusCodeErrorObj[err.status](serverError);
-        // } else {
-        //   this.showMessageErrorDefault(serverError);
-        // }
-
-        return throwError(err);
-      })
-    );
+          return throwError(err);
+        })
+      );
+    }
   }
 }

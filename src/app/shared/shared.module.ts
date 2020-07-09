@@ -44,6 +44,7 @@ import { PeriodoComponent } from './_components/filter/periodo/periodo.component
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TreeTableComponent } from './_components/tree-table/tree-table.component';
 import { EmptyContentComponent } from './_components/empty-content/empty-content.component';
+import { ButtonFilterComponent } from './_components/buttons/button-filter/button-filter.component';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -95,6 +96,7 @@ import { EmptyContentComponent } from './_components/empty-content/empty-content
     MaskDateDirective,
     TreeTableComponent,
     EmptyContentComponent,
+    ButtonFilterComponent,
   ],
   exports: [
     CommonModule,
@@ -142,6 +144,7 @@ import { EmptyContentComponent } from './_components/empty-content/empty-content
     MaskDateDirective,
     TreeTableComponent,
     EmptyContentComponent,
+    ButtonFilterComponent,
   ],
 })
 

@@ -5,13 +5,20 @@
     </h2>
 
     <div class="content-indicador">
-      <ft-indicadores></ft-indicadores>
-      <div
-        class="pl-0 pr-0 col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 ml-0 ml-md-2 ml-lg-2 ml-xl-2"
-      >
-        <ft-combo-franquias
-          (handleChangeEmit)="getCodigoFranqueado($event)"
-        ></ft-combo-franquias>
+      <ft-indicadores [(codigoFranqueado)]="codigoFranqueado"></ft-indicadores>
+
+      <div class="content-filter col-12 col-sm-12 col-md-8 col-lg-8 col-xl-5">
+        <div
+          class="pl-0 pr-0 col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 ml-0 ml-md-2 ml-lg-2 ml-xl-2"
+        >
+          <ft-combo-franquias
+            (handleChangeEmit)="getCodigoFranqueado($event)"
+          ></ft-combo-franquias>
+        </div>
+        <!-- <ft-button-filter
+          class="btn-filter-custom"
+          (handleClickEmit)="handleFilter()"
+        ></ft-button-filter> -->
       </div>
     </div>
   </div>

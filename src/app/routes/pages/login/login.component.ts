@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from './../../../core/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'ft-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public authenticationService: AuthenticationService,
-    public router: Router
+    public router: Router,
+    public toaster: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -24,10 +26,13 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm(e) {
-    this.authenticationService
-      .signIn(this.loginForm.value)
-      .subscribe((response) => {
+    this.authenticationService.signIn(this.loginForm.value).subscribe(
+      (response) => {
         this.router.navigate(['/']);
-      });
+      },
+      (err) => {
+        this.toaster.error(err?.error?.Message || 'Credenciais inválidas');
+      }
+    );
   }
 }

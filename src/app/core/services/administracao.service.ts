@@ -12,7 +12,7 @@ export class AdministracaoService {
 
   getListaFranqueado(): Observable<IListaFranqueadoPerfil> {
     return this.http.get<IListaFranqueadoPerfil>(
-      `${environment.API.URL}${environment.API.Routes.adm.listaPessoaFranqueado}?incluirValorConsolidado=true`
+      `${environment.API.URL}${environment.API.Routes.adm.listaPessoaFranqueado}`
     );
   }
 }

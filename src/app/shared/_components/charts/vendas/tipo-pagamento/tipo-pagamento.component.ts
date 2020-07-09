@@ -14,25 +14,25 @@ import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model
 
 am4core.useTheme(am4themes_animated);
 
-const colors = {
-  Dinheiro: '#6fb142',
-  Crédito: '#4472c4',
-  Débito: '#ffc54b',
-  Cortesia: '#5f7b53',
-};
+// const colors = {
+//   Dinheiro: '#6fb142',
+//   Crédito: '#4472c4',
+//   Débito: '#ffc54b',
+//   Cortesia: '#5f7b53',
+// };
 
-// const colors = [
-//   '#6fb142',
-//   '#4472c4',
-//   '#ffc54b',
-//   '#5f7b53',
-//   '#b085f5',
-//   '#ff6f60',
-//   '#63a4ff',
-//   '#52c7b8',
-//   '#80e27e',
-//   '#8bc34a',
-// ];
+const colors = [
+  '#6fb142',
+  '#4472c4',
+  '#ffc54b',
+  '#5f7b53',
+  '#b085f5',
+  '#ff6f60',
+  '#63a4ff',
+  '#52c7b8',
+  '#80e27e',
+  '#8bc34a',
+];
 
 @Component({
   selector: 'chart-tipo-pagamento',
@@ -60,7 +60,11 @@ export class TipoPagamentoComponent implements OnInit, OnChanges {
 
         this.vendasTipoPagamento.Data.map(
           (formPag) =>
-            (formPag.color = am4core.color(colors[formPag.FormaPagamento]))
+            (formPag.color = am4core.color(
+              colors[formPag.FormaPagamento]
+                ? colors[formPag.FormaPagamento]
+                : this.getRandomColor()
+            ))
         );
 
         this.chart.data = [];
@@ -77,11 +81,19 @@ export class TipoPagamentoComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.codigoFranqueado && changes.codigoFranqueado.currentValue) {
-      console.log(changes.codigoFranqueado);
       this.filtroFranqueado.codigoFranqueado =
         changes.codigoFranqueado.currentValue;
       this.getVendasTipoPagto();
     }
+  }
+
+  getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 
   getRandomIntInclusive(min, max) {

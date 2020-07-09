@@ -59,6 +59,10 @@
   }
 }
 
+.img-thumbnail {
+  max-width: 55px;
+}
+
 @media screen and(min-width: 768px) {
   :host ::ng-deep .card-person .card {
     width: 50%;

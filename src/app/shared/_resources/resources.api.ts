@@ -9,6 +9,7 @@ export const ApiRoutes = {
   },
   dashboards: {
     franqueados: {
+      faturamento: 'dashboards/franqueados/faturamento',
       vendasTipoPagamento: 'dashboards/franqueados/vendasTipoPagamento',
       vendasMensal: 'dashboards/franqueados/vendasMensal',
       vendasAcumuladas: 'dashboards/franqueados/vendasAcumuladas',

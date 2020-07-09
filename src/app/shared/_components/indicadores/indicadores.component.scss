@@ -2,9 +2,25 @@
 
 .indicadores {
   width: 100%;
+  // max-width: 320px;
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   font-family: $ft-font-default;
+
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  // display: flex;
+
+  .card-indicador {
+    flex: 0 0 auto;
+  }
 }
 
 .indicador {
@@ -24,12 +40,30 @@
   }
 }
 
+@media screen and (max-width: 320px) {
+  .indicadores {
+    width: 100%;
+    max-width: 275px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 380px) {
+  .indicadores {
+    width: 100%;
+    max-width: 340px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .indicadores {
     flex-direction: row;
+    width: 100%;
+    max-width: 100%;
   }
 
   .card-indicador {
-    margin-right: 0.5rem;
+    &:not(:last-of-type) {
+      margin-right: 0.5rem;
+    }
   }
 }

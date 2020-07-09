@@ -3,16 +3,22 @@
     <div
       class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 p-relative mb-2 mb-sm-2 mb-md-0 mb-lg-0 mb-xl-0"
     >
-      <div class="form-group">
+      <div class="form-group p-relative">
         <label for="inputEmail4">Data Início *</label>
         <input
           class="form-control"
           type="text"
           formControlName="dataInicio"
           bsDatepicker
+          #dpInicio="bsDatepicker"
           [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
           maskDate
         />
+        <i
+          class="far fa-calendar-alt fa-lg icon-callendar"
+          [attr.aria-expanded]="dpInicio.isOpen"
+          (click)="dpInicio.toggle()"
+        ></i>
         <span
           class="invalid-tltip"
           *ngIf="submitted && !formPeriodo.get('dataInicio').valid"
@@ -25,16 +31,22 @@
     <div
       class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 p-relative mb-2 mb-sm-2 mb-md-0 mb-lg-0 mb-xl-0"
     >
-      <div class="form-group">
+      <div class="form-group p-relative">
         <label for="inputEmail4">Data Fim *</label>
         <input
           class="form-control"
           type="text"
           formControlName="dataFim"
           bsDatepicker
+          #dpFim="bsDatepicker"
           [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
           maskDate
         />
+        <i
+          class="far fa-calendar-alt fa-lg icon-callendar"
+          [attr.aria-expanded]="dpFim.isOpen"
+          (click)="dpFim.toggle()"
+        ></i>
         <span
           class="invalid-tltip"
           *ngIf="submitted && !formPeriodo.get('dataFim').valid"

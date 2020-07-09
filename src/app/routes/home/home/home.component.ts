@@ -1,7 +1,13 @@
 import { IListaFranqueadoPerfil } from './../../../shared/interfaces/lista-franqueado-perfil.interface';
 import { FiltroFranqueado } from './../../../shared/models/filtro-indicadores.model';
 import { HelperService } from './../../../core/services/helper.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -51,7 +57,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (franqueado) {
       this.codigoFranqueado = franqueado.codigo;
     }
-    console.log(this.codigoFranqueado);
   }
 
   ngOnInit() {}
@@ -59,4 +64,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     window.removeEventListener('scroll', this.onScrollEvent, false);
   }
+
+  handleFilter() {}
 }

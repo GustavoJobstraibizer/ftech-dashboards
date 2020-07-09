@@ -6,7 +6,7 @@
 
 <ft-card>
   <div class="table-responsive">
-    <table class="table table-striped table-hover table-condensed">
+    <table class="table table-condensed">
       <thead class="thead-bg">
         <tr>
           <th class="text-center"></th>
@@ -19,9 +19,7 @@
     </table>
 
     <div class="bodycontainer scrollable">
-      <table
-        class="table table-hover table-striped table-condensed table-scrollable"
-      >
+      <table class="table table-condensed table-scrollable">
         <tbody class="tbody-data">
           <ng-container *ngFor="let item of vendasFranqueado">
             <tr>
@@ -54,7 +52,7 @@
             </tr>
 
             <tr *ngIf="item?.Cliente && item?.Cliente.Expanded">
-              <td colspan="5" style="padding: 35px 0px;">
+              <td colspan="5" class="pt-2 pb-2">
                 <ft-cliente-detalhes
                   style="width: 100%;"
                   [cliente]="item?.Cliente"
@@ -67,7 +65,7 @@
       <ft-empty-content *ngIf="!vendasFranqueado.length"></ft-empty-content>
     </div>
 
-    <table class="table table-hover table-striped table-condensed">
+    <table class="table table-condensed">
       <tfoot class="tfoot-data">
         <tr *ngFor="let item of vendasFranqueadoTotal">
           <td></td>

@@ -15,12 +15,21 @@ import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model
 import { IVendaCategoriaProduto } from 'src/app/shared/interfaces/venda-categoria-produto.interface';
 import { IVendasFranqueado } from 'src/app/shared/interfaces/vendas-franqueado.interface';
 import { IVendasFranqueadoDetalhes } from 'src/app/shared/interfaces/vendas-franqueado-detalhes.interface';
+import { IFaturamento } from 'src/app/shared/interfaces/faturamento.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FranqueadosService {
   constructor(private http: HttpClient) {}
+
+  getFaturamento(filtroFranqueado: FiltroFranqueado): Observable<IFaturamento> {
+    return this.http
+      .get<IFaturamento>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.faturamento}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
+      )
+      .pipe(map((response) => response['Data'] || {}));
+  }
 
   getVendasTipoPagamento(
     filtroFranqueado: FiltroFranqueado

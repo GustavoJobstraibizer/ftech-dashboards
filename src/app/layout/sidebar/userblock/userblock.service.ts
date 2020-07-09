@@ -21,9 +21,11 @@ export class UserblockService {
   }
 
   getUserInfo() {
-    const { EmailUsuario: emailUsuario, NomeUsuario: nomeUsuario } = JSON.parse(
-      localStorage.getItem('currentUser')
-    );
-    return { emailUsuario, nomeUsuario };
+    const {
+      EmailUsuario: emailUsuario,
+      NomeUsuario: nomeUsuario,
+      CodigoUsuario: codigoUsuario,
+    } = JSON.parse(localStorage.getItem('currentUser'));
+    return { emailUsuario, nomeUsuario, codigoUsuario };
   }
 }

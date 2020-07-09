@@ -4,7 +4,10 @@
     <div class="user-block-status">
       <img
         class="img-thumbnail rounded-circle"
-        [src]="user.picture"
+        [src]="
+          'https://adm.ftechappdev.com.br/portal/download/imagemPessoa.aspx?codigo=' +
+          userLogged?.codigoUsuario
+        "
         alt="Avatar"
       />
       <div class="circle bg-success circle-lg"></div>

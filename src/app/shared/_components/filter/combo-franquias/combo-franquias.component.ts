@@ -33,9 +33,7 @@ export class ComboFranquiasComponent extends SelectControlValueAccessor
   implements OnInit, AfterViewInit {
   private innerValue: any;
   public items: IListaFranqueadoPerfil[];
-  // @Input() submitted: boolean;
-  // @Input() formControl: string;
-  // @Input() formGroup: FormGroup;
+
   @Output() handleChangeEmit = new EventEmitter();
 
   constructor(
@@ -46,9 +44,7 @@ export class ComboFranquiasComponent extends SelectControlValueAccessor
     super(_renderer, _elementRef);
   }
 
-  ngOnInit() {
-    // console.log(this.formGroup.get(this.formControl).valid);
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.admService.getListaFranqueado().subscribe((response) => {
@@ -56,6 +52,13 @@ export class ComboFranquiasComponent extends SelectControlValueAccessor
 
       if (this.items.length === 1) {
         this.value = response['Data'][0].codigo;
+      } else {
+        this.items.unshift({
+          auxiliar: null,
+          codigo: -1,
+          descricao: 'TODOS',
+          valor: 0,
+        });
       }
     });
   }

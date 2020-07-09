@@ -2,28 +2,39 @@
   <div class="indicadores">
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
-        <span class="indicador__value">R$ 35,50</span>
-        <small class="indicador__footer">Faturamento / 1.000</small>
+        <span class="indicador__value">{{
+          faturamento?.Faturamento | currency: "BRL"
+        }}</span>
+        <small class="indicador__footer"
+          >Faturamento /
+          {{ faturamento?.BaseDivisaoFaturamento | number }}</small
+        >
       </div>
     </ft-card>
 
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
-        <span class="indicador__value">500</span>
+        <span class="indicador__value">{{
+          faturamento?.ClientesAtendidos | number
+        }}</span>
         <small class="indicador__footer">Clientes atendidos</small>
       </div>
     </ft-card>
 
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
-        <span class="indicador__value">R$ 14,33</span>
+        <span class="indicador__value">{{
+          faturamento?.ValorTicketMedioCliente | currency: "BRL"
+        }}</span>
         <small class="indicador__footer">Ticket médio cliente</small>
       </div>
     </ft-card>
 
-    <ft-card class="w-auto">
+    <ft-card class="w-auto card-indicador">
       <div class="indicador">
-        <span class="indicador__value">R$ 08,07</span>
+        <span class="indicador__value">{{
+          faturamento?.ValorTicketMedioPeso | currency: "BRL"
+        }}</span>
         <small class="indicador__footer">Ticket médio peso</small>
       </div>
     </ft-card>
