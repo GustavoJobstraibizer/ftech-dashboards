@@ -18,7 +18,7 @@ th[scope="row"] {
     }
 
     th:first-of-type {
-      width: 10% !important;
+      width: 100% !important;
     }
   }
 }
@@ -43,7 +43,7 @@ th[scope="row"] {
     }
 
     td:first-of-type {
-      width: 10% !important;
+      width: 100% !important;
     }
   }
 }
@@ -91,4 +91,27 @@ th[scope="row"] {
 }
 
 @media screen and(min-width: 768px) {
+  .thead-bg {
+    tr {
+      th:not(:first-child) {
+        width: calc(100% / 5);
+      }
+
+      th:first-of-type {
+        width: 10% !important;
+      }
+    }
+  }
+
+  .tfoot-data {
+    tr {
+      td:not(:first-child) {
+        width: calc(100% / 5);
+      }
+
+      td:first-of-type {
+        width: 10% !important;
+      }
+    }
+  }
 }

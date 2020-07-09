@@ -1,17 +1,18 @@
 @import "variables";
 
-$blue-alpha: rgba(0, 123, 255, 0.5);
+$blue-alpha: rgba(0, 123, 255, 0.3);
 $blue-solid: #007bff;
 
 .td-total {
-  // background-color: $blue-alpha;
-  color: #fff;
+  background-color: $blue-alpha;
+  color: $ft-black-solid;
+  padding: 0;
 }
 
 .total-result {
-  background-color: $blue-alpha;
+  // background-color: $blue-alpha;
   padding: 2px;
-  border-radius: 12px;
+  // border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;

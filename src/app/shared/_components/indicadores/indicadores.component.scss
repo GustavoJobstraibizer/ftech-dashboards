@@ -4,28 +4,30 @@
   width: 100%;
   // max-width: 320px;
   display: flex;
-  // flex-direction: column;
+  flex-direction: column;
   font-family: $ft-font-default;
+  flex-wrap: wrap;
 
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  // flex-wrap: nowrap;
+  // overflow-x: auto;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
 
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  // display: flex;
+  // -ms-overflow-style: none; /* IE and Edge */
+  // scrollbar-width: none; /* Firefox */
+  // // display: flex;
 
-  .card-indicador {
-    flex: 0 0 auto;
-  }
+  // .card-indicador {
+  //   flex: 0 0 auto;
+  // }
 }
 
 .indicador {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   &__value {
     font-size: 27px;
@@ -40,19 +42,26 @@
   }
 }
 
-@media screen and (max-width: 320px) {
-  .indicadores {
-    width: 100%;
-    max-width: 275px;
-  }
-}
+// @media screen and (max-width: 320px) {
+//   .indicadores {
+//     width: 100%;
+//     max-width: 275px;
+//   }
+// }
 
-@media (min-width: 320px) and (max-width: 380px) {
-  .indicadores {
-    width: 100%;
-    max-width: 340px;
-  }
-}
+// @media (min-width: 380px) and (max-width: 500px) {
+//   .indicadores {
+//     width: 100%;
+//     max-width: 340px;
+//   }
+// }
+
+// @media (min-width: 320px) and (max-width: 380px) {
+//   .indicadores {
+//     width: 100%;
+//     max-width: 340px;
+//   }
+// }
 
 @media screen and (min-width: 768px) {
   .indicadores {
@@ -61,7 +70,22 @@
     max-width: 100%;
   }
 
-  .card-indicador {
+  .indicador {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    &__value {
+      font-size: 32px;
+    }
+  }
+
+  ::ng-deep .card-indicador {
+    .card {
+      width: auto;
+      min-width: 200px !important;
+      height: 125px;
+    }
     &:not(:last-of-type) {
       margin-right: 0.5rem;
     }

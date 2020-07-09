@@ -24,7 +24,7 @@ $blue-alpha: rgba(0, 123, 255, 0.1);
     }
 
     td:first-of-type {
-      width: 50%;
+      width: 100%;
     }
   }
 }
@@ -36,9 +36,9 @@ $blue-alpha: rgba(0, 123, 255, 0.1);
       width: calc(100% / 4);
     }
 
-    // td:first-of-type {
-    //   width: 10% !important;
-    // }
+    td:first-of-type {
+      width: 100% !important;
+    }
   }
 }
 
@@ -94,6 +94,18 @@ td {
     tr {
       td:not(:first-child) {
         width: calc(100% / 4) !important;
+      }
+
+      td:first-of-type {
+        width: initial !important;
+      }
+    }
+  }
+
+  .tfoot-data {
+    tr {
+      td:not(:first-child) {
+        width: calc(100% / 4);
       }
 
       td:first-of-type {
