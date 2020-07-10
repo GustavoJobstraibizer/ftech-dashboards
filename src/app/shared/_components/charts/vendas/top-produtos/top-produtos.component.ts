@@ -34,6 +34,8 @@ export class TopProdutosComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.chart = am4core.create('chartTopProdutos', am4charts.XYChart);
     this.chart.language.locale = am4lang_pt_BR;
+    this.chart.responsive.enabled = true;
+    this.chart.logo.disabled = true;
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -35,6 +35,7 @@ export class HistoricoComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.chart = am4core.create('chartHistoricoVendas', am4charts.XYChart);
     this.chart.language.locale = am4lang_pt_BR;
+    this.chart.logo.disabled = true;
   }
 
   ngOnChanges(changes: SimpleChanges) {

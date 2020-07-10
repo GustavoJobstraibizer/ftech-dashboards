@@ -53,19 +53,21 @@ export class TipoPagamentoComponent implements OnInit, OnChanges {
 
   getVendasTipoPagto() {
     this.chart = am4core.create('chartTipoPagamento', am4charts.PieChart);
+    this.chart.responsive.enabled = true;
+    this.chart.logo.disabled = true;
     this.franqueadosDashBoardsService
       .getVendasTipoPagamento(this.filtroFranqueado)
       .subscribe((response) => {
         this.vendasTipoPagamento = response;
 
-        this.vendasTipoPagamento.Data.map(
-          (formPag) =>
-            (formPag.color = am4core.color(
-              colors[formPag.FormaPagamento]
-                ? colors[formPag.FormaPagamento]
-                : this.getRandomColor()
-            ))
-        );
+        // this.vendasTipoPagamento.Data.map(
+        //   (formPag) =>
+        //     (formPag.color = am4core.color(
+        //       colors[formPag.FormaPagamento]
+        //         ? colors[formPag.FormaPagamento]
+        //         : this.getRandomColor()
+        //     ))
+        // );
 
         this.chart.data = [];
         this.chart.data = [...this.vendasTipoPagamento.Data];

@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
-    "build": "ng build",
+    "build:qa": "ng build",
+    "build:prod": "ng build --prod --base-href /ftech/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
