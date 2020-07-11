@@ -4,6 +4,11 @@
   src: url("/assets/fonts/Circular Std Book.ttf");
 }
 
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("/assets/fonts/Roboto-Regular.ttf");
+}
+
 @import "variables";
 
 //== Vendor
@@ -94,9 +99,11 @@ input.form-control {
 //------------------------------------------
 
 .thead-bg {
-  background-color: #0e6ba8;
+  background-color: #0d4c8f;
   color: #fff;
   text-transform: uppercase;
+
+  font-size: 12px;
 }
 
 .tfoot-data {
@@ -106,6 +113,12 @@ input.form-control {
 .modal-detalhes-consumo {
   width: 100%;
   max-width: 1140px !important;
+}
+
+.modal-filter {
+  .modal-content {
+    border-radius: 12px;
+  }
 }
 
 //---------------------------------------------
@@ -121,4 +134,20 @@ input.form-control {
 .table-scrollable {
   margin: 0;
   padding: 0;
+}
+
+//---------------------------------------------
+// Bootstrap reset (button)
+// --------------------------------------------
+
+.btn-success {
+  background-color: #9381ff;
+  border-color: #9381ff;
+
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: #6a52ff !important;
+    border-color: #6a52ff !important;
+  }
 }

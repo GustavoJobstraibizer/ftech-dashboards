@@ -2,26 +2,10 @@
 
 .indicadores {
   width: 100%;
-  // max-width: 320px;
   display: flex;
   flex-direction: column;
   font-family: $ft-font-default;
   flex-wrap: wrap;
-
-  // flex-wrap: nowrap;
-  // overflow-x: auto;
-
-  // &::-webkit-scrollbar {
-  //   display: none;
-  // }
-
-  // -ms-overflow-style: none; /* IE and Edge */
-  // scrollbar-width: none; /* Firefox */
-  // // display: flex;
-
-  // .card-indicador {
-  //   flex: 0 0 auto;
-  // }
 }
 
 .indicador {
@@ -31,7 +15,7 @@
 
   &__value {
     font-size: 27px;
-    color: #232a2f;
+    color: #fff;
     font-weight: 500;
     letter-spacing: -0.7px;
   }
@@ -42,26 +26,11 @@
   }
 }
 
-// @media screen and (max-width: 320px) {
-//   .indicadores {
-//     width: 100%;
-//     max-width: 275px;
-//   }
-// }
-
-// @media (min-width: 380px) and (max-width: 500px) {
-//   .indicadores {
-//     width: 100%;
-//     max-width: 340px;
-//   }
-// }
-
-// @media (min-width: 320px) and (max-width: 380px) {
-//   .indicadores {
-//     width: 100%;
-//     max-width: 340px;
-//   }
-// }
+::ng-deep .card-indicador {
+  .card {
+    background: linear-gradient(to right, #a6adf0 30%, #ccd1ff);
+  }
+}
 
 @media screen and (min-width: 768px) {
   .indicadores {
@@ -77,6 +46,10 @@
 
     &__value {
       font-size: 32px;
+    }
+
+    &__footer {
+      font-size: 14px;
     }
   }
 

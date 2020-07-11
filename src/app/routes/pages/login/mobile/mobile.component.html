@@ -1,0 +1,106 @@
+<!-- <div class="bg-business"></div> -->
+<div class="wrapper h-100 container-login">
+  <div
+    class="block-center mt-4 d-flex justify-content-center align-items-center h-100"
+  >
+    <div class="d-flex flex-column content-login">
+      <div class="text-center mb-4">
+        <a href="#">
+          <img
+            class="block-center rounded img-logo"
+            src="assets/img/logo.svg"
+            alt="Image"
+          />
+        </a>
+      </div>
+
+      <p class="text-center py-2 title-login">Faça login para continuar</p>
+      <form
+        [formGroup]="loginForm"
+        class="form-validate mb-3"
+        role="form"
+        name="loginForm"
+        novalidate=""
+        (ngSubmit)="submitForm($event)"
+      >
+        <div class="form-group">
+          <input
+            class="form-control"
+            id="exampleInputUsuario1"
+            type="text"
+            name="Usuario"
+            placeholder="Usuário"
+            autocomplete="off"
+            formControlName="Usuario"
+            required=""
+          />
+          <small
+            class="text-danger"
+            *ngIf="
+              loginForm.controls['Usuario'].hasError('required') &&
+              (loginForm.controls['Usuario'].dirty ||
+                loginForm.controls['Usuario'].touched)
+            "
+          >
+            Preencha o campo E-mail
+          </small>
+          <small
+            class="text-danger"
+            *ngIf="
+              loginForm.controls['Usuario'].hasError('Usuario') &&
+              (loginForm.controls['Usuario'].dirty ||
+                loginForm.controls['Usuario'].touched)
+            "
+          >
+            É necessário que preencha um E-mail válido
+          </small>
+        </div>
+        <div class="form-group p-relative">
+          <input
+            #inputPasswd
+            class="form-control"
+            id="exampleInputPassword1"
+            type="password"
+            name="password"
+            placeholder="Senha"
+            formControlName="Senha"
+            required=""
+          />
+          <i
+            class="fas see-pass"
+            [ngClass]="{
+              'fa-eye': inputPasswd.type == 'password',
+              'fa-eye-slash': inputPasswd.type == 'text'
+            }"
+            (click)="
+              inputPasswd.type =
+                inputPasswd.type == 'text' ? 'password' : 'text'
+            "
+          ></i>
+
+          <small
+            class="text-danger"
+            *ngIf="
+              loginForm.controls['Senha'].hasError('required') &&
+              (loginForm.controls['Senha'].dirty ||
+                loginForm.controls['Senha'].touched)
+            "
+          >
+            Preencha o campo Senha
+          </small>
+        </div>
+        <div class="clearfix">
+          <div class="checkbox c-checkbox float-left mt0">
+            <label class="check-remember-me">
+              <input type="checkbox" value="" name="account_remember" />
+              <span class="fa fa-check"></span>Lembre-me</label
+            >
+          </div>
+        </div>
+        <button class="btn btn-block btn-primary mt-3 btn-signin" type="submit">
+          Entrar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

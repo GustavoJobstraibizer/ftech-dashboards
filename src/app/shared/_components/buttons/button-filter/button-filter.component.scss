@@ -1,13 +1,5 @@
 .btn-filter {
   width: 100%;
   margin-bottom: 10px;
-  margin-right: 5px;
-  margin-left: 5px;
-}
-
-@media screen and (min-width: 768px) {
-  .btn-filter {
-    width: 120px !important;
-    margin: 0;
-  }
+  text-transform: uppercase;
 }

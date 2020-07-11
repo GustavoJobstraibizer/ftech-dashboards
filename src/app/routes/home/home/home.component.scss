@@ -10,6 +10,7 @@
 
 .home-title {
   font-size: 20px;
+  margin-bottom: 0 !important;
 }
 
 .content-indicador {
@@ -21,7 +22,7 @@
 .home-title {
   margin-bottom: 30px;
   font-weight: 500;
-  font-family: $ft-font-default;
+  font-family: "Roboto-Regular";
 }
 
 .content-filter {
@@ -32,7 +33,7 @@
 
 @media screen and (min-width: 768px) {
   .home-title {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   .content-indicador {

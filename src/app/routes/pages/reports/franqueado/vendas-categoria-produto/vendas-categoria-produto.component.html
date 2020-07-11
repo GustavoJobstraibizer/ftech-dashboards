@@ -4,7 +4,17 @@
     'Selecione um período para visualizar as vendas agredadas por categoria do produto'
   "
 ></ft-page-title>
-<ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+
+<div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+  <ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+</div>
+
+<ft-button-filter
+  (filteredValueEmit)="filtroPeriodo($event)"
+  [titleModalFilter]="
+    'Selecione um período para visualizar as vendas agredadas por categoria do produto'
+  "
+></ft-button-filter>
 
 <ft-card>
   <ft-tree-table [listValues]="listaVendasPorCategoria"></ft-tree-table>

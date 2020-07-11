@@ -32,8 +32,9 @@ $nav-top-item-desktop-active: $nav-top-item-mobile-active;
   border: 0;
   padding: 0;
   min-height: $navbar-height;
-  background-color: linear-gradient(45deg, #a7bfe8, #6190e8);
-  @include gradient-x($nav-top-bg-start, $nav-top-bg-end);
+  background-color: #3488e3;
+  // background-color: linear-gradient(45deg, #a7bfe8, #6190e8);
+  // @include gradient-x($nav-top-bg-start, $nav-top-bg-end);
 
   @include media-breakpoint-up(md) {
     .navbar-header {

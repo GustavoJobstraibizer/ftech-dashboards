@@ -1,7 +1,11 @@
+import { ModalPeriodoComponent } from './../../../../../shared/_components/filter/modal-periodo/modal-periodo.component';
+import { PeriodoComponent } from './../../../../../shared/_components/filter/periodo/periodo.component';
 import { IVendasHora } from './../../../../../shared/interfaces/vendas-hora.interface';
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service';
 import { Component, OnInit } from '@angular/core';
 import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ft-vendas-hora',
@@ -16,8 +20,12 @@ export class VendasHoraComponent implements OnInit {
   };
 
   public vendas: IVendasHora[];
+  public bsModalRef: BsModalRef;
 
-  constructor(public franqueadosService: FranqueadosService) {}
+  constructor(
+    public franqueadosService: FranqueadosService,
+    public modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
     this.getVendasPorHora();
@@ -52,4 +60,22 @@ export class VendasHoraComponent implements OnInit {
     this.periodo = filter;
     this.getVendasPorHora();
   }
+
+  // openModalFiltros() {
+  //   const initialState = {
+  //     title:
+  //       'Selecione um período para visualizar as vendas agredadas por horário e por dia da semana',
+  //   };
+  //   this.bsModalRef = this.modalService.show(ModalPeriodoComponent, {
+  //     initialState,
+  //     class: 'modal-centered',
+  //   });
+
+  //   this.modalService.onHidden.pipe(take(1)).subscribe((data) => {
+  //     if (data && data !== 'backdrop-click') {
+  //       this.periodo = JSON.parse(data);
+  //       this.getVendasPorHora();
+  //     }
+  //   });
+  // }
 }

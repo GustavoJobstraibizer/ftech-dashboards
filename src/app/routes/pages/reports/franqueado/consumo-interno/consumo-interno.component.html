@@ -2,7 +2,17 @@
   [title]="'Consumo Interno'"
   [subTitle]="'Selecione um período para visualizar os consumos internos'"
 ></ft-page-title>
-<ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+
+<div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+  <ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+</div>
+
+<ft-button-filter
+  (filteredValueEmit)="filtroPeriodo($event)"
+  [titleModalFilter]="
+    'Selecione um período para visualizar os consumos internos'
+  "
+></ft-button-filter>
 
 <ft-card class="card-person">
   <div class="table-responsive">

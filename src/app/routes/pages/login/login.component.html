@@ -1,18 +1,20 @@
-<div class="wrapper h-100 container-login">
+<div
+  class="wrapper h-100 container-login d-none d-sm-none d-md-block d-lg-block d-xl-block"
+>
   <div
     class="block-center mt-4 d-flex justify-content-center align-items-center h-100"
   >
-    <!-- START card-->
     <div class="card card-flat shadow content-login">
       <div class="card-header text-center bg-dark">
         <a href="#">
           <img
             class="block-center rounded"
-            src="assets/img/mini_logo.png"
+            src="assets/img/logo.svg"
             alt="Image"
           />
         </a>
       </div>
+
       <div class="card-body">
         <p class="text-center py-2">Faça login para continuar.</p>
         <form
@@ -24,7 +26,6 @@
           (ngSubmit)="submitForm($event)"
         >
           <div class="form-group">
-            <!-- <div class="input-group with-focus"> -->
             <input
               class="form-control"
               id="exampleInputUsuario1"
@@ -35,14 +36,6 @@
               formControlName="Usuario"
               required=""
             />
-            <!-- <div class="input-group-append">
-                <span
-                  class="input-group-text text-muted bg-transparent border-left-0"
-                >
-                  <em class="fa fa-envelope"></em>
-                </span>
-              </div> -->
-            <!-- </div> -->
             <small
               class="text-danger"
               *ngIf="
@@ -65,7 +58,6 @@
             </small>
           </div>
           <div class="form-group p-relative">
-            <!-- <div class="input-group with-focus"> -->
             <input
               #inputPasswd
               class="form-control"
@@ -118,3 +110,7 @@
     </div>
   </div>
 </div>
+
+<ft-signin-mobile
+  class="d-block d-sm-block d-md-none d-lg-none d-xl-none h-100"
+></ft-signin-mobile>
