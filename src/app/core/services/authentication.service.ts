@@ -1,16 +1,22 @@
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from './../../../environments/environment';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Local } from 'protractor/built/driverProviders';
-import { Location } from '@angular/common';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
+  secretKey = 'Ft3chT3chN@|@gy';
+  refreshTokenInProgress = false;
+
+  tokenRefreshedSource = new Subject();
+  tokenRefreshed$ = this.tokenRefreshedSource.asObservable();
+
   constructor(public http: HttpClient, private route: Router) {}
 
   signIn({ Usuario, Senha }) {
@@ -28,7 +34,7 @@ export class AuthenticationService {
       );
   }
 
-  refresh(
+  refreshToken(
     AccessToken: string,
     RefreshToken: string
   ): Observable<HttpResponse<any>> {
@@ -40,7 +46,50 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.clear();
+    localStorage.removeItem('currentUser');
     this.route.navigate(['/login']);
+  }
+
+  encryptUsingAES256(login: string, password: string) {
+    const prepareToken = `#9${login}||${password}`;
+    const encrypted = CryptoJS.AES.encrypt(
+      JSON.stringify(prepareToken),
+      this.secretKey
+    );
+    localStorage.setItem('_SSoQ', encrypted.toString());
+  }
+
+  decryptUsingAES256(): string[] {
+    const bytes = CryptoJS.AES.decrypt(
+      localStorage.getItem('_SSoQ'),
+      this.secretKey
+    );
+    const decrypted = bytes.toString(CryptoJS.enc.Utf8);
+    return decrypted.slice(3, decrypted.length - 1).split('||');
+  }
+
+  refreshAccess() {
+    if (this.refreshTokenInProgress) {
+      return new Observable((observer) => {
+        this.tokenRefreshed$.subscribe(() => {
+          observer.next();
+          observer.complete();
+        });
+      });
+    } else {
+      this.refreshTokenInProgress = true;
+
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      return this.refreshToken(
+        currentUser.AccessToken,
+        currentUser.RefreshToken
+      ).pipe(
+        tap((data) => {
+          console.log(data);
+          this.refreshTokenInProgress = false;
+          this.tokenRefreshedSource.next();
+        })
+      );
+    }
   }
 }

@@ -28,7 +28,6 @@
           <div class="form-group">
             <input
               class="form-control"
-              id="exampleInputUsuario1"
               type="text"
               name="Usuario"
               placeholder="Usuário"
@@ -61,7 +60,6 @@
             <input
               #inputPasswd
               class="form-control"
-              id="exampleInputPassword1"
               type="password"
               name="password"
               placeholder="Senha"
@@ -94,7 +92,11 @@
           <div class="clearfix">
             <div class="checkbox c-checkbox float-left mt0">
               <label>
-                <input type="checkbox" value="" name="account_remember" />
+                <input
+                  type="checkbox"
+                  #checkRememberMe
+                  name="account_remember"
+                />
                 <span class="fa fa-check"></span>Lembre-me</label
               >
             </div>

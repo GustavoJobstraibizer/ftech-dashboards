@@ -27,6 +27,7 @@
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
     "bootstrap": "^4.5.0",
+    "crypto-js": "^4.0.0",
     "easy-pie-chart": "^2.1.7",
     "jquery": "^3.5.1",
     "jquery.browser": "^0.1.0",

@@ -30,7 +30,7 @@ export class ButtonFilterComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(ModalPeriodoComponent, {
       initialState,
-      class: 'modal-filter',
+      class: 'modal-dialog-centered modal-filter',
     });
 
     this.modalService.onHidden.pipe(take(1)).subscribe((data) => {
