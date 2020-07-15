@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { environment } from './../../../environments/environment';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, switchMap, filter, take } from 'rxjs/operators';
 import { Local } from 'protractor/built/driverProviders';
 import * as CryptoJS from 'crypto-js';
 
@@ -14,8 +14,8 @@ export class AuthenticationService {
   secretKey = 'Ft3chT3chN@|@gy';
   refreshTokenInProgress = false;
 
-  tokenRefreshedSource = new Subject();
-  tokenRefreshed$ = this.tokenRefreshedSource.asObservable();
+  // tokenRefreshedSource = new Subject();
+  // tokenRefreshed$ = this.tokenRefreshedSource.asObservable();
 
   constructor(public http: HttpClient, private route: Router) {}
 
@@ -69,27 +69,45 @@ export class AuthenticationService {
   }
 
   refreshAccess() {
-    if (this.refreshTokenInProgress) {
-      return new Observable((observer) => {
-        this.tokenRefreshed$.subscribe(() => {
-          observer.next();
-          observer.complete();
-        });
-      });
-    } else {
-      this.refreshTokenInProgress = true;
-
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      return this.refreshToken(
-        currentUser.AccessToken,
-        currentUser.RefreshToken
-      ).pipe(
-        tap((data) => {
-          console.log(data);
-          this.refreshTokenInProgress = false;
-          this.tokenRefreshedSource.next();
-        })
-      );
-    }
+    // if (!this.refreshTokenInProgress) {
+    //   this.refreshTokenInProgress = true;
+    //   this.tokenRefreshedSource.next(null);
+    //   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    //   return this.refreshToken(
+    //     currentUser.AccessToken,
+    //     currentUser.RefreshToken
+    //   ).pipe(switchMap((token) => {
+    //     this.refreshTokenInProgress = false;
+    //     this.tokenRefreshedSource.next(token);
+    //     return token;
+    //   }));
+    // } else {
+    //   return this.tokenRefreshedSource.pipe(filter(token => token !== null)),
+    //   take(1),
+    //   switchMap(jwt => {
+    //     return jwt;
+    //   });
+    // }
+    // if (this.refreshTokenInProgress) {
+    //   return new Observable((observer) => {
+    //     this.tokenRefreshed$.subscribe(() => {
+    //       observer.next();
+    //       observer.complete();
+    //     });
+    //   });
+    // } else {
+    //   this.refreshTokenInProgress = true;
+    //   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    //   return this.refreshToken(
+    //     currentUser.AccessToken,
+    //     currentUser.RefreshToken
+    //   ).pipe(
+    //     tap((data) => {
+    //       console.log(data);
+    //       this.refreshTokenInProgress = false;
+    //       this.tokenRefreshedSource.next();
+    //     })
+    //   );
+    // }
   }
 }

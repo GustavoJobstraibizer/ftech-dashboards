@@ -6,11 +6,16 @@ import {
   HttpHandler,
   HttpEvent,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, first } from 'rxjs/operators';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { catchError, first, switchMap, filter, take } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+  private isRefreshing = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
+    null
+  );
+
   constructor(public authService: AuthenticationService) {}
 
   intercept(
@@ -22,68 +27,77 @@ export class ErrorInterceptor implements HttpInterceptor {
     } else {
       return next.handle(req).pipe(
         catchError((err) => {
-          debugger;
           if (
             err.status === 401 ||
             (err.status === 0 && localStorage.getItem('currentUser'))
           ) {
-            this.authService
-              .refreshAccess()
-              .pipe(
-                catchError(() => {
-                  return next.handle(req);
-                })
-              )
-              .subscribe(
-                (response) => {
-                  if (response && response['body']) {
+            if (!this.isRefreshing) {
+              this.isRefreshing = true;
+              this.refreshTokenSubject.next(null);
+
+              const currentUser = JSON.parse(
+                localStorage.getItem('currentUser')
+              );
+              return this.authService
+                .refreshToken(currentUser.AccessToken, currentUser.RefreshToken)
+                .pipe(
+                  catchError(() => {
+                    const credentials = localStorage.getItem('_SSoQ');
+
+                    if (credentials) {
+                      const crendential = this.authService.decryptUsingAES256();
+                      this.authService
+                        .signIn({
+                          Usuario: crendential[0],
+                          Senha: crendential[1],
+                        })
+                        .subscribe(
+                          (responseSignIn) => {
+                            localStorage.setItem(
+                              'currentUser',
+                              JSON.stringify(responseSignIn.body.Data)
+                            );
+
+                            return next.handle(
+                              this.addAuthHeader(
+                                req,
+                                responseSignIn.body.Data.accessToken
+                              )
+                            );
+                          },
+                          () => {
+                            this.authService.logout();
+                            return next.handle(req);
+                          }
+                        );
+                    } else {
+                      this.authService.logout();
+                      return next.handle(req);
+                    }
+                  }),
+                  switchMap((token: any) => {
+                    this.isRefreshing = false;
+                    this.refreshTokenSubject.next(token.body['Data']);
+
                     localStorage.removeItem('currentUser');
                     localStorage.setItem(
                       'currentUser',
-                      JSON.stringify(response['body'])
+                      JSON.stringify(token.body['Data'])
                     );
                     return next.handle(
-                      this.addAuthHeader(req, response['body'].AccessToken)
+                      this.addAuthHeader(req, token.body['Data'].AccessToken)
                     );
-                  } else {
-                    this.authService.logout();
-                  }
-
-                  return next.handle(req);
-                },
-                () => {
-                  const credentials = localStorage.getItem('_SSoQ');
-
-                  if (credentials) {
-                    const crendential = this.authService.decryptUsingAES256();
-                    this.authService
-                      .signIn({
-                        Usuario: crendential[0],
-                        Senha: crendential[1],
-                      })
-                      .subscribe(
-                        (responseSignIn) => {
-                          localStorage.setItem(
-                            'currentUser',
-                            JSON.stringify(responseSignIn.body)
-                          );
-
-                          return next.handle(
-                            this.addAuthHeader(
-                              req,
-                              responseSignIn.body.accessToken
-                            )
-                          );
-                        },
-                        () => {
-                          this.authService.logout();
-                          return next.handle(req);
-                        }
-                      );
-                  }
-                }
+                  })
+                );
+            } else {
+              return this.refreshTokenSubject.pipe(
+                filter((token) => token != null),
+                take(1),
+                switchMap((jwt) => {
+                  return next.handle(this.addAuthHeader(req, jwt.AccessToken));
+                })
               );
-            // this.authService.logout();
+            }
           }
 
           return throwError(err);
@@ -92,8 +106,8 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
   }
 
-  addAuthHeader(request: HttpRequest<any>, token) {
-    return request.clone({
+  addAuthHeader(req: HttpRequest<any>, token: string) {
+    return req.clone({
       setHeaders: { Authorization: `Bearer ${token}` },
     });
   }
