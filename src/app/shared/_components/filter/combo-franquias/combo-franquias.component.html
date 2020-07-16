@@ -5,7 +5,8 @@
     [bindLabel]="'descricao'"
     [bindValue]="'codigo'"
     [(ngModel)]="value"
-    (change)="handleChangeEmit.emit($event)"
+    (change)="handleChangeValue($event)"
+    (clear)="clearItemSelected()"
   >
   </ng-select>
 </div>

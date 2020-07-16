@@ -6,6 +6,7 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
+  OnDestroy,
 } from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
@@ -23,7 +24,7 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './mensal.component.html',
   styleUrls: ['./mensal.component.scss'],
 })
-export class MensalComponent implements OnInit, OnChanges {
+export class MensalComponent implements OnInit, OnChanges, OnDestroy {
   @Input() carregarVendasMensal = false;
 
   public vendasMensal: any;
@@ -46,6 +47,10 @@ export class MensalComponent implements OnInit, OnChanges {
     ) {
       this.getVendasMensal();
     }
+  }
+
+  ngOnDestroy() {
+    this.chart.dispose();
   }
 
   getVendasMensal() {

@@ -1,3 +1,4 @@
+import { HelperService } from './../../../../core/services/helper.service';
 import { AdministracaoService } from './../../../../core/services/administracao.service';
 import {
   Component,
@@ -39,7 +40,8 @@ export class ComboFranquiasComponent extends SelectControlValueAccessor
   constructor(
     _renderer: Renderer2,
     _elementRef: ElementRef,
-    public admService: AdministracaoService
+    public admService: AdministracaoService,
+    private _helperService: HelperService
   ) {
     super(_renderer, _elementRef);
   }
@@ -50,8 +52,21 @@ export class ComboFranquiasComponent extends SelectControlValueAccessor
     this.admService.getListaFranqueado().subscribe((response) => {
       this.items = response['Data'];
 
+      const currentUser = this._helperService.getUserInfo();
+
       if (this.items.length === 1) {
         this.value = response['Data'][0].codigo;
+        this.handleChangeEmit.emit(response['Data'][0]);
+
+        if (currentUser) {
+          localStorage.setItem(
+            'unity',
+            JSON.stringify({
+              usuario: currentUser.CodigoUsuario,
+              franqueado: response['Data'][0],
+            })
+          );
+        }
       } else {
         this.items.unshift({
           auxiliar: null,
@@ -59,8 +74,46 @@ export class ComboFranquiasComponent extends SelectControlValueAccessor
           descricao: 'TODOS',
           valor: 0,
         });
+
+        const unidade = localStorage.getItem('unity')
+          ? JSON.parse(localStorage.getItem('unity'))
+          : null;
+
+        if (this.checkUnityOfSelectedUser(unidade, currentUser)) {
+          if (
+            this.items.find(
+              (item) => item.codigo == unidade?.franqueado?.codigo
+            )
+          ) {
+            this.value = unidade?.franqueado?.codigo;
+            this.handleChangeEmit.emit(unidade?.franqueado);
+          }
+        } else {
+          localStorage.removeItem('unity');
+        }
       }
     });
+  }
+
+  checkUnityOfSelectedUser(unidade, currentUser) {
+    return unidade && unidade.usuario == currentUser.CodigoUsuario;
+  }
+
+  clearItemSelected() {
+    localStorage.removeItem('unity');
+  }
+
+  handleChangeValue(franquia) {
+    const currentUser = this._helperService.getUserInfo();
+    localStorage.setItem(
+      'unity',
+      JSON.stringify({
+        usuario: currentUser.CodigoUsuario,
+        franqueado: franquia,
+      })
+    );
+
+    this.handleChangeEmit.emit(franquia);
   }
 
   set value(value: any) {

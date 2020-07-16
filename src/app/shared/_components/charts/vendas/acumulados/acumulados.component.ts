@@ -5,6 +5,7 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
+  OnDestroy,
 } from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
@@ -21,7 +22,7 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './acumulados.component.html',
   styleUrls: ['./acumulados.component.scss'],
 })
-export class AcumuladosComponent implements OnInit, OnChanges {
+export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
   public acumulados: any;
   public chart: any;
   public filtroFranqueado = new FiltroFranqueado(0);
@@ -40,6 +41,10 @@ export class AcumuladosComponent implements OnInit, OnChanges {
     if (changes.carregarVendasAcc && changes.carregarVendasAcc.currentValue) {
       this.getVendasAcumuladas();
     }
+  }
+
+  ngOnDestroy() {
+    this.chart.dispose();
   }
 
   getVendasAcumuladas() {

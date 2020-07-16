@@ -6,6 +6,7 @@ import {
   OnChanges,
   SimpleChange,
   SimpleChanges,
+  OnDestroy,
 } from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
@@ -22,7 +23,7 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './historico.component.html',
   styleUrls: ['./historico.component.scss'],
 })
-export class HistoricoComponent implements OnInit, OnChanges {
+export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
   @Input() carregarHistorico = false;
 
   public historicoVendas: any;
@@ -42,6 +43,10 @@ export class HistoricoComponent implements OnInit, OnChanges {
     if (changes.carregarHistorico && changes.carregarHistorico.currentValue) {
       this.getHistoricoVendas();
     }
+  }
+
+  ngOnDestroy() {
+    this.chart.dispose();
   }
 
   getHistoricoVendas() {

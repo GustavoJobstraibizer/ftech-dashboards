@@ -6,6 +6,7 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
+  OnDestroy,
 } from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
@@ -39,7 +40,7 @@ const colors = [
   templateUrl: './tipo-pagamento.component.html',
   styleUrls: ['./tipo-pagamento.component.scss'],
 })
-export class TipoPagamentoComponent implements OnInit, OnChanges {
+export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
   @Input() codigoFranqueado = 0;
   public vendasTipoPagamento: IVendasTipoPagamento;
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado);
@@ -87,6 +88,10 @@ export class TipoPagamentoComponent implements OnInit, OnChanges {
         changes.codigoFranqueado.currentValue;
       this.getVendasTipoPagto();
     }
+  }
+
+  ngOnDestroy() {
+    this.chart.dispose();
   }
 
   getRandomColor() {

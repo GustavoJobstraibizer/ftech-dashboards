@@ -5,6 +5,7 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
+  OnDestroy,
 } from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
@@ -20,14 +21,12 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './top-produtos.component.html',
   styleUrls: ['./top-produtos.component.scss'],
 })
-export class TopProdutosComponent implements OnInit, OnChanges {
+export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
   @Input() carregarTopProdutos = false;
 
   public topProdutos: any;
-  public chart: any;
+  public chart: am4charts.XYChart;
   public filtroFranqueado = new FiltroFranqueado(0);
-
-  // @TODO Incluir tipo parametro top 10, 20, 30, 40
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
@@ -47,7 +46,11 @@ export class TopProdutosComponent implements OnInit, OnChanges {
     }
   }
 
-  sortByValor(a, b) {
+  ngOnDestroy() {
+    this.chart.dispose();
+  }
+
+  sortByValue(a, b) {
     if (a.Valor < b.Valor) {
       return -1;
     } else if (a.Valor > b.Valor) {
@@ -62,7 +65,7 @@ export class TopProdutosComponent implements OnInit, OnChanges {
       .subscribe((response) => {
         this.topProdutos = response?.Data || [];
 
-        this.topProdutos.sort(this.sortByValor);
+        this.topProdutos.sort(this.sortByValue);
 
         this.chart.data = this.topProdutos;
 

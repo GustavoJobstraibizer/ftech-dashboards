@@ -11,6 +11,12 @@ export class HelperService {
     return currentUser.AccessToken;
   }
 
+  getUserInfo() {
+    return localStorage.getItem('currentUser')
+      ? JSON.parse(localStorage.getItem('currentUser'))
+      : null;
+  }
+
   getReferenceMonth(): string {
     const MONTHS = [
       'Janeiro',
