@@ -5,6 +5,7 @@ import { FranqueadosService } from './../../../../../../core/services/dashboards
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface';
+import * as moment from 'moment/moment';
 
 @Component({
   selector: 'ft-detalhes',
@@ -37,8 +38,10 @@ export class DetalhesComponent implements OnInit {
   ngOnInit(): void {
     this.cmpnentfiltroPeriodo.formPeriodo
       .get('dataInicio')
-      .setValue(this.dataInicio);
-    this.cmpnentfiltroPeriodo.formPeriodo.get('dataFim').setValue(this.dataFim);
+      .setValue(moment(this.dataInicio, 'MM/DD/YYYY').format('DD/MM/YYYY'));
+    this.cmpnentfiltroPeriodo.formPeriodo
+      .get('dataFim')
+      .setValue(moment(this.dataFim, 'MM/DD/YYYY').format('DD/MM/YYYY'));
     this.cmpnentfiltroPeriodo.formPeriodo
       .get('codigoFranqueado')
       .setValue(this.codigoFranqueado);
@@ -55,7 +58,6 @@ export class DetalhesComponent implements OnInit {
         this.codigoPessoa
       )
       .subscribe((data) => {
-        console.log('detalhes >> ', data);
         this.vendasConsumoInternoDetalhes = data;
       });
   }

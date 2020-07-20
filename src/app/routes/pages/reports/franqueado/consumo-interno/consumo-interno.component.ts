@@ -27,7 +27,6 @@ export class ConsumoInternoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getVendasConsumoInterno();
-    console.log(this.consumoInterno.length);
   }
 
   getVendasConsumoInterno() {
