@@ -5,6 +5,10 @@
         <span class="indicador__value">{{
           faturamento?.Faturamento | currency: "BRL"
         }}</span>
+        <ft-skeleton-loader
+          *ngIf="!faturamento?.Faturamento || loading"
+          [theme]="{ width: '100px', height: '30px' }"
+        ></ft-skeleton-loader>
         <small class="indicador__footer"
           >Faturamento /
           {{ faturamento?.BaseDivisaoFaturamento | number }}</small
@@ -17,6 +21,10 @@
         <span class="indicador__value">{{
           faturamento?.ClientesAtendidos | number
         }}</span>
+        <ft-skeleton-loader
+          *ngIf="!faturamento?.ClientesAtendidos || loading"
+          [theme]="{ width: '100px', height: '30px' }"
+        ></ft-skeleton-loader>
         <small class="indicador__footer">Clientes atendidos</small>
       </div>
     </ft-card>
@@ -26,6 +34,10 @@
         <span class="indicador__value">{{
           faturamento?.ValorTicketMedioCliente | currency: "BRL"
         }}</span>
+        <ft-skeleton-loader
+          *ngIf="!faturamento?.ClientesAtendidos || loading"
+          [theme]="{ width: '100px', height: '30px' }"
+        ></ft-skeleton-loader>
         <small class="indicador__footer">Ticket médio cliente</small>
       </div>
     </ft-card>
@@ -35,6 +47,10 @@
         <span class="indicador__value">{{
           faturamento?.ValorTicketMedioPeso | currency: "BRL"
         }}</span>
+        <ft-skeleton-loader
+          *ngIf="!faturamento?.ClientesAtendidos || loading"
+          [theme]="{ width: '100px', height: '30px' }"
+        ></ft-skeleton-loader>
         <small class="indicador__footer">Ticket médio peso</small>
       </div>
     </ft-card>
