@@ -74,7 +74,7 @@ export class DetalhesComponent implements OnInit {
     };
     this.bsModalRef2 = this.modalService.show(ItensComponent, {
       initialState,
-      class: 'modal-lg',
+      class: 'modal-itens-detalhe',
     });
   }
 

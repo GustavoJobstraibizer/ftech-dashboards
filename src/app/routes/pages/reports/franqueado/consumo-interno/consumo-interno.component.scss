@@ -4,21 +4,6 @@
   width: 10%;
 }
 
-.btn-detail {
-  outline: none;
-  border: 1px solid #e3eaf1;
-  background-color: #fff;
-  border-radius: 5px;
-  transition: $transition;
-  width: 28px;
-  height: 28px;
-  box-shadow: $box-shadow;
-
-  &:hover {
-    background-color: $ft-blue-light;
-  }
-}
-
 .thead-bg {
   background-color: #0e6ba8;
   color: #fff;

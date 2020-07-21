@@ -121,6 +121,11 @@ input.form-control {
   }
 }
 
+.modal-itens-detalhe {
+  width: 100%;
+  max-width: 1140px !important;
+}
+
 //---------------------------------------------
 // Tables responsive fixed height
 // --------------------------------------------
@@ -134,6 +139,31 @@ input.form-control {
 .table-scrollable {
   margin: 0;
   padding: 0;
+}
+
+//---------------------------------------------
+// btn detalhes table
+//---------------------------------------------
+
+.btn-detail {
+  outline: none;
+  border: 1px solid #e3eaf1;
+  background-color: #fff;
+  border-radius: 5px;
+  transition: $transition;
+  width: 28px;
+  height: 28px;
+  box-shadow: $box-shadow;
+  margin: 0 12px 0 0;
+
+  &__centered {
+    display: flex;
+    align-items: center;
+  }
+
+  &:hover {
+    background-color: $ft-blue-light;
+  }
 }
 
 //---------------------------------------------
