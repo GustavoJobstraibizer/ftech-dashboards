@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 $blue-alpha: rgba(0, 123, 255, 0.3);
 $blue-solid: #007bff;
@@ -10,9 +10,7 @@ $blue-solid: #007bff;
 }
 
 .total-result {
-  // background-color: $blue-alpha;
   padding: 2px;
-  // border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;

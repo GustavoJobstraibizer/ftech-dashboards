@@ -62,7 +62,8 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/assets/scss/variables",
-                "src/app/shared/animations"
+                "src/app/shared/animations",
+                "src/assets/scss/mixins"
               ]
             },
             "scripts": ["node_modules/jquery/dist/jquery.js"]

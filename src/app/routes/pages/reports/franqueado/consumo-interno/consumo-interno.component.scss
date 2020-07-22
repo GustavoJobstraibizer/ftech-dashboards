@@ -1,4 +1,5 @@
-@import "variables";
+@import 'variables';
+@import 'mixins';
 
 .td-btn-detail {
   width: 10%;
@@ -48,7 +49,7 @@
   max-width: 55px;
 }
 
-@media screen and(min-width: 768px) {
+@include mediaUp('md') {
   :host ::ng-deep .card-person .card {
     width: 50%;
   }

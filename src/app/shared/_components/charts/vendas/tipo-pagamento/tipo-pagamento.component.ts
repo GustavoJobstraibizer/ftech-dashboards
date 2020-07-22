@@ -1,19 +1,19 @@
-import { IVendasTipoPagamento } from './../../../../interfaces/vendas-tipo-pagamento.interface';
-import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service';
+import * as am4charts from '@amcharts/amcharts4/charts'
+import * as am4core from '@amcharts/amcharts4/core'
+import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import {
   Component,
-  OnInit,
   Input,
   OnChanges,
-  SimpleChanges,
   OnDestroy,
-} from '@angular/core';
-import * as am4core from '@amcharts/amcharts4/core';
-import * as am4charts from '@amcharts/amcharts4/charts';
-import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
+  OnInit,
+  SimpleChanges,
+} from '@angular/core'
+import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
+import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
+import { IVendasTipoPagamento } from './../../../../interfaces/vendas-tipo-pagamento.interface'
 
-am4core.useTheme(am4themes_animated);
+am4core.useTheme(am4themes_animated)
 
 // const colors = {
 //   Dinheiro: '#6fb142',
@@ -33,7 +33,7 @@ const colors = [
   '#52c7b8',
   '#80e27e',
   '#8bc34a',
-];
+]
 
 @Component({
   selector: 'chart-tipo-pagamento',
@@ -41,25 +41,25 @@ const colors = [
   styleUrls: ['./tipo-pagamento.component.scss'],
 })
 export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() codigoFranqueado = 0;
-  public vendasTipoPagamento: IVendasTipoPagamento;
-  public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado);
-  public chart: am4charts.PieChart;
+  @Input() codigoFranqueado = 0
+  public vendasTipoPagamento: IVendasTipoPagamento
+  public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
+  public chart: am4charts.PieChart
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
   ngOnInit(): void {
-    this.getVendasTipoPagto();
+    this.getVendasTipoPagto()
   }
 
   getVendasTipoPagto() {
-    this.chart = am4core.create('chartTipoPagamento', am4charts.PieChart);
-    this.chart.responsive.enabled = true;
-    this.chart.logo.disabled = true;
+    this.chart = am4core.create('chartTipoPagamento', am4charts.PieChart)
+    this.chart.responsive.enabled = true
+    this.chart.logo.disabled = true
     this.franqueadosDashBoardsService
       .getVendasTipoPagamento(this.filtroFranqueado)
       .subscribe((response) => {
-        this.vendasTipoPagamento = response;
+        this.vendasTipoPagamento = response
 
         // this.vendasTipoPagamento.Data.map(
         //   (formPag) =>
@@ -70,42 +70,42 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
         //     ))
         // );
 
-        this.chart.data = [];
-        this.chart.data = [...this.vendasTipoPagamento.Data];
+        this.chart.data = []
+        this.chart.data = [...this.vendasTipoPagamento.Data]
 
-        const pieSeries = this.chart.series.push(new am4charts.PieSeries());
-        pieSeries.dataFields.value = 'Valor';
-        pieSeries.dataFields.category = 'FormaPagamento';
-        pieSeries.slices.template.propertyFields.fill = 'color';
+        const pieSeries = this.chart.series.push(new am4charts.PieSeries())
+        pieSeries.dataFields.value = 'Valor'
+        pieSeries.dataFields.category = 'FormaPagamento'
+        pieSeries.slices.template.propertyFields.fill = 'color'
 
-        this.chart.legend = new am4charts.Legend();
-      });
+        this.chart.legend = new am4charts.Legend()
+      })
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.codigoFranqueado && changes.codigoFranqueado.currentValue) {
       this.filtroFranqueado.codigoFranqueado =
-        changes.codigoFranqueado.currentValue;
-      this.getVendasTipoPagto();
+        changes.codigoFranqueado.currentValue
+      this.getVendasTipoPagto()
     }
   }
 
   ngOnDestroy() {
-    this.chart.dispose();
+    this.chart.dispose()
   }
 
   getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
+    const letters = '0123456789ABCDEF'
+    let color = '#'
     for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+      color += letters[Math.floor(Math.random() * 16)]
     }
-    return color;
+    return color
   }
 
   getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min + 1)) + min
   }
 }

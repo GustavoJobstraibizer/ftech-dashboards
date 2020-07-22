@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .thead-bg {
   background-color: #0e6ba8;
@@ -26,13 +26,10 @@
   background: rgba(0, 123, 255, 0.6);
 }
 .table-price-title {
-  font-family: "Circular std", sans-serif;
+  font-family: 'Circular std', sans-serif;
   color: rgba(255, 255, 255, 0.6);
 }
 .table-price-subtitle {
-  font-family: "Circular std", sans-serif;
+  font-family: 'Circular std', sans-serif;
   color: #fff;
-}
-
-@media screen and(min-width: 768px) {
 }
