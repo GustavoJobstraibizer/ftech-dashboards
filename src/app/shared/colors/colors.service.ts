@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
 @Injectable()
 export class ColorsService {
@@ -19,14 +19,14 @@ export class ColorsService {
     gray: '#dde6e9',
     'gray-light': '#e4eaec',
     'gray-lighter': '#edf1f2',
-  };
+  }
 
-  APP_COLORS_CHART = {};
+  APP_COLORS_CHART = {}
 
   constructor() {}
 
   byName(name) {
     // console.log(name +' -> ' + this.APP_COLORS[name])
-    return this.APP_COLORS[name] || '#fff';
+    return this.APP_COLORS[name] || '#fff'
   }
 }

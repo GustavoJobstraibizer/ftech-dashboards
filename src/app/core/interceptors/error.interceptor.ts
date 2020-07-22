@@ -1,20 +1,20 @@
-import { AuthenticationService } from './../services/authentication.service';
-import { Injectable } from '@angular/core';
 import {
+  HttpEvent,
+  HttpHandler,
   HttpInterceptor,
   HttpRequest,
-  HttpHandler,
-  HttpEvent,
-} from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, first, switchMap, filter, take } from 'rxjs/operators';
+} from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { BehaviorSubject, Observable, throwError } from 'rxjs'
+import { catchError, filter, switchMap, take } from 'rxjs/operators'
+import { AuthenticationService } from './../services/authentication.service'
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  private isRefreshing = false;
+  private isRefreshing = false
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
     null
-  );
+  )
 
   constructor(public authService: AuthenticationService) {}
 
@@ -23,7 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (req.url.includes('portal/autenticacao/refresh')) {
-      return next.handle(req);
+      return next.handle(req)
     } else {
       return next.handle(req).pipe(
         catchError((err) => {
@@ -32,20 +32,20 @@ export class ErrorInterceptor implements HttpInterceptor {
             (err.status === 0 && localStorage.getItem('currentUser'))
           ) {
             if (!this.isRefreshing) {
-              this.isRefreshing = true;
-              this.refreshTokenSubject.next(null);
+              this.isRefreshing = true
+              this.refreshTokenSubject.next(null)
 
               const currentUser = JSON.parse(
                 localStorage.getItem('currentUser')
-              );
+              )
               return this.authService
                 .refreshToken(currentUser.AccessToken, currentUser.RefreshToken)
                 .pipe(
                   catchError(() => {
-                    const credentials = localStorage.getItem('_SSoQ');
+                    const credentials = localStorage.getItem('_SSoQ')
 
                     if (credentials) {
-                      const crendential = this.authService.decryptUsingAES256();
+                      const crendential = this.authService.decryptUsingAES256()
                       this.authService
                         .signIn({
                           Usuario: crendential[0],
@@ -56,59 +56,59 @@ export class ErrorInterceptor implements HttpInterceptor {
                             localStorage.setItem(
                               'currentUser',
                               JSON.stringify(responseSignIn.body.Data)
-                            );
+                            )
 
                             return next.handle(
                               this.addAuthHeader(
                                 req,
                                 responseSignIn.body.Data.accessToken
                               )
-                            );
+                            )
                           },
                           () => {
-                            this.authService.logout();
-                            return next.handle(req);
+                            this.authService.logout()
+                            return next.handle(req)
                           }
-                        );
+                        )
                     } else {
-                      this.authService.logout();
-                      return next.handle(req);
+                      this.authService.logout()
+                      return next.handle(req)
                     }
                   }),
                   switchMap((token: any) => {
-                    this.isRefreshing = false;
-                    this.refreshTokenSubject.next(token.body['Data']);
+                    this.isRefreshing = false
+                    this.refreshTokenSubject.next(token.body['Data'])
 
-                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('currentUser')
                     localStorage.setItem(
                       'currentUser',
                       JSON.stringify(token.body['Data'])
-                    );
+                    )
                     return next.handle(
                       this.addAuthHeader(req, token.body['Data'].AccessToken)
-                    );
+                    )
                   })
-                );
+                )
             } else {
               return this.refreshTokenSubject.pipe(
                 filter((token) => token != null),
                 take(1),
                 switchMap((jwt) => {
-                  return next.handle(this.addAuthHeader(req, jwt.AccessToken));
+                  return next.handle(this.addAuthHeader(req, jwt.AccessToken))
                 })
-              );
+              )
             }
           }
 
-          return throwError(err);
+          return throwError(err)
         })
-      );
+      )
     }
   }
 
   addAuthHeader(req: HttpRequest<any>, token: string) {
     return req.clone({
       setHeaders: { Authorization: `Bearer ${token}` },
-    });
+    })
   }
 }

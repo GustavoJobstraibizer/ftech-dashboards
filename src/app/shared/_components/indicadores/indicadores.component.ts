@@ -1,9 +1,9 @@
-import { FiltroFranqueado } from './../../models/filtro-indicadores.model';
-import { FranqueadosService } from './../../../core/services/dashboards/franqueados.service';
-import { HelperService } from './../../../core/services/helper.service';
-import { Component, OnInit, Input } from '@angular/core';
-import { IFaturamento } from '../../interfaces/faturamento.interface';
-import { finalize } from 'rxjs/operators';
+import { Component, Input, OnInit } from '@angular/core'
+import { finalize } from 'rxjs/operators'
+import { IFaturamento } from '../../interfaces/faturamento.interface'
+import { FranqueadosService } from './../../../core/services/dashboards/franqueados.service'
+import { HelperService } from './../../../core/services/helper.service'
+import { FiltroFranqueado } from './../../models/filtro-indicadores.model'
 
 @Component({
   selector: 'ft-indicadores',
@@ -11,12 +11,12 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./indicadores.component.scss'],
 })
 export class IndicadoresComponent implements OnInit {
-  @Input() codigoFranqueado = 0;
+  @Input() codigoFranqueado = 0
 
-  public month: string;
-  public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado);
-  public faturamento: IFaturamento;
-  public loading = false;
+  public month: string
+  public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
+  public faturamento: IFaturamento
+  public loading = false
 
   constructor(
     private _helperService: HelperService,
@@ -24,14 +24,14 @@ export class IndicadoresComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.month = this._helperService.getReferenceMonth();
+    this.month = this._helperService.getReferenceMonth()
 
-    this.loading = true;
+    this.loading = true
     this.franqueadosService
       .getFaturamento(this.filtroFranqueado)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe((data) => {
-        this.faturamento = data;
-      });
+        this.faturamento = data
+      })
   }
 }

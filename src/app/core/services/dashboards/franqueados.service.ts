@@ -1,21 +1,21 @@
-import { IVendasConsumoInternoDetalhado } from './../../../shared/interfaces/vendas-consumo-interno-detalhado.interface';
-import { IVendasConsumoInterno } from './../../../shared/interfaces/vendas-consumo-interno.interface';
-import { IVendasHora } from './../../../shared/interfaces/vendas-hora.interface';
-import { IVendasHistorico } from './../../../shared/interfaces/vendas-historico.interface';
-import { IVendasTopProdutos } from './../../../shared/interfaces/vendas-top-produtos.interface';
-import { IVendasAcumuladas } from './../../../shared/interfaces/vendas-acumuladas.interface';
-import { IVendasTipoPagamento } from './../../../shared/interfaces/vendas-tipo-pagamento.interface';
-import { environment } from './../../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IVendasMensal } from 'src/app/shared/interfaces/vendas-mensal.interface';
-import { map } from 'rxjs/operators';
-import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model';
-import { IVendaCategoriaProduto } from 'src/app/shared/interfaces/venda-categoria-produto.interface';
-import { IVendasFranqueado } from 'src/app/shared/interfaces/vendas-franqueado.interface';
-import { IVendasFranqueadoDetalhes } from 'src/app/shared/interfaces/vendas-franqueado-detalhes.interface';
-import { IFaturamento } from 'src/app/shared/interfaces/faturamento.interface';
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { IFaturamento } from 'src/app/shared/interfaces/faturamento.interface'
+import { IVendaCategoriaProduto } from 'src/app/shared/interfaces/venda-categoria-produto.interface'
+import { IVendasFranqueadoDetalhes } from 'src/app/shared/interfaces/vendas-franqueado-detalhes.interface'
+import { IVendasFranqueado } from 'src/app/shared/interfaces/vendas-franqueado.interface'
+import { IVendasMensal } from 'src/app/shared/interfaces/vendas-mensal.interface'
+import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
+import { environment } from './../../../../environments/environment'
+import { IVendasAcumuladas } from './../../../shared/interfaces/vendas-acumuladas.interface'
+import { IVendasConsumoInternoDetalhado } from './../../../shared/interfaces/vendas-consumo-interno-detalhado.interface'
+import { IVendasConsumoInterno } from './../../../shared/interfaces/vendas-consumo-interno.interface'
+import { IVendasHistorico } from './../../../shared/interfaces/vendas-historico.interface'
+import { IVendasHora } from './../../../shared/interfaces/vendas-hora.interface'
+import { IVendasTipoPagamento } from './../../../shared/interfaces/vendas-tipo-pagamento.interface'
+import { IVendasTopProdutos } from './../../../shared/interfaces/vendas-top-produtos.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class FranqueadosService {
       .get<IFaturamento>(
         `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.faturamento}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
       )
-      .pipe(map((response) => response['Data'] || {}));
+      .pipe(map((response) => response['Data'] || {}))
   }
 
   getVendasTipoPagamento(
@@ -36,7 +36,7 @@ export class FranqueadosService {
   ): Observable<IVendasTipoPagamento> {
     return this.http.get<IVendasTipoPagamento>(
       `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasTipoPagamento}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
-    );
+    )
   }
 
   getVendasMensal(filtroFranqueado: FiltroFranqueado): Observable<any> {
@@ -51,13 +51,13 @@ export class FranqueadosService {
               Mes: `${venda.Mes}/${venda.Ano}`,
               Valor: venda.Venda,
               Media: data.Data.Media,
-            });
-            return acc;
-          }, []);
+            })
+            return acc
+          }, [])
 
-          return vendas;
+          return vendas
         })
-      );
+      )
   }
 
   getVendasAcumuladas(
@@ -65,7 +65,7 @@ export class FranqueadosService {
   ): Observable<IVendasAcumuladas> {
     return this.http.get<IVendasAcumuladas>(
       `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasAcumuladas}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
-    );
+    )
   }
 
   getVendasTopProdutos(
@@ -73,7 +73,7 @@ export class FranqueadosService {
   ): Observable<IVendasTopProdutos> {
     return this.http.get<IVendasTopProdutos>(
       `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasTopProdutos}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
-    );
+    )
   }
 
   getVendasHistorico(filtroFranqueado: FiltroFranqueado): Observable<any> {
@@ -89,17 +89,17 @@ export class FranqueadosService {
               VendaAnoAnterior: venda.VendaAnoAnterior,
               VendaAnoAtual: venda.VendaAnoAtual,
               MediaAnoAnterior: data.Data.MediaAnoAnterior,
-            });
-            return acc;
-          }, []);
+            })
+            return acc
+          }, [])
 
           return {
             AnoAnterior: data.Data.AnoAnterior,
             AnoAtual: data.Data.AnoAtual,
             Vendas: historico,
-          };
+          }
         })
-      );
+      )
   }
 
   getVendasPorCategoriaProduto(
@@ -111,8 +111,8 @@ export class FranqueadosService {
       dataInicio,
       dataFim,
       codigoFranqueado: codigoFranqueado.toString(),
-    }).toString();
-    console.log(queryParams);
+    }).toString()
+    console.log(queryParams)
     return this.http
       .get<IVendaCategoriaProduto[]>(
         `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasPorCategoriaProduto}?${queryParams}`
@@ -121,16 +121,16 @@ export class FranqueadosService {
         map((vendas) => {
           vendas['Data'].map((venda) => {
             if (!venda.Categoria) {
-              venda.Visible = true;
+              venda.Visible = true
             } else {
-              venda.Expanded = true;
+              venda.Expanded = true
             }
-            return venda;
-          });
+            return venda
+          })
 
-          return vendas['Data'];
+          return vendas['Data']
         })
-      );
+      )
   }
 
   getVendasFranqueado(
@@ -142,7 +142,7 @@ export class FranqueadosService {
       dataInicio,
       dataFim,
       codigoFranqueado: codigoFranqueado.toString(),
-    }).toString();
+    }).toString()
     return this.http
       .get<IVendasFranqueado[]>(
         `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasFranqueado}?${queryParams}`
@@ -150,7 +150,7 @@ export class FranqueadosService {
       .pipe(
         map((vendasFranqueado) => {
           if (!vendasFranqueado['Data']) {
-            return [];
+            return []
           }
           const vendasFranqueadoNew = vendasFranqueado['Data'].reduce(
             (acc, venda) => {
@@ -169,16 +169,16 @@ export class FranqueadosService {
                 ValorLiquido: venda.ValorLiquido,
                 ResultadoHorizontal: venda.ResultadoHorizontal,
                 Total: venda.Total,
-              });
+              })
 
-              return acc;
+              return acc
             },
             []
-          );
+          )
 
-          return vendasFranqueadoNew;
+          return vendasFranqueadoNew
         })
-      );
+      )
   }
 
   getVendasFranqueadoDetalhado(
@@ -186,7 +186,7 @@ export class FranqueadosService {
   ): Observable<IVendasFranqueadoDetalhes> {
     return this.http.get<IVendasFranqueadoDetalhes>(
       `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasFranqueadoDetalhado}?codigoDocumento=${codigoDocumento}`
-    );
+    )
   }
 
   getVendasConsumoInterno(
@@ -198,12 +198,12 @@ export class FranqueadosService {
       dataInicio,
       dataFim,
       codigoFranqueado: codigoFranqueado.toString(),
-    }).toString();
+    }).toString()
     return this.http
       .get<IVendasConsumoInterno[]>(
         `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasConsumoInterno}?${queryParams}`
       )
-      .pipe(map((response) => response['Data'] || []));
+      .pipe(map((response) => response['Data'] || []))
   }
 
   getVendasConsumoInternoDetalhado(
@@ -217,12 +217,12 @@ export class FranqueadosService {
       dataFim,
       codigoFranqueado: codigoFranqueado.toString(),
       codigoRecebedor: codigoRecebedor.toString(),
-    }).toString();
+    }).toString()
     return this.http
       .get<IVendasConsumoInternoDetalhado[]>(
         `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasConsumoInternoDetalhado}?${queryParams}`
       )
-      .pipe(map((response) => response['Data'] || []));
+      .pipe(map((response) => response['Data'] || []))
   }
 
   getVendasPorHora(
@@ -234,11 +234,11 @@ export class FranqueadosService {
       dataInicio,
       dataFim,
       codigoFranqueado: codigoFranqueado.toString(),
-    }).toString();
+    }).toString()
     return this.http
       .get<IVendasHora[]>(
         `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasPorHora}?${queryParams}`
       )
-      .pipe(map((vendas) => vendas['Data'] || []));
+      .pipe(map((vendas) => vendas['Data'] || []))
   }
 }
