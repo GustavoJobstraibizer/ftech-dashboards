@@ -58,22 +58,46 @@ export class MensalComponent extends FtechChartXY
       .subscribe((response) => {
         this.vendasMensal = response
 
-        this.chart.paddingRight = 20
+        console.log('mensal > ', response)
+
+        this.chart.paddingLeft = 0
         this.chart.data = [...this.vendasMensal]
 
         const categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis())
         categoryAxis.dataFields.category = 'Mes'
+        categoryAxis.renderer.grid.template.location = 0
+        categoryAxis.renderer.minGridDistance = 10
+
+        // categoryAxis.renderer.grid.template.location = 0
+        // categoryAxis.renderer.inside = false
+        // categoryAxis.renderer.labels.template.valign = 'top'
+        // categoryAxis.renderer.labels.template.fontSize = 15
+        // categoryAxis.renderer.cellStartLocation = 0.1
+        // categoryAxis.renderer.cellEndLocation = 0.9
 
         // First value axis
-        const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis())
+        this.chart.yAxes.push(new am4charts.ValueAxis())
 
         this.columnSeries = this.chart.series.push(new am4charts.ColumnSeries())
         this.columnSeries.dataFields.valueY = 'Valor'
         this.columnSeries.dataFields.categoryX = 'Mes'
-        this.columnSeries.name = 'Vendas'
-        this.columnSeries.tooltipText = '{name}: [bold]{valueY}[/]'
+        this.columnSeries.name = 'Mês'
+        this.columnSeries.tooltipText =
+          'Valor: [bold]{valueY}[/] no mês [bold]{categoryX}[/]'
         this.columnSeries.stroke = am4core.color('#6fb142')
         this.columnSeries.columns.template.fill = am4core.color('#6fb142')
+        this.columnSeries.strokeWidth = 0
+
+        const bullet = this.columnSeries.bullets.push(
+          new am4charts.LabelBullet()
+        )
+        // bullet.label.text = '{valueY}'
+        bullet.label.rotation = 45
+        bullet.label.truncate = false
+        bullet.label.hideOversized = false
+        bullet.label.horizontalCenter = 'left'
+        bullet.locationY = 1
+        bullet.dy = 50
 
         this.lineSeries = this.chart.series.push(new am4charts.LineSeries())
         this.lineSeries.dataFields.valueY = 'Media'
@@ -83,6 +107,9 @@ export class MensalComponent extends FtechChartXY
         this.lineSeries.stroke = am4core.color('#4472c4')
         this.lineSeries.strokeWidth = 5
 
+        this.chart.paddingBottom = 60
+        // this.chart.maskBullets = true
+
         // Add legend
         this.addLegend()
 
@@ -90,4 +117,6 @@ export class MensalComponent extends FtechChartXY
         this.addXYCursor()
       })
   }
+
+  createSeries() {}
 }

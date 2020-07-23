@@ -1,8 +1,4 @@
 export interface IVendasTopProdutos {
-  Data: [
-    {
-      Produto: string;
-      Valor: number;
-    }
-  ];
+  Produto: string
+  Valor: number
 }

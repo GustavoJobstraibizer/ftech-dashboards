@@ -48,7 +48,11 @@ export class FranqueadosService {
         map((data) => {
           const vendas = data.Data.Vendas.reduce((acc, venda) => {
             acc.push({
-              Mes: `${venda.Mes}/${venda.Ano}`,
+              Mes: `${
+                venda.Mes.toString().length == 2
+                  ? venda.Mes.toString()
+                  : `0${venda.Mes.toString()}`
+              }/${venda.Ano.toString().substring(2, 4)}`,
               Valor: venda.Venda,
               Media: data.Data.Media,
             })
@@ -70,10 +74,12 @@ export class FranqueadosService {
 
   getVendasTopProdutos(
     filtroFranqueado: FiltroFranqueado
-  ): Observable<IVendasTopProdutos> {
-    return this.http.get<IVendasTopProdutos>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasTopProdutos}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
-    )
+  ): Observable<IVendasTopProdutos[]> {
+    return this.http
+      .get<IVendasTopProdutos[]>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasTopProdutos}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
+      )
+      .pipe(map((data) => data['Data'] || []))
   }
 
   getVendasHistorico(filtroFranqueado: FiltroFranqueado): Observable<any> {

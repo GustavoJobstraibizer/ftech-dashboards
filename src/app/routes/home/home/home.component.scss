@@ -1,6 +1,45 @@
-@import "variables";
+@import 'variables';
+@import 'mixins';
 
-.home-container {
+.chart-container {
+  display: grid;
+  grid-template-areas:
+    'pagto pagto'
+    'vendasMensal vendasMensal'
+    'histVendas histVendas'
+    'vendasAcc vendasAcc'
+    'topProd topProd';
+
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  margin-top: 10px;
+
+  .tipo-pagto {
+    grid-area: pagto;
+  }
+  .vendas-mensal {
+    grid-area: vendasMensal;
+  }
+  .hist-vendas {
+    grid-area: histVendas;
+  }
+  .vendas-acc {
+    grid-area: vendasAcc;
+  }
+  .top-produtos {
+    grid-area: topProd;
+  }
+
+  @include mediaUp('lg') {
+    grid-template-areas:
+      'pagto vendasMensal'
+      'histVendas vendasAcc'
+      'topProd topProd';
+  }
+}
+
+:host ::ng-deep .card-body {
+  padding: 10px 0;
 }
 
 .home-title {
@@ -17,7 +56,7 @@
 .home-title {
   margin-bottom: 30px;
   font-weight: 500;
-  font-family: "Roboto-Regular";
+  font-family: 'Roboto-Regular';
 }
 
 .content-filter {

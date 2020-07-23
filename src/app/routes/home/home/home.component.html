@@ -9,9 +9,9 @@
     <div class="content-indicador">
       <ft-indicadores [(codigoFranqueado)]="codigoFranqueado"></ft-indicadores>
 
-      <div class="content-filter col-12 col-sm-12 col-md-8 col-lg-8 col-xl-5">
+      <div class="content-filter col-12 col-sm-12 col-md-8 col-lg-8 col-xl-4">
         <div
-          class="pl-0 pr-0 col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 ml-0 ml-md-2 ml-lg-2 ml-xl-2"
+          class="pl-0 pr-0 col-12 col-sm-12 col-md-8 col-lg-8 col-xl-12 ml-0 ml-md-2 ml-lg-2 ml-xl-2"
         >
           <ft-combo-franquias
             (handleChangeEmit)="getCodigoFranqueado($event)"
@@ -25,33 +25,51 @@
     </div>
   </div>
 
-  <ft-card [title]="'Vendas por tipo de pagamento'" id="tipoPagto">
-    <chart-tipo-pagamento
-      [(codigoFranqueado)]="codigoFranqueado"
-    ></chart-tipo-pagamento>
-  </ft-card>
+  <section class="chart-container">
+    <ft-card
+      [title]="'Vendas por tipo de pagamento'"
+      id="tipoPagto"
+      class="tipo-pagto"
+    >
+      <chart-tipo-pagamento
+        [(codigoFranqueado)]="codigoFranqueado"
+      ></chart-tipo-pagamento>
+    </ft-card>
 
-  <ft-card [title]="'Vendas Mensal'" id="vendasMensal">
-    <chart-mensal
-      [(carregarVendasMensal)]="carregarValores.carregarVendasMensal"
-    ></chart-mensal>
-  </ft-card>
+    <ft-card [title]="'Vendas Mensal'" id="vendasMensal" class="vendas-mensal">
+      <chart-mensal
+        [(carregarVendasMensal)]="carregarValores.carregarVendasMensal"
+      ></chart-mensal>
+    </ft-card>
 
-  <ft-card [title]="'Histórico de vendas'" id="historicoVendas">
-    <chart-historico
-      [(carregarHistorico)]="carregarValores.carregarHistorico"
-    ></chart-historico>
-  </ft-card>
+    <ft-card
+      [title]="'Histórico de vendas'"
+      id="historicoVendas"
+      class="hist-vendas"
+    >
+      <chart-historico
+        [(carregarHistorico)]="carregarValores.carregarHistorico"
+      ></chart-historico>
+    </ft-card>
 
-  <ft-card [title]="'Vendas Acumuladas 2020'" id="vendasAcumuladas">
-    <chart-acumulados
-      [(carregarVendasAcc)]="carregarValores.carregaVendasAcumuladas"
-    ></chart-acumulados>
-  </ft-card>
+    <ft-card
+      [title]="'Vendas Acumuladas 2020'"
+      id="vendasAcumuladas"
+      class="vendas-acc"
+    >
+      <chart-acumulados
+        [(carregarVendasAcc)]="carregarValores.carregaVendasAcumuladas"
+      ></chart-acumulados>
+    </ft-card>
 
-  <ft-card [title]="'Top 10 Produtos mais vendidos'" id="topProdutos">
-    <chart-top-produtos
-      [(carregarTopProdutos)]="carregarValores.carregaTopProdutos"
-    ></chart-top-produtos>
-  </ft-card>
+    <ft-card
+      [title]="'Top 10 Produtos mais vendidos'"
+      id="topProdutos"
+      class="top-produtos"
+    >
+      <chart-top-produtos
+        [(carregarTopProdutos)]="carregarValores.carregaTopProdutos"
+      ></chart-top-produtos>
+    </ft-card>
+  </section>
 </div>
