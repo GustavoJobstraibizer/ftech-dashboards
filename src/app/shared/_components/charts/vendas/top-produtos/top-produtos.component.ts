@@ -24,32 +24,34 @@ am4core.useTheme(am4themes_animated)
 })
 export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
   @Input() carregarTopProdutos = false
+  @Input() codigoFranqueado = 0
 
   public topProdutos: IVendasTopProdutos[]
   public chart: am4charts.XYChart
-  public filtroFranqueado = new FiltroFranqueado(0)
+  public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
 
   public loading = false
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
   ngOnInit(): void {
-    this.chart = am4core.create('chartTopProdutos', am4charts.XYChart)
-    this.chart.language.locale = am4lang_pt_BR
-    this.chart.responsive.enabled = true
-    this.chart.logo.disabled = true
+    this.getTopProdutos()
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (
-      changes.carregarTopProdutos &&
-      changes.carregarTopProdutos.currentValue
-    ) {
+    if (this.carregarTopProdutos && this.codigoFranqueado) {
+      this.filtroFranqueado.codigoFranqueado = this.codigoFranqueado
       this.getTopProdutos()
     }
   }
 
   ngOnDestroy() {
-    this.chart.dispose()
+    this.disposeChart()
+  }
+
+  disposeChart() {
+    if (this.chart) {
+      this.chart.dispose()
+    }
   }
 
   sortByValue(a, b) {
@@ -62,6 +64,12 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getTopProdutos() {
+    this.disposeChart()
+    this.chart = am4core.create('chartTopProdutos', am4charts.XYChart)
+    this.chart.language.locale = am4lang_pt_BR
+    this.chart.responsive.enabled = true
+    this.chart.logo.disabled = true
+
     this.loading = true
     this.franqueadosDashBoardsService
       .getVendasTopProdutos(this.filtroFranqueado)
@@ -91,11 +99,11 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
         series.columns.template.strokeOpacity = 0.5
         series.columns.template.height = am4core.percent(35)
 
-        const labelBullet = new am4charts.LabelBullet()
-        series.bullets.push(labelBullet)
+        const labelBullet = series.bullets.push(new am4charts.LabelBullet())
         labelBullet.label.text = '{valueX}'
         labelBullet.label.fontSize = 16
         labelBullet.label.fontWeight = 'bold'
+        labelBullet.label.horizontalCenter = 'left'
 
         this.chart.cursor = new am4charts.XYCursor()
         this.chart.cursor.lineX.disabled = true

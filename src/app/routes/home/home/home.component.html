@@ -7,7 +7,7 @@
     <hr class="w-100" />
 
     <div class="content-indicador">
-      <ft-indicadores [(codigoFranqueado)]="codigoFranqueado"></ft-indicadores>
+      <ft-indicadores [codigoFranqueado]="codigoFranqueado"></ft-indicadores>
 
       <div class="content-filter col-12 col-sm-12 col-md-8 col-lg-8 col-xl-4">
         <div
@@ -38,7 +38,8 @@
 
     <ft-card [title]="'Vendas Mensal'" id="vendasMensal" class="vendas-mensal">
       <chart-mensal
-        [(carregarVendasMensal)]="carregarValores.carregarVendasMensal"
+        [carregarVendasMensal]="carregarValores.carregarVendasMensal"
+        [(codigoFranqueado)]="codigoFranqueado"
       ></chart-mensal>
     </ft-card>
 
@@ -48,7 +49,8 @@
       class="hist-vendas"
     >
       <chart-historico
-        [(carregarHistorico)]="carregarValores.carregarHistorico"
+        [carregarHistorico]="carregarValores.carregarHistorico"
+        [(codigoFranqueado)]="codigoFranqueado"
       ></chart-historico>
     </ft-card>
 
@@ -58,7 +60,8 @@
       class="vendas-acc"
     >
       <chart-acumulados
-        [(carregarVendasAcc)]="carregarValores.carregaVendasAcumuladas"
+        [carregarVendasAcc]="carregarValores.carregaVendasAcumuladas"
+        [(codigoFranqueado)]="codigoFranqueado"
       ></chart-acumulados>
     </ft-card>
 
@@ -68,7 +71,8 @@
       class="top-produtos"
     >
       <chart-top-produtos
-        [(carregarTopProdutos)]="carregarValores.carregaTopProdutos"
+        [carregarTopProdutos]="carregarValores.carregaTopProdutos"
+        [(codigoFranqueado)]="codigoFranqueado"
       ></chart-top-produtos>
     </ft-card>
   </section>

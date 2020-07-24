@@ -26,31 +26,42 @@ am4core.useTheme(am4themes_animated)
 })
 export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
   @Input() carregarHistorico = false
+  @Input() codigoFranqueado = 0
 
   public historicoVendas: any
 
   public chart: any
-  public filtroFranqueado = new FiltroFranqueado(0)
+  public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
   ngOnInit(): void {
-    this.chart = am4core.create('chartHistoricoVendas', am4charts.XYChart)
-    this.chart.language.locale = am4lang_pt_BR
-    this.chart.logo.disabled = true
+    this.getHistoricoVendas()
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.carregarHistorico && changes.carregarHistorico.currentValue) {
+    if (this.carregarHistorico && this.codigoFranqueado) {
+      this.filtroFranqueado.codigoFranqueado = this.codigoFranqueado
       this.getHistoricoVendas()
     }
   }
 
   ngOnDestroy() {
-    this.chart.dispose()
+    this.disposeChart()
+  }
+
+  disposeChart() {
+    if (this.chart) {
+      this.chart.dispose()
+    }
   }
 
   getHistoricoVendas() {
+    this.disposeChart()
+    this.chart = am4core.create('chartHistoricoVendas', am4charts.XYChart)
+    this.chart.language.locale = am4lang_pt_BR
+    this.chart.logo.disabled = true
+
     this.franqueadosDashBoardsService
       .getVendasHistorico(this.filtroFranqueado)
       .subscribe((response) => {
@@ -61,13 +72,11 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
 
         const categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis())
         categoryAxis.dataFields.category = 'Mes'
+        categoryAxis.renderer.grid.template.location = 0
+        categoryAxis.renderer.minGridDistance = 10
 
         // First value axis
         const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis())
-
-        // Second value axis
-        // const valueAxis2 = this.chart.yAxes.push(new am4charts.ValueAxis());
-        // valueAxis2.renderer.opposite = true;
 
         // First series
         const series = this.chart.series.push(new am4charts.ColumnSeries())

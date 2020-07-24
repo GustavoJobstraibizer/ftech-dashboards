@@ -1,19 +1,19 @@
 <div class="skeleton-container">
   <div class="skeleton">
-    <div *ngIf="appearance == 'circle'" class="w-100">
+    <ng-container *ngIf="appearance == 'circle'" class="w-100">
       <div
         class="skeleton__circle"
         *ngFor="let obj of objectsToIterate"
         [ngStyle]="theme"
       ></div>
-    </div>
+    </ng-container>
 
-    <div *ngIf="appearance == 'line'" class="w-100">
+    <ng-container *ngIf="appearance == 'line'" class="w-100">
       <div
         *ngFor="let obj of objectsToIterate"
         class="skeleton__line"
         [ngStyle]="theme"
       ></div>
-    </div>
+    </ng-container>
   </div>
 </div>

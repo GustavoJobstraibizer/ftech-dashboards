@@ -1,11 +1,10 @@
 <div
   class="chartTipoPagamento"
-  [ngStyle]="{ display: vendasTipoPagamento ? 'block' : 'none' }"
-  style="width: 100%; height: 500px;"
+  [ngStyle]="{ display: !loading ? 'block' : 'none' }"
 ></div>
 
 <div
-  *ngIf="!vendasTipoPagamento"
+  *ngIf="loading"
   class="d-flex justify-content-center align-items-center flex-column p-absolute"
   style="height: 500px;"
 >

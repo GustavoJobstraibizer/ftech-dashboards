@@ -12,6 +12,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core'
+import { finalize } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { FtechChartXY } from 'src/app/shared/models/ftech-chart.models'
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
@@ -27,23 +28,23 @@ am4core.useTheme(am4themes_animated)
 export class MensalComponent extends FtechChartXY
   implements OnInit, OnChanges, OnDestroy {
   @Input() carregarVendasMensal = false
+  @Input() codigoFranqueado = 0
 
   public vendasMensal: any
-  public filtroFranqueado = new FiltroFranqueado(0)
+  public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
+  public loading = false
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {
     super('chartVendasMensal')
   }
 
   ngOnInit(): void {
-    this.createChart()
+    this.getVendasMensal()
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (
-      changes.carregarVendasMensal &&
-      changes.carregarVendasMensal.currentValue
-    ) {
+    if (this.carregarVendasMensal && this.codigoFranqueado) {
+      this.filtroFranqueado.codigoFranqueado = this.codigoFranqueado
       this.getVendasMensal()
     }
   }
@@ -53,12 +54,15 @@ export class MensalComponent extends FtechChartXY
   }
 
   getVendasMensal() {
+    this.dispose()
+    this.createChart()
+
+    this.loading = true
     this.franqueadosDashBoardsService
       .getVendasMensal(this.filtroFranqueado)
+      .pipe(finalize(() => (this.loading = false)))
       .subscribe((response) => {
         this.vendasMensal = response
-
-        console.log('mensal > ', response)
 
         this.chart.paddingLeft = 0
         this.chart.data = [...this.vendasMensal]
@@ -67,13 +71,6 @@ export class MensalComponent extends FtechChartXY
         categoryAxis.dataFields.category = 'Mes'
         categoryAxis.renderer.grid.template.location = 0
         categoryAxis.renderer.minGridDistance = 10
-
-        // categoryAxis.renderer.grid.template.location = 0
-        // categoryAxis.renderer.inside = false
-        // categoryAxis.renderer.labels.template.valign = 'top'
-        // categoryAxis.renderer.labels.template.fontSize = 15
-        // categoryAxis.renderer.cellStartLocation = 0.1
-        // categoryAxis.renderer.cellEndLocation = 0.9
 
         // First value axis
         this.chart.yAxes.push(new am4charts.ValueAxis())
@@ -84,20 +81,26 @@ export class MensalComponent extends FtechChartXY
         this.columnSeries.name = 'Mês'
         this.columnSeries.tooltipText =
           'Valor: [bold]{valueY}[/] no mês [bold]{categoryX}[/]'
+
         this.columnSeries.stroke = am4core.color('#6fb142')
         this.columnSeries.columns.template.fill = am4core.color('#6fb142')
-        this.columnSeries.strokeWidth = 0
+
+        this.columnSeries.columns.template.width = am4core.percent(65)
+        // this.columnSeries.strokeWidth = 0
 
         const bullet = this.columnSeries.bullets.push(
           new am4charts.LabelBullet()
         )
-        // bullet.label.text = '{valueY}'
+        bullet.label.text = '{categoryX}'
         bullet.label.rotation = 45
         bullet.label.truncate = false
         bullet.label.hideOversized = false
         bullet.label.horizontalCenter = 'left'
         bullet.locationY = 1
-        bullet.dy = 50
+        bullet.dy = 10
+
+        // this.chart.paddingBottom = 150
+        // this.chart.maskBullets = false
 
         this.lineSeries = this.chart.series.push(new am4charts.LineSeries())
         this.lineSeries.dataFields.valueY = 'Media'
@@ -106,9 +109,6 @@ export class MensalComponent extends FtechChartXY
         this.lineSeries.tooltipText = '{name}: [bold]{valueY}[/]'
         this.lineSeries.stroke = am4core.color('#4472c4')
         this.lineSeries.strokeWidth = 5
-
-        this.chart.paddingBottom = 60
-        // this.chart.maskBullets = true
 
         // Add legend
         this.addLegend()

@@ -2,8 +2,8 @@
   <div class="indicadores">
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
-        <span class="indicador__value">{{
-          faturamento?.Faturamento | currency: "BRL"
+        <span *ngIf="!loading" class="indicador__value">{{
+          faturamento?.Faturamento | currency: 'BRL'
         }}</span>
         <ft-skeleton-loader
           *ngIf="!faturamento?.Faturamento || loading"
@@ -18,7 +18,7 @@
 
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
-        <span class="indicador__value">{{
+        <span *ngIf="!loading" class="indicador__value">{{
           faturamento?.ClientesAtendidos | number
         }}</span>
         <ft-skeleton-loader
@@ -31,8 +31,8 @@
 
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
-        <span class="indicador__value">{{
-          faturamento?.ValorTicketMedioCliente | currency: "BRL"
+        <span *ngIf="!loading" class="indicador__value">{{
+          faturamento?.ValorTicketMedioCliente | currency: 'BRL'
         }}</span>
         <ft-skeleton-loader
           *ngIf="!faturamento?.ClientesAtendidos || loading"
@@ -44,8 +44,8 @@
 
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
-        <span class="indicador__value">{{
-          faturamento?.ValorTicketMedioPeso | currency: "BRL"
+        <span *ngIf="!loading" class="indicador__value">{{
+          faturamento?.ValorTicketMedioPeso | currency: 'BRL'
         }}</span>
         <ft-skeleton-loader
           *ngIf="!faturamento?.ClientesAtendidos || loading"

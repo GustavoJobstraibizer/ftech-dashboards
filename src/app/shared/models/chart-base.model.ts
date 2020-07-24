@@ -1,14 +1,15 @@
-import * as am4charts from '@amcharts/amcharts4/charts';
-import * as am4core from '@amcharts/amcharts4/core';
+import * as am4charts from '@amcharts/amcharts4/charts'
 
 export class BaseChart<T extends am4charts.XYChart | am4charts.PieChart> {
-  public chart: T;
-  public htmlElement: string;
+  public chart: T
+  public htmlElement: string
 
   constructor() {}
 
   dispose() {
-    this.chart.dispose();
+    if (this.chart) {
+      this.chart.dispose()
+    }
   }
 
   // createColumsSerie() {

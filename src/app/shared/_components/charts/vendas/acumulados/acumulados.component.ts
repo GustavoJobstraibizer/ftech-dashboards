@@ -25,31 +25,42 @@ am4core.useTheme(am4themes_animated)
   styleUrls: ['./acumulados.component.scss'],
 })
 export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() carregarVendasAcc = false
+  @Input() codigoFranqueado = 0
+
   public acumulados: any
   public chart: any
-  public filtroFranqueado = new FiltroFranqueado(0)
-
-  @Input() carregarVendasAcc = false
+  public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
   ngOnInit(): void {
-    this.chart = am4core.create('chartVendasAcumuladas', am4charts.XYChart)
-    this.chart.language.locale = am4lang_pt_BR
-    this.chart.logo.disabled = true
+    this.disposeChart()
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.carregarVendasAcc && changes.carregarVendasAcc.currentValue) {
+    if (this.carregarVendasAcc && this.codigoFranqueado) {
+      this.filtroFranqueado.codigoFranqueado = this.codigoFranqueado
       this.getVendasAcumuladas()
     }
   }
 
   ngOnDestroy() {
-    this.chart.dispose()
+    this.disposeChart()
+  }
+
+  disposeChart() {
+    if (this.chart) {
+      this.chart.dispose()
+    }
   }
 
   getVendasAcumuladas() {
+    this.disposeChart()
+    this.chart = am4core.create('chartVendasAcumuladas', am4charts.XYChart)
+    this.chart.language.locale = am4lang_pt_BR
+    this.chart.logo.disabled = true
+
     this.franqueadosDashBoardsService
       .getVendasAcumuladas(this.filtroFranqueado)
       .subscribe((response) => {

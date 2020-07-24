@@ -9,6 +9,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core'
+import { finalize } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
 import { IVendasTipoPagamento } from './../../../../interfaces/vendas-tipo-pagamento.interface'
@@ -38,6 +39,7 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
   public vendasTipoPagamento: IVendasTipoPagamento
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
   public chart: am4charts.PieChart
+  public loading = false
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
@@ -46,13 +48,17 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getVendasTipoPagto() {
+    this.disposeChart()
     this.chart = am4core.create('chartTipoPagamento', am4charts.PieChart)
     this.chart.responsive.enabled = true
     this.responsiveConfig()
 
     this.chart.logo.disabled = true
+
+    this.loading = true
     this.franqueadosDashBoardsService
       .getVendasTipoPagamento(this.filtroFranqueado)
+      .pipe(finalize(() => (this.loading = false)))
       .subscribe((response) => {
         this.vendasTipoPagamento = response
 
@@ -73,14 +79,9 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
         pieSeries.dataFields.category = 'FormaPagamento'
         pieSeries.labels.template.text = '{value.percent.formatNumber("#.0")}%'
         pieSeries.labels.template.align = 'center'
-        // pieSeries.ticks.template.disabled = true
-        // pieSeries.ticks.template.dx = 0
-        // pieSeries.ticks.template.strokeWidth = 2
         pieSeries.ticks.template.length = 0
         pieSeries.ticks.template.width = 10
-        // pieSeries.ticks.template.maxWidth = 1
-        // pieSeries.ticks.template.scale = 0.7
-        // pieSeries.ticks.template.align = 'right'
+
         pieSeries.slices.template.propertyFields.fill = 'color'
 
         this.chart.legend = new am4charts.Legend()
@@ -113,7 +114,7 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.codigoFranqueado && changes.codigoFranqueado.currentValue) {
+    if (changes?.codigoFranqueado?.currentValue) {
       this.filtroFranqueado.codigoFranqueado =
         changes.codigoFranqueado.currentValue
       this.getVendasTipoPagto()
@@ -121,6 +122,12 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.chart.dispose()
+    this.disposeChart()
+  }
+
+  disposeChart() {
+    if (this.chart) {
+      this.chart.dispose()
+    }
   }
 }
