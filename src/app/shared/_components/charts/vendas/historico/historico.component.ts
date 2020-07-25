@@ -31,6 +31,8 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
   public historicoVendas: any
 
   public chart: any
+  public valueAxis: am4charts.ValueAxis
+  public categoryAxis: am4charts.CategoryAxis
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
@@ -56,11 +58,37 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  responsiveConfig() {
+    this.chart.responsive.rules.push({
+      relevant: (target) => {
+        if (target.pixelWidth <= 600) {
+          return true
+        }
+        return false
+      },
+      state: (target, stateId) => {
+        if (target instanceof am4charts.ValueAxis) {
+          const state = target.states.create(stateId)
+
+          state.properties.fontSize = 12
+          return state
+        }
+
+        if (target instanceof am4charts.CategoryAxis) {
+          this.categoryAxis.renderer.minGridDistance = 40
+        }
+
+        return null
+      },
+    })
+  }
+
   getHistoricoVendas() {
     this.disposeChart()
     this.chart = am4core.create('chartHistoricoVendas', am4charts.XYChart)
     this.chart.language.locale = am4lang_pt_BR
     this.chart.logo.disabled = true
+    this.responsiveConfig()
 
     this.franqueadosDashBoardsService
       .getVendasHistorico(this.filtroFranqueado)
@@ -70,13 +98,14 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
         this.chart.paddingRight = 20
         this.chart.data = [...this.historicoVendas]
 
-        const categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis())
-        categoryAxis.dataFields.category = 'Mes'
-        categoryAxis.renderer.grid.template.location = 0
-        categoryAxis.renderer.minGridDistance = 10
+        this.categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis())
+        this.categoryAxis.dataFields.category = 'Mes'
+        this.categoryAxis.renderer.grid.template.location = 0
+        this.categoryAxis.renderer.minGridDistance = 10
+        this.categoryAxis.renderer.labels.template.fontSize = 14
 
         // First value axis
-        const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis())
+        this.valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis())
 
         // First series
         const series = this.chart.series.push(new am4charts.ColumnSeries())

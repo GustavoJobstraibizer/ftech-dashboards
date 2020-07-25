@@ -5,7 +5,7 @@
     "ng": "ng",
     "dev": "ng serve",
     "build:qa": "ng build",
-    "build:prod": "ng build --prod --base-href /ftech/",
+    "build:prod": "ng build --prod",
     "build:deploy": "ng build --prod --base-href https://GustavoJobstraibizer.github.io/ftech-dashboards/",
     "test": "ng test",
     "lint": "ng lint",

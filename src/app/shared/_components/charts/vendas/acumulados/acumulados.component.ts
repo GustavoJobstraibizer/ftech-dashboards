@@ -30,6 +30,7 @@ export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
 
   public acumulados: any
   public chart: any
+  public valueAxis: am4charts.ValueAxis
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
@@ -55,11 +56,30 @@ export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  responsiveConfig() {
+    this.chart.responsive.rules.push({
+      relevant: (target) => {
+        if (target.pixelWidth <= 600) {
+          return true
+        }
+        return false
+      },
+      state: (target, stateId) => {
+        if (target instanceof am4charts.ValueAxis) {
+          this.valueAxis.fontSize = 12
+        }
+
+        return null
+      },
+    })
+  }
+
   getVendasAcumuladas() {
     this.disposeChart()
     this.chart = am4core.create('chartVendasAcumuladas', am4charts.XYChart)
     this.chart.language.locale = am4lang_pt_BR
     this.chart.logo.disabled = true
+    this.responsiveConfig()
 
     this.franqueadosDashBoardsService
       .getVendasAcumuladas(this.filtroFranqueado)
@@ -76,7 +96,7 @@ export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
         categoryAxis.renderer.grid.template.location = 0
         categoryAxis.renderer.minGridDistance = 20
 
-        const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis())
+        this.valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis())
 
         // Create series
         const series = this.chart.series.push(new am4charts.ColumnSeries())

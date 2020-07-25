@@ -33,6 +33,8 @@ export class MensalComponent extends FtechChartXY
   public vendasMensal: any
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
   public loading = false
+  public valueAxys: am4charts.ValueAxis
+  public categoryAxis: am4charts.CategoryAxis
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {
     super('chartVendasMensal')
@@ -53,9 +55,44 @@ export class MensalComponent extends FtechChartXY
     this.dispose()
   }
 
+  responsiveConfig() {
+    this.chart.responsive.rules.push({
+      relevant: (target) => {
+        if (target.pixelWidth <= 600) {
+          return true
+        }
+        return false
+      },
+      state: (target, stateId) => {
+        if (target instanceof am4charts.ColumnSeries) {
+          const state = target.states.create(stateId)
+
+          this.columnSeries.columns.template.width = am4core.percent(50)
+          this.columnSeries.columns.template.fontSize = 12
+          return state
+        }
+
+        if (target instanceof am4charts.ValueAxis) {
+          const state = target.states.create(stateId)
+
+          state.properties.fontSize = 12
+          return state
+        }
+
+        if (target instanceof am4charts.CategoryAxis) {
+          this.categoryAxis.renderer.minGridDistance = 40
+          // this.categoryAxis.renderer.fontSize = 12
+        }
+
+        return null
+      },
+    })
+  }
+
   getVendasMensal() {
     this.dispose()
     this.createChart()
+    this.responsiveConfig()
 
     this.loading = true
     this.franqueadosDashBoardsService
@@ -67,15 +104,22 @@ export class MensalComponent extends FtechChartXY
         this.chart.paddingLeft = 0
         this.chart.data = [...this.vendasMensal]
 
-        const categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis())
-        categoryAxis.dataFields.category = 'Mes'
-        categoryAxis.renderer.grid.template.location = 0
-        categoryAxis.renderer.minGridDistance = 10
+        this.categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis())
+        this.categoryAxis.dataFields.category = 'Mes'
+        this.categoryAxis.renderer.grid.template.location = 0
+        this.categoryAxis.renderer.minGridDistance = 10
+        this.categoryAxis.renderer.fontSize = 16
+        this.categoryAxis.renderer.labels.template.rotation = -45
+        this.categoryAxis.renderer.labels.template.horizontalCenter = 'middle'
+        this.categoryAxis.renderer.labels.template.verticalCenter = 'middle'
+        this.categoryAxis.renderer.labels.template.marginTop = 0
 
         // First value axis
-        this.chart.yAxes.push(new am4charts.ValueAxis())
+        this.valueAxys = this.chart.yAxes.push(new am4charts.ValueAxis())
+        // yAxes.fontSize = 12
 
         this.columnSeries = this.chart.series.push(new am4charts.ColumnSeries())
+        this.columnSeries.columns.template.fontSize = 16
         this.columnSeries.dataFields.valueY = 'Valor'
         this.columnSeries.dataFields.categoryX = 'Mes'
         this.columnSeries.name = 'Mês'
@@ -88,16 +132,16 @@ export class MensalComponent extends FtechChartXY
         this.columnSeries.columns.template.width = am4core.percent(65)
         // this.columnSeries.strokeWidth = 0
 
-        const bullet = this.columnSeries.bullets.push(
-          new am4charts.LabelBullet()
-        )
-        bullet.label.text = '{categoryX}'
-        bullet.label.rotation = 45
-        bullet.label.truncate = false
-        bullet.label.hideOversized = false
-        bullet.label.horizontalCenter = 'left'
-        bullet.locationY = 1
-        bullet.dy = 10
+        // const bullet = this.columnSeries.bullets.push(
+        //   new am4charts.LabelBullet()
+        // )
+        // bullet.label.text = '{categoryX}'
+        // bullet.label.rotation = 45
+        // bullet.label.truncate = false
+        // bullet.label.hideOversized = false
+        // bullet.label.horizontalCenter = 'left'
+        // bullet.locationY = 1
+        // bullet.dy = 10
 
         // this.chart.paddingBottom = 150
         // this.chart.maskBullets = false
