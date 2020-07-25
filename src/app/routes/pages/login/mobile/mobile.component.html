@@ -1,23 +1,20 @@
-<!-- <div class="bg-business"></div> -->
 <div class="wrapper h-100 container-login">
-  <div
-    class="block-center d-flex justify-content-center align-items-center h-100"
-  >
-    <div class="d-flex flex-column content-login">
-      <div class="text-center">
-        <a href="#">
-          <img
-            class="block-center rounded img-logo"
-            src="assets/img/logo.svg"
-            alt="Image"
-          />
-        </a>
-      </div>
+  <section class="content-wrapper">
+    <div class="content-wrapper__logo" [@growUp]>
+      <img
+        class="block-center rounded img-logo"
+        src="assets/img/logo.svg"
+        alt="Image"
+      />
 
-      <p class="text-center py-2 title-login">Faça login para continuar</p>
+      <span>Acompanhe o crescimento de suas vendas</span>
+    </div>
+
+    <div class="d-flex flex-column content-login" [@slideUp]>
+      <p class="text-center title-login">Faça login para continuar</p>
       <form
         [formGroup]="loginForm"
-        class="form-validate mb-3"
+        class="form-validate mx-4 content-login__form"
         role="form"
         name="loginForm"
         novalidate=""
@@ -102,5 +99,5 @@
         </button>
       </form>
     </div>
-  </div>
+  </section>
 </div>

@@ -11,8 +11,8 @@
           <th scope="col">Valor</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let item of topProdutos">
+      <tbody *ngIf="!loading">
+        <tr *ngFor="let item of topProdTable">
           <td>
             <span>{{ item?.Produto }}</span>
           </td>

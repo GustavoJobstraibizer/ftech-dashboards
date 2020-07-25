@@ -5,11 +5,73 @@
 .container-login {
   overflow-y: hidden;
   background: #f1f1f1;
-  // background-image: url("/assets/img/report-analysis.svg");
-  // background-repeat: no-repeat;
-  // background-position-x: 50%;
-  // background-position-y: center;
-  // background-size: 60%;
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+
+    .illustration {
+      width: 40vw;
+      height: 100vh;
+      // background: rgba(0, 0, 0, 0.3);
+      background: linear-gradient(
+        to bottom,
+        rgba(97, 144, 232, 0.9),
+        rgba(166, 173, 240, 0.4)
+      );
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1;
+
+      .card-body {
+        max-width: 400px;
+        width: 100%;
+        flex: initial;
+        flex: 3;
+
+        .title-login {
+          font-weight: 600;
+        }
+      }
+    }
+
+    &__logo {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      flex: 2;
+      justify-content: center;
+
+      .img-logo {
+        max-width: 140px;
+        width: 100%;
+      }
+
+      span {
+        color: #fff;
+        font-size: 14px;
+      }
+    }
+
+    .card-login {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 60vw;
+
+      &__illustration {
+        max-width: 900px;
+        opacity: 0.8;
+      }
+    }
+  }
 }
 
 .content-login {

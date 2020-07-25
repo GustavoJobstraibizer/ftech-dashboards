@@ -27,6 +27,7 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
   @Input() codigoFranqueado = 0
 
   public topProdutos: IVendasTopProdutos[]
+  public topProdTable: IVendasTopProdutos[]
   public chart: am4charts.XYChart
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
 
@@ -54,13 +55,12 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  sortByValue(a, b) {
-    if (a.Valor < b.Valor) {
-      return -1
-    } else if (a.Valor > b.Valor) {
-      return 1
-    }
-    return 0
+  sortByValueAsc(a, b) {
+    return a.Valor - b.Valor
+  }
+
+  sortByValueDesc(a, b) {
+    return b.Valor - a.Valor
   }
 
   getTopProdutos() {
@@ -73,10 +73,18 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
     this.loading = true
     this.franqueadosDashBoardsService
       .getVendasTopProdutos(this.filtroFranqueado)
-      .pipe(finalize(() => (this.loading = false)))
+      .pipe(
+        finalize(() => {
+          this.loading = false
+        })
+      )
       .subscribe((response) => {
         this.topProdutos = response
-        this.topProdutos.sort(this.sortByValue)
+        this.topProdutos.sort(this.sortByValueAsc)
+
+        // const topProds = this.topProdutos
+
+        this.topProdTable = this.topProdutos
 
         this.chart.data = this.topProdutos
 
