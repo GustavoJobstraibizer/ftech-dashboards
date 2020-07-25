@@ -81,7 +81,6 @@ export class MensalComponent extends FtechChartXY
 
         if (target instanceof am4charts.CategoryAxis) {
           this.categoryAxis.renderer.minGridDistance = 40
-          // this.categoryAxis.renderer.fontSize = 12
         }
 
         return null
