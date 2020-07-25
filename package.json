@@ -6,6 +6,7 @@
     "dev": "ng serve",
     "build:qa": "ng build",
     "build:prod": "ng build --prod --base-href /ftech/",
+    "build:deploy": "ng build --prod --base-href https://GustavoJobstraibizer.github.io/ftech-dashboards/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -49,6 +50,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.12.42",
     "codelyzer": "^5.1.2",
+    "gh-pages": "^3.1.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~5.0.0",
