@@ -13,6 +13,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core'
+import { finalize } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
 
@@ -34,6 +35,7 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
   public valueAxis: am4charts.ValueAxis
   public categoryAxis: am4charts.CategoryAxis
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
+  public loading = false
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
@@ -89,9 +91,11 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
     this.chart.language.locale = am4lang_pt_BR
     this.chart.logo.disabled = true
     this.responsiveConfig()
+    this.loading = true
 
     this.franqueadosDashBoardsService
       .getVendasHistorico(this.filtroFranqueado)
+      .pipe(finalize(() => (this.loading = false)))
       .subscribe((response) => {
         this.historicoVendas = response.Vendas
 

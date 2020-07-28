@@ -13,6 +13,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core'
+import { finalize } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
 
@@ -32,6 +33,7 @@ export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
   public chart: any
   public valueAxis: am4charts.ValueAxis
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
+  public loading = false
 
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
@@ -66,7 +68,10 @@ export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
       },
       state: (target, stateId) => {
         if (target instanceof am4charts.ValueAxis) {
-          this.valueAxis.fontSize = 12
+          const state = target.states.create(stateId)
+
+          state.properties.fontSize = 12
+          return state
         }
 
         return null
@@ -80,9 +85,11 @@ export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
     this.chart.language.locale = am4lang_pt_BR
     this.chart.logo.disabled = true
     this.responsiveConfig()
+    this.loading = true
 
     this.franqueadosDashBoardsService
       .getVendasAcumuladas(this.filtroFranqueado)
+      .pipe(finalize(() => (this.loading = false)))
       .subscribe((response) => {
         this.acumulados = response?.Data || []
 

@@ -1,1 +1,31 @@
-<div class="chartHistoricoVendas"></div>
+<div
+  class="chartHistoricoVendas"
+  [ngStyle]="{ display: !loading ? 'block' : 'none' }"
+></div>
+
+<div
+  *ngIf="loading"
+  class="d-flex justify-content-center align-items-center p-absolute"
+  style="height: 500px;"
+>
+  <div class="legend-skeleton">
+    <ft-skeleton-loader
+      [count]="2"
+      [theme]="{ width: '30px', height: '200px' }"
+    ></ft-skeleton-loader>
+    <ft-skeleton-loader
+      [count]="2"
+      [theme]="{ width: '30px', height: '155px' }"
+    ></ft-skeleton-loader>
+    <ft-skeleton-loader
+      [count]="2"
+      [theme]="{ width: '30px', height: '195px' }"
+    ></ft-skeleton-loader>
+    <ft-skeleton-loader
+      [theme]="{ width: '30px', height: '370px' }"
+    ></ft-skeleton-loader>
+    <ft-skeleton-loader
+      [theme]="{ width: '30px', height: '50px' }"
+    ></ft-skeleton-loader>
+  </div>
+</div>

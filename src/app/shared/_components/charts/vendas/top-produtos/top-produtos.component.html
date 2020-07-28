@@ -1,6 +1,22 @@
-<div
-  class="chartTopProdutos d-none d-sm-none d-md-none d-lg-block d-xl-block"
-></div>
+<div class="d-none d-sm-none d-md-none d-lg-block d-xl-block">
+  <div
+    class="chartTopProdutos"
+    [ngStyle]="{ display: !loading ? 'block' : 'none' }"
+  ></div>
+
+  <div
+    *ngIf="loading"
+    class="p-absolute d-flex justify-content-center align-items-center"
+    style="height: 450px;"
+  >
+    <div class="legend-skeleton">
+      <ft-skeleton-loader
+        *ngFor="let item of [1, 2, 3, 5, 6, 7, 8, 9]"
+        [theme]="{ width: item * 100 + 'px', height: '15px' }"
+      ></ft-skeleton-loader>
+    </div>
+  </div>
+</div>
 
 <div class="d-sm-block d-md-block d-lg-none d-xl-none">
   <div class="table-responsive">

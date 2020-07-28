@@ -47,6 +47,7 @@ export class IndicadoresComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('codigoFranqueado > ', this.codigoFranqueado)
     if (this.codigoFranqueado) {
       this.filtroFranqueado.codigoFranqueado = this.codigoFranqueado
       this.getFaturamento()

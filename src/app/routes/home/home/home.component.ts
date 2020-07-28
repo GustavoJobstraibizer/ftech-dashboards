@@ -44,9 +44,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getCodigoFranqueado(franqueado: IListaFranqueadoPerfil) {
-    if (franqueado) {
-      this.codigoFranqueado = franqueado.codigo
-    }
+    // if (franqueado) {
+    this.codigoFranqueado = franqueado?.codigo
+    // }
   }
 
   ngOnInit() {}

@@ -3,15 +3,15 @@
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
         <span *ngIf="!loading" class="indicador__value">{{
-          faturamento?.Faturamento | currency: 'BRL'
+          faturamento?.Faturamento || 0 | currency: 'BRL'
         }}</span>
         <ft-skeleton-loader
-          *ngIf="!faturamento?.Faturamento || loading"
+          *ngIf="loading"
           [theme]="{ width: '100px', height: '30px' }"
         ></ft-skeleton-loader>
         <small class="indicador__footer"
           >Faturamento /
-          {{ faturamento?.BaseDivisaoFaturamento | number }}</small
+          {{ faturamento?.BaseDivisaoFaturamento || 0 | number }}</small
         >
       </div>
     </ft-card>
@@ -19,10 +19,10 @@
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
         <span *ngIf="!loading" class="indicador__value">{{
-          faturamento?.ClientesAtendidos | number
+          faturamento?.ClientesAtendidos || 0 | number
         }}</span>
         <ft-skeleton-loader
-          *ngIf="!faturamento?.ClientesAtendidos || loading"
+          *ngIf="loading"
           [theme]="{ width: '100px', height: '30px' }"
         ></ft-skeleton-loader>
         <small class="indicador__footer">Clientes atendidos</small>
@@ -32,10 +32,10 @@
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
         <span *ngIf="!loading" class="indicador__value">{{
-          faturamento?.ValorTicketMedioCliente | currency: 'BRL'
+          faturamento?.ValorTicketMedioCliente || 0 | currency: 'BRL'
         }}</span>
         <ft-skeleton-loader
-          *ngIf="!faturamento?.ClientesAtendidos || loading"
+          *ngIf="loading"
           [theme]="{ width: '100px', height: '30px' }"
         ></ft-skeleton-loader>
         <small class="indicador__footer">Ticket médio cliente</small>
@@ -45,10 +45,10 @@
     <ft-card class="w-auto card-indicador">
       <div class="indicador">
         <span *ngIf="!loading" class="indicador__value">{{
-          faturamento?.ValorTicketMedioPeso | currency: 'BRL'
+          faturamento?.ValorTicketMedioPeso || 0 | currency: 'BRL'
         }}</span>
         <ft-skeleton-loader
-          *ngIf="!faturamento?.ClientesAtendidos || loading"
+          *ngIf="loading"
           [theme]="{ width: '100px', height: '30px' }"
         ></ft-skeleton-loader>
         <small class="indicador__footer">Ticket médio peso</small>
