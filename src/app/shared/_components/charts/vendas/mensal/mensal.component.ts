@@ -129,21 +129,6 @@ export class MensalComponent extends FtechChartXY
         this.columnSeries.columns.template.fill = am4core.color('#6fb142')
 
         this.columnSeries.columns.template.width = am4core.percent(65)
-        // this.columnSeries.strokeWidth = 0
-
-        // const bullet = this.columnSeries.bullets.push(
-        //   new am4charts.LabelBullet()
-        // )
-        // bullet.label.text = '{categoryX}'
-        // bullet.label.rotation = 45
-        // bullet.label.truncate = false
-        // bullet.label.hideOversized = false
-        // bullet.label.horizontalCenter = 'left'
-        // bullet.locationY = 1
-        // bullet.dy = 10
-
-        // this.chart.paddingBottom = 150
-        // this.chart.maskBullets = false
 
         this.lineSeries = this.chart.series.push(new am4charts.LineSeries())
         this.lineSeries.dataFields.valueY = 'Media'

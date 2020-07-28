@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public month: string
   public codigoFranqueado = 0
   public fullYear = new Date().getFullYear()
+  private codigoFranquia = 0
 
   public carregarValores = {
     carregarHistorico: false,
@@ -60,5 +61,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     window.removeEventListener('scroll', this.onScrollEvent, false)
   }
 
-  handleFilter() {}
+  // handleFilter() {
+  //   this.codigoFranqueado = this.codigoFranquia
+  // }
 }

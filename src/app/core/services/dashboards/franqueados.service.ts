@@ -44,7 +44,7 @@ export class FranqueadosService {
   getVendasMensal(filtroFranqueado: FiltroFranqueado): Observable<any> {
     return this.http
       .get<IVendasMensal>(
-        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasMensal}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasMensal}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}&escala=${this.escala}`
       )
       .pipe(
         map((data) => {
@@ -56,7 +56,7 @@ export class FranqueadosService {
                   : `0${venda.Mes.toString()}`
               }/${venda.Ano.toString().substring(2, 4)}`,
               Valor: venda.Venda,
-              Media: data.Data.Media,
+              Media: this.dividirPelaEscala(data.Data.Media),
             })
             return acc
           }, [])
@@ -70,7 +70,7 @@ export class FranqueadosService {
     filtroFranqueado: FiltroFranqueado
   ): Observable<IVendasAcumuladas> {
     return this.http.get<IVendasAcumuladas>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasAcumuladas}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
+      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasAcumuladas}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}&escala=${this.escala}`
     )
   }
 
@@ -87,7 +87,7 @@ export class FranqueadosService {
   getVendasHistorico(filtroFranqueado: FiltroFranqueado): Observable<any> {
     return this.http
       .get<IVendasHistorico>(
-        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasHistorico}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasHistorico}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}&escala=${this.escala}`
       )
       .pipe(
         map((data) => {
@@ -96,7 +96,9 @@ export class FranqueadosService {
               Mes: venda.Mes,
               VendaAnoAnterior: venda.VendaAnoAnterior,
               VendaAnoAtual: venda.VendaAnoAtual,
-              MediaAnoAnterior: data.Data.MediaAnoAnterior,
+              MediaAnoAnterior: this.dividirPelaEscala(
+                data.Data.MediaAnoAnterior
+              ),
             })
             return acc
           }, [])
@@ -248,5 +250,9 @@ export class FranqueadosService {
         `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasPorHora}?${queryParams}`
       )
       .pipe(map((vendas) => vendas['Data'] || []))
+  }
+
+  dividirPelaEscala(valor: number) {
+    return this.escala ? valor / this.escala : valor
   }
 }
