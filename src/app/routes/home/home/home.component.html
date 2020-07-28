@@ -36,7 +36,15 @@
       ></chart-tipo-pagamento>
     </ft-card>
 
-    <ft-card [title]="'Vendas Mensal'" id="vendasMensal" class="vendas-mensal">
+    <ft-card
+      title="Vendas Mensal {{
+        franqueadoService?.escala > 0
+          ? '(escala 1:' + (franqueadoService?.escala | number) + ')'
+          : ''
+      }}"
+      id="vendasMensal"
+      class="vendas-mensal"
+    >
       <chart-mensal
         [carregarVendasMensal]="carregarValores.carregarVendasMensal"
         [(codigoFranqueado)]="codigoFranqueado"
@@ -44,7 +52,11 @@
     </ft-card>
 
     <ft-card
-      [title]="'Histórico de vendas'"
+      title="Histórico de vendas {{
+        franqueadoService?.escala > 0
+          ? '(escala 1:' + (franqueadoService?.escala | number) + ')'
+          : ''
+      }}"
       id="historicoVendas"
       class="hist-vendas"
     >
@@ -55,7 +67,11 @@
     </ft-card>
 
     <ft-card
-      [title]="'Vendas Acumuladas 2020'"
+      title="Vendas Acumuladas {{ fullYear }} {{
+        franqueadoService?.escala > 0
+          ? '(escala 1:' + (franqueadoService?.escala | number) + ')'
+          : ''
+      }}"
       id="vendasAcumuladas"
       class="vendas-acc"
     >

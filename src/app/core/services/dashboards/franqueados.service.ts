@@ -21,6 +21,8 @@ import { IVendasTopProdutos } from './../../../shared/interfaces/vendas-top-prod
   providedIn: 'root',
 })
 export class FranqueadosService {
+  public readonly escala = 1000
+
   constructor(private http: HttpClient) {}
 
   getFaturamento(filtroFranqueado: FiltroFranqueado): Observable<IFaturamento> {
