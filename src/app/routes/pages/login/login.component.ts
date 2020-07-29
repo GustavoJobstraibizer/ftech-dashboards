@@ -26,8 +26,17 @@ import { AuthenticationService } from './../../../core/services/authentication.s
       transition('void => *', [
         style({ opacity: 0, transform: 'scale(0.8)' }),
         animate(
-          '250ms 300ms ease-in',
+          '300ms 700ms ease-in',
           style({ opacity: 1, transform: 'scale(1.0)' })
+        ),
+      ]),
+    ]),
+    trigger('slideUp', [
+      transition('void => *', [
+        style({ opacity: 0, transform: 'translateY(15px)' }),
+        animate(
+          '250ms 300ms ease-in',
+          style({ opacity: 1, transform: 'translateY(0)' })
         ),
       ]),
     ]),

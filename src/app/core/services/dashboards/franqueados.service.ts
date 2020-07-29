@@ -122,7 +122,6 @@ export class FranqueadosService {
       dataFim,
       codigoFranqueado: codigoFranqueado.toString(),
     }).toString()
-    console.log(queryParams)
     return this.http
       .get<IVendaCategoriaProduto[]>(
         `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasPorCategoriaProduto}?${queryParams}`

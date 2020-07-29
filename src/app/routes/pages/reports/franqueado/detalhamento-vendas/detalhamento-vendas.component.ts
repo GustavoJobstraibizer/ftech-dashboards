@@ -1,9 +1,9 @@
-import { ItensComponent } from './itens/itens.component';
-import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service';
-import { Component, OnInit } from '@angular/core';
-import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface';
-import { IVendasFranqueado } from 'src/app/shared/interfaces/vendas-franqueado.interface';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component, OnInit } from '@angular/core'
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
+import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface'
+import { IVendasFranqueado } from 'src/app/shared/interfaces/vendas-franqueado.interface'
+import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
+import { ItensComponent } from './itens/itens.component'
 
 @Component({
   selector: 'ft-detalhamento-vendas',
@@ -15,12 +15,12 @@ export class DetalhamentoVendasComponent implements OnInit {
     dataInicio: null,
     dataFim: null,
     codigoFranqueado: 0,
-  };
+  }
 
-  bsModalRef: BsModalRef;
-  public vendasFranqueado: IVendasFranqueado[] = [];
-  public vendasFranqueadoTotal: any[] = [];
-  public showItemsOnDesktopVersion = window.innerWidth >= 768;
+  bsModalRef: BsModalRef
+  public vendasFranqueado: IVendasFranqueado[] = []
+  public vendasFranqueadoTotal: any[] = []
+  public showItemsOnDesktopVersion = window.innerWidth >= 768
 
   constructor(
     public franqueadosService: FranqueadosService,
@@ -28,7 +28,7 @@ export class DetalhamentoVendasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getVendasFranqueado();
+    this.getVendasFranqueado()
   }
 
   getVendasFranqueado() {
@@ -39,32 +39,31 @@ export class DetalhamentoVendasComponent implements OnInit {
         this.periodo.codigoFranqueado
       )
       .subscribe((response) => {
-        this.vendasFranqueado = response;
+        this.vendasFranqueado = response
         this.vendasFranqueado = this.vendasFranqueado.filter(
           (venda) => !venda.Total
-        );
+        )
         response.forEach((v) => {
           if (v.Total) {
-            this.vendasFranqueadoTotal.push(v);
+            this.vendasFranqueadoTotal.push(v)
           }
-        });
-        console.log(this.vendasFranqueadoTotal);
-      });
+        })
+      })
   }
 
   filtroPeriodo(filter: any) {
-    this.periodo = filter;
-    this.vendasFranqueadoTotal = [];
-    this.getVendasFranqueado();
+    this.periodo = filter
+    this.vendasFranqueadoTotal = []
+    this.getVendasFranqueado()
   }
 
   openModalItens(codigoDocumento: string) {
     const initialState = {
       codigoDocumento,
-    };
+    }
     this.bsModalRef = this.modalService.show(ItensComponent, {
       initialState,
       class: 'modal-itens-detalhe',
-    });
+    })
   }
 }

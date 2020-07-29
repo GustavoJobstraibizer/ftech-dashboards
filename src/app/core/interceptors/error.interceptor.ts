@@ -28,7 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       return next.handle(req).pipe(
         catchError((err) => {
           if (
-            err.status === 401 ||
+            (err.error == null && err.status === 401) ||
             (err.status === 0 && localStorage.getItem('currentUser'))
           ) {
             if (!this.isRefreshing) {
