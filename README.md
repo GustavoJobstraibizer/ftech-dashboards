@@ -1,27 +1,41 @@
-# DashboardsFetch
+![Logo ftech](src/assets/img/logo.svg)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
+# Aplicação web Dashboards Ftech
 
-## Development server
+> Aplicação web dashboard ftech desenvolvido com **Angular**, **Angle Template** e **am4charts** para os gráficos.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Instalação
 
-## Code scaffolding
+Para executar o projeto em ambiente de **desenvolvimento** é necessário ter a versão **LTS** do Node instalado em sua maquina.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Download Node](https://nodejs.org/pt-br/download/)
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Executando o projeto
 
-## Running unit tests
+Após ter instalado o node, execute os seguintes comandos:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+# Instala as dependências do projeto
+npm install
 
-## Running end-to-end tests
+# Executa o projeto em ambiente de desenvolvimento
+npm run dev
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Abra o navegador e digite a URL http://localhost:4200
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Preparação do build qa e/ou prod
+
+Para gerar o build da apliacação rode os comandos a seguir
+
+```bash
+# Faz o build da aplicação utilizando ambiente de desenvolvimento
+npm run build:qa
+
+# Faz o build da aplicação otimizado para produção
+npm run build:prod 
+```
