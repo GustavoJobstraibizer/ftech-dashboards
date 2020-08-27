@@ -123,7 +123,7 @@ export class MensalComponent extends FtechChartXY
         this.columnSeries.dataFields.categoryX = 'Mes'
         this.columnSeries.name = 'Mês'
         this.columnSeries.tooltipText =
-          'Valor: [bold]{valueY}[/] no mês [bold]{categoryX}[/]'
+          'Valor: [bold]{valueY.formatNumber("#.00")}[/] no mês [bold]{categoryX}[/]'
 
         this.columnSeries.stroke = am4core.color('#6fb142')
         this.columnSeries.columns.template.fill = am4core.color('#6fb142')

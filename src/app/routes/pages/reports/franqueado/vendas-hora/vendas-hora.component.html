@@ -39,14 +39,27 @@
             <span
               [ngClass]="{
                 'total-result': item?.PenultimaLinha,
-                'td-percent': item.UltimaLinha
+                'td-percent': item.UltimaLinha,
+                'total-result__total':
+                  item?.PenultimaLinha && item?.Hora == 'Total'
               }"
               class="td-hour"
               >{{ item?.Hora }}</span
             >
           </td>
-          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+          <td
+            [ngClass]="{ 'td-total': item?.PenultimaLinha }"
+            class="text-right"
+          >
             <span
+              *ngIf="!item?.UltimaLinha"
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha
+              }"
+              >{{ item?.Segunda | currency: 'BRL':'symbol':'1.2-2' }}</span
+            >
+            <span
+              *ngIf="item?.UltimaLinha"
               [ngClass]="{
                 'total-result': item?.PenultimaLinha,
                 'td-percent': item.UltimaLinha
@@ -54,8 +67,19 @@
               >{{ item?.Segunda | number: '1.2-2' }}%</span
             >
           </td>
-          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+          <td
+            [ngClass]="{ 'td-total': item?.PenultimaLinha }"
+            class="text-right"
+          >
             <span
+              *ngIf="!item?.UltimaLinha"
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha
+              }"
+              >{{ item?.Terca | currency: 'BRL':'symbol':'1.2-2' }}</span
+            >
+            <span
+              *ngIf="item?.UltimaLinha"
               [ngClass]="{
                 'total-result': item?.PenultimaLinha,
                 'td-percent': item.UltimaLinha
@@ -63,8 +87,19 @@
               >{{ item?.Terca | number: '1.2-2' }}%</span
             >
           </td>
-          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+          <td
+            [ngClass]="{ 'td-total': item?.PenultimaLinha }"
+            class="text-right"
+          >
             <span
+              *ngIf="!item?.UltimaLinha"
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha
+              }"
+              >{{ item?.Quarta | currency: 'BRL':'symbol':'1.2-2' }}</span
+            >
+            <span
+              *ngIf="item?.UltimaLinha"
               [ngClass]="{
                 'total-result': item?.PenultimaLinha,
                 'td-percent': item.UltimaLinha
@@ -72,8 +107,19 @@
               >{{ item?.Quarta | number: '1.2-2' }}%</span
             >
           </td>
-          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+          <td
+            [ngClass]="{ 'td-total': item?.PenultimaLinha }"
+            class="text-right"
+          >
             <span
+              *ngIf="!item?.UltimaLinha"
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha
+              }"
+              >{{ item?.Quinta | currency: 'BRL':'symbol':'1.2-2' }}</span
+            >
+            <span
+              *ngIf="item?.UltimaLinha"
               [ngClass]="{
                 'total-result': item?.PenultimaLinha,
                 'td-percent': item.UltimaLinha
@@ -81,8 +127,19 @@
               >{{ item?.Quinta | number: '1.2-2' }}%</span
             >
           </td>
-          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+          <td
+            [ngClass]="{ 'td-total': item?.PenultimaLinha }"
+            class="text-right"
+          >
             <span
+              *ngIf="!item?.UltimaLinha"
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha
+              }"
+              >{{ item?.Sexta | currency: 'BRL':'symbol':'1.2-2' }}</span
+            >
+            <span
+              *ngIf="item?.UltimaLinha"
               [ngClass]="{
                 'total-result': item?.PenultimaLinha,
                 'td-percent': item.UltimaLinha
@@ -90,8 +147,19 @@
               >{{ item?.Sexta | number: '1.2-2' }}%</span
             >
           </td>
-          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+          <td
+            [ngClass]="{ 'td-total': item?.PenultimaLinha }"
+            class="text-right"
+          >
             <span
+              *ngIf="!item?.UltimaLinha"
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha
+              }"
+              >{{ item?.Sabado | currency: 'BRL':'symbol':'1.2-2' }}</span
+            >
+            <span
+              *ngIf="item?.UltimaLinha"
               [ngClass]="{
                 'total-result': item?.PenultimaLinha,
                 'td-percent': item.UltimaLinha
@@ -99,8 +167,19 @@
               >{{ item?.Sabado | number: '1.2-2' }}%</span
             >
           </td>
-          <td [ngClass]="{ 'td-total': item?.PenultimaLinha }">
+          <td
+            [ngClass]="{ 'td-total': item?.PenultimaLinha }"
+            class="text-right"
+          >
             <span
+              *ngIf="!item?.UltimaLinha"
+              [ngClass]="{
+                'total-result': item?.PenultimaLinha
+              }"
+              >{{ item?.Domingo | currency: 'BRL':'symbol':'1.2-2' }}</span
+            >
+            <span
+              *ngIf="item?.UltimaLinha"
               [ngClass]="{
                 'total-result': item?.PenultimaLinha,
                 'td-percent': item.UltimaLinha
@@ -110,6 +189,14 @@
           </td>
           <td class="td-total">
             <span
+              *ngIf="!item?.UltimaLinha"
+              [ngClass]="{
+                'total-result': !item?.ResultadoHorizontal
+              }"
+              >{{ item?.Total | currency: 'BRL':'symbol':'1.2-2' }}</span
+            >
+            <span
+              *ngIf="item?.UltimaLinha"
               [ngClass]="{
                 'total-result': !item?.ResultadoHorizontal,
                 'td-percent': item.UltimaLinha
@@ -117,7 +204,7 @@
               >{{ item?.Total | number: '1.2-2' }}%</span
             >
           </td>
-          <td class="td-percent">
+          <td class="td-percent" class="text-right">
             <span *ngIf="!item?.ResultadoHorizontal">
               {{ item?.Percentual | number: '1.2-2' }}%
             </span>

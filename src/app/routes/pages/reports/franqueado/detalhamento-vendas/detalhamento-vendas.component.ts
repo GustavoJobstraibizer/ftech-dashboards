@@ -40,11 +40,12 @@ export class DetalhamentoVendasComponent implements OnInit {
       )
       .subscribe((response) => {
         this.vendasFranqueado = response
+
         this.vendasFranqueado = this.vendasFranqueado.filter(
           (venda) => !venda.Total
         )
         response.forEach((v) => {
-          if (v.Total) {
+          if (v.Total && v.Data != '%') {
             this.vendasFranqueadoTotal.push(v)
           }
         })

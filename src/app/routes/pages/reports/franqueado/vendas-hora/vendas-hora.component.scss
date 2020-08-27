@@ -13,7 +13,11 @@ $blue-solid: #007bff;
   padding: 2px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+
+  &__total {
+    justify-content: center;
+  }
 }
 
 .thead-bg {
@@ -22,7 +26,7 @@ $blue-solid: #007bff;
 }
 
 td {
-  color: #8498ae;
+  color: #6083a8;
 }
 
 .td-hour {

@@ -36,7 +36,7 @@ const colors = [
 })
 export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
   @Input() codigoFranqueado = 0
-  public vendasTipoPagamento: IVendasTipoPagamento
+  public vendasTipoPagamento: IVendasTipoPagamento[]
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
   public chart: am4charts.PieChart
   public loading = false
@@ -61,7 +61,6 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(finalize(() => (this.loading = false)))
       .subscribe((response) => {
         this.vendasTipoPagamento = response
-
         // this.vendasTipoPagamento.Data.map(
         //   (formPag) =>
         //     (formPag.color = am4core.color(
@@ -72,19 +71,23 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
         // );
 
         // this.chart.data = []
-        this.chart.data = [...this.vendasTipoPagamento.Data]
+        this.chart.data = [...this.vendasTipoPagamento]
 
         const pieSeries = this.chart.series.push(new am4charts.PieSeries())
         pieSeries.dataFields.value = 'Valor'
         pieSeries.dataFields.category = 'FormaPagamento'
-        pieSeries.labels.template.text = '{value.percent.formatNumber("#.0")}%'
+        pieSeries.labels.template.text = '{value.percent.formatNumber("#.")}%'
         pieSeries.labels.template.align = 'center'
         pieSeries.ticks.template.length = 0
         pieSeries.ticks.template.width = 10
+        pieSeries.slices.template.tooltipText =
+          '{category}: R$ {value.formatNumber("#.00")}'
 
         pieSeries.slices.template.propertyFields.fill = 'color'
 
         this.chart.legend = new am4charts.Legend()
+        this.chart.legend.valueLabels.template.text = '{value.category}'
+        this.chart.legend.maxWidth = undefined
       })
   }
 
@@ -101,10 +104,10 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
           const state = target.states.create(stateId)
 
           const labelState = target.labels.template.states.create(stateId)
-          labelState.properties.disabled = true
+          // labelState.properties.disabled = true
 
           const tickState = target.ticks.template.states.create(stateId)
-          tickState.properties.disabled = true
+          // tickState.properties.disabled = true
           return state
         }
 

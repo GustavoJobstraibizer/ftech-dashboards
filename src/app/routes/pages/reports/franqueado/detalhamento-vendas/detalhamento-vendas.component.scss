@@ -9,6 +9,12 @@ th[scope='row'] {
   top: 2px;
 }
 
+td {
+  font-size: 12px;
+  color: #172b3e;
+  font-weight: 500;
+}
+
 .thead-bg {
   background-color: #0e6ba8;
   color: #fff;
@@ -97,4 +103,10 @@ th[scope='row'] {
 
 .icon-eye {
   color: #818181;
+}
+
+@media screen and (min-width: 768px) {
+  td {
+    font-size: 14px;
+  }
 }

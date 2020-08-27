@@ -116,7 +116,7 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
         series.dataFields.valueY = 'VendaAnoAnterior'
         series.dataFields.categoryX = 'Mes'
         series.name = response.AnoAnterior
-        series.tooltipText = '{name}: [bold]{valueY}[/]'
+        series.tooltipText = '{name}: [bold]{valueY.formatNumber("#.00")}[/]'
         series.stroke = am4core.color('#818181')
         series.columns.template.fill = am4core.color('#818181')
 
@@ -124,7 +124,7 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
         serie3.dataFields.valueY = 'VendaAnoAtual'
         serie3.dataFields.categoryX = 'Mes'
         serie3.name = response.AnoAtual
-        serie3.tooltipText = '{name}: [bold]{valueY}[/]'
+        serie3.tooltipText = '{name}: [bold]{valueY.formatNumber("#.00")}[/]'
         serie3.stroke = am4core.color('#6fb142')
         serie3.columns.template.fill = am4core.color('#6fb142')
 
@@ -133,7 +133,7 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
         series2.dataFields.valueY = 'MediaAnoAnterior'
         series2.dataFields.categoryX = 'Mes'
         series2.name = `Média ${response.AnoAnterior}`
-        series2.tooltipText = '{name}: [bold]{valueY}[/]'
+        series2.tooltipText = '{name}: [bold]{valueY.formatNumber("#.00")}[/]'
         series2.strokeWidth = 5
         // series2.yAxis = valueAxis2;
 

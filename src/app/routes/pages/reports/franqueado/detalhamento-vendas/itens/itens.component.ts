@@ -1,7 +1,7 @@
-import { IVendasFranqueadoDetalhes } from 'src/app/shared/interfaces/vendas-franqueado-detalhes.interface';
-import { FranqueadosService } from './../../../../../../core/services/dashboards/franqueados.service';
-import { Component, OnInit, Input } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Component, OnInit } from '@angular/core'
+import { BsModalRef } from 'ngx-bootstrap/modal'
+import { IVendasFranqueadoDetalhes } from 'src/app/shared/interfaces/vendas-franqueado-detalhes.interface'
+import { FranqueadosService } from './../../../../../../core/services/dashboards/franqueados.service'
 
 @Component({
   selector: 'ft-itens',
@@ -9,9 +9,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./itens.component.scss'],
 })
 export class ItensComponent implements OnInit {
-  codigoDocumento: string;
+  codigoDocumento: string
 
-  public vendaFranqueadoDetalhes: IVendasFranqueadoDetalhes;
+  public vendaFranqueadoDetalhes: IVendasFranqueadoDetalhes
 
   constructor(
     public franqueadosService: FranqueadosService,
@@ -23,8 +23,8 @@ export class ItensComponent implements OnInit {
       this.franqueadosService
         .getVendasFranqueadoDetalhado(this.codigoDocumento)
         .subscribe((response) => {
-          this.vendaFranqueadoDetalhes = response['Data'];
-        });
+          this.vendaFranqueadoDetalhes = response['Data']
+        })
     }
   }
 }

@@ -35,10 +35,12 @@ export class FranqueadosService {
 
   getVendasTipoPagamento(
     filtroFranqueado: FiltroFranqueado
-  ): Observable<IVendasTipoPagamento> {
-    return this.http.get<IVendasTipoPagamento>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasTipoPagamento}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
-    )
+  ): Observable<IVendasTipoPagamento[]> {
+    return this.http
+      .get<IVendasTipoPagamento[]>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasTipoPagamento}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}`
+      )
+      .pipe(map((response) => response['Data'] || []))
   }
 
   getVendasMensal(filtroFranqueado: FiltroFranqueado): Observable<any> {

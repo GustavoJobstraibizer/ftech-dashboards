@@ -42,6 +42,14 @@
   padding: 10px 0;
 }
 
+:host ::ng-deep .top-produtos {
+  .card {
+    .card-body {
+      padding-right: 20px;
+    }
+  }
+}
+
 .home-title {
   font-size: 16px;
   margin-bottom: 0 !important;

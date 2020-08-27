@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core'
 
 @Component({
   selector: 'ft-page-title',
@@ -6,8 +6,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./page-title.component.scss'],
 })
 export class PageTitleComponent implements OnInit {
-  @Input() title = '';
-  @Input() subTitle = '';
+  @Input() title = ''
+  @Input() subTitle = ''
+  public showSubTitle = false
 
   constructor() {}
 

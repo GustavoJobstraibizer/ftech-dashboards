@@ -105,13 +105,16 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
         series.columns.template.stroke = am4core.color('#6fb142')
         series.columns.template.strokeWidth = 1
         series.columns.template.strokeOpacity = 0.5
-        series.columns.template.height = am4core.percent(35)
+        series.columns.template.height = am4core.percent(45)
 
         const labelBullet = series.bullets.push(new am4charts.LabelBullet())
         labelBullet.label.text = '{valueX}'
+        labelBullet.label.truncate = false
         labelBullet.label.fontSize = 16
         labelBullet.label.fontWeight = 'bold'
-        labelBullet.label.horizontalCenter = 'left'
+        // labelBullet.label.horizontalCenter = 'left'
+        labelBullet.dx = 10
+        labelBullet.valign = 'middle'
 
         this.chart.cursor = new am4charts.XYCursor()
         this.chart.cursor.lineX.disabled = true

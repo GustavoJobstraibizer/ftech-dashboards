@@ -16,14 +16,10 @@
     font-family: $ft-font-default;
     color: $ft-black-solid;
     font-weight: bold;
+    margin-bottom: 0;
   }
 
   .card-body {
     text-align: center;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // width: auto;
-    // position: relative;
   }
 }

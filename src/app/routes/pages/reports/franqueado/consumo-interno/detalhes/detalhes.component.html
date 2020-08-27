@@ -1,4 +1,7 @@
 <div class="modal-header">
+  <div class="title-modal-detalhes">
+    <i class="fas fa-list mr-2"></i>Detalhes
+  </div>
   <button
     type="button"
     class="close pull-right"
@@ -9,11 +12,7 @@
   </button>
 </div>
 
-<div class="py-2 px-2 mt-3">
-  <ft-periodo
-    #cmpnentfiltroPeriodo
-    (periodoFilterEmit)="filtroPeriodo($event)"
-  ></ft-periodo>
+<div class="py-2 px-2">
   <ft-card>
     <div class="table-responsive">
       <div class="bodycontainer scrollable">
@@ -22,19 +21,16 @@
             <tr>
               <th></th>
               <th class="text-center">DATA</th>
-              <th class="text-center">VALOR BRUTO</th>
-              <th class="text-center">DESCONTO</th>
-              <th class="text-center">VALOR LÍQUIDO</th>
+              <th class="text-center">VALOR TOTAL</th>
               <th class="text-center">CPF CLIENTE</th>
               <th class="text-center">NOME CLIENTE</th>
-              <th class="text-center">NÚMERO SAT</th>
               <th class="text-center">VENDEDOR</th>
             </tr>
           </thead>
           <tbody class="tbody-data">
             <ng-container *ngFor="let item of vendasConsumoInternoDetalhes">
               <tr *ngIf="!item?.Total">
-                <td class="td-btn-detail">
+                <td class="td-btn-detail pl-0">
                   <button
                     type="button"
                     class="btn-detail btn-detail__centered"
@@ -46,23 +42,14 @@
                 <td class="text-center">
                   {{ item?.Data }}
                 </td>
-                <td class="text-center">
-                  {{ item?.ValorBruto | currency: "BRL" }}
-                </td>
-                <td class="text-center">
-                  {{ item?.ValorDesconto | currency: "BRL" }}
-                </td>
-                <td class="text-center">
-                  {{ item?.ValorLiquido | currency: "BRL" }}
+                <td class="text-right">
+                  {{ item?.ValorLiquido | currency: 'BRL' }}
                 </td>
                 <td class="text-center">
                   {{ item?.CPFCliente }}
                 </td>
                 <td class="text-center">
                   {{ item?.NomeCliente }}
-                </td>
-                <td class="text-center">
-                  {{ item?.NumeroNF }}
                 </td>
                 <td class="text-center">
                   {{ item?.Vendedor }}
@@ -75,12 +62,15 @@
               <tr *ngIf="item?.Total">
                 <td></td>
                 <td>{{ item?.Data }}</td>
-                <td>{{ item?.ValorBruto | currency: "BRL" }}</td>
-                <td>{{ item?.ValorDesconto | currency: "BRL" }}</td>
-                <td>{{ item?.ValorLiquido | currency: "BRL" }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td class="text-right">
+                  {{ item?.ValorBruto | currency: 'BRL' }}
+                </td>
+                <td>
+                  {{ item?.ValorDesconto | currency: 'BRL' }}
+                </td>
+                <td>
+                  {{ item?.ValorLiquido | currency: 'BRL' }}
+                </td>
                 <td></td>
               </tr>
             </ng-container>

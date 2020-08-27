@@ -33,7 +33,7 @@
         <tbody class="tbody-data">
           <ng-container *ngFor="let item of vendasFranqueado">
             <tr>
-              <td class="text-center">
+              <td class="text-left pl-0">
                 <button
                   type="button"
                   class="btn-detail"
@@ -50,14 +50,14 @@
                 </button>
               </td>
               <td class="text-center">{{ item?.Data }}</td>
-              <td class="text-center">
-                {{ item?.ValorBruto }}
+              <td class="text-right">
+                {{ item?.ValorBruto | currency: 'BRL':'symbol':'1.2-2' }}
               </td>
-              <td class="text-center">
-                {{ item?.ValorDesconto }}
+              <td class="text-right">
+                {{ item?.ValorDesconto | currency: 'BRL':'symbol':'1.2-2' }}
               </td>
-              <td class="text-center">
-                {{ item?.ValorLiquido }}
+              <td class="text-right">
+                {{ item?.ValorLiquido | currency: 'BRL':'symbol':'1.2-2' }}
               </td>
             </tr>
 
@@ -80,12 +80,14 @@
         <tr *ngFor="let item of vendasFranqueadoTotal">
           <td></td>
           <td>{{ item?.Data }}</td>
-          <td>{{ item?.ValorBruto | currency: "BRL" }}</td>
-          <td>
-            {{ item?.ValorDesconto | currency: "BRL" }}
+          <td class="text-right">
+            {{ item?.ValorBruto | currency: 'BRL':'symbol':'1.2-2' }}
           </td>
-          <td>
-            {{ item?.ValorLiquido | currency: "BRL" }}
+          <td class="text-right">
+            {{ item?.ValorDesconto | currency: 'BRL':'symbol':'1.2-2' }}
+          </td>
+          <td class="text-right">
+            {{ item?.ValorLiquido | currency: 'BRL':'symbol':'1.2-2' }}
           </td>
         </tr>
       </tfoot>

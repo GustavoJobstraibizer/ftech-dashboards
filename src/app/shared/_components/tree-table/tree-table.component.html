@@ -15,7 +15,10 @@
       <tbody class="tbody-data">
         <ng-container *ngFor="let item of listValues">
           <tr *ngIf="item?.Visible || (item?.Categoria && item?.Volume)">
-            <td [ngClass]="{ 'item-td-category': !item?.Categoria }">
+            <td
+              [ngClass]="{ 'item-td-category': !item?.Categoria }"
+              class="pl-0"
+            >
               <div class="d-flex align-items-center justify-content-start">
                 <button
                   type="button"
@@ -40,33 +43,37 @@
               </div>
             </td>
 
-            <td [ngClass]="{ 'item-td-category': !item?.Categoria }">
+            <td
+              [ngClass]="{ 'item-td-category': !item?.Categoria }"
+              class="text-right"
+            >
               <span
                 *ngIf="item?.Volume"
                 [ngClass]="{ 'item-category': !item?.Categoria }"
               >
-                {{ item?.Volume | number: "1.2-2" }}</span
-              >
-              <!-- <span
-                *ngIf="!item?.Volume"
-                [ngClass]="{ 'item-category': !item?.Categoria }"
-                >Total</span
-              > -->
-            </td>
-
-            <td [ngClass]="{ 'item-td-category': !item?.Categoria }">
-              <span
-                *ngIf="item?.Volume"
-                [ngClass]="{ 'item-category': !item?.Categoria }"
-                >{{ item?.Valor | currency: "BRL" }}</span
+                {{ item?.Volume | number: '1.2-2' }}</span
               >
             </td>
 
-            <td [ngClass]="{ 'item-td-category': !item?.Categoria }">
+            <td
+              [ngClass]="{ 'item-td-category': !item?.Categoria }"
+              class="text-right"
+            >
               <span
                 *ngIf="item?.Volume"
                 [ngClass]="{ 'item-category': !item?.Categoria }"
-                >{{ item?.Percentual | number: "1.2-2" }}%</span
+                >{{ item?.Valor | currency: 'BRL' }}</span
+              >
+            </td>
+
+            <td
+              [ngClass]="{ 'item-td-category': !item?.Categoria }"
+              class="text-right"
+            >
+              <span
+                *ngIf="item?.Volume"
+                [ngClass]="{ 'item-category': !item?.Categoria }"
+                >{{ item?.Percentual | number: '1.2-2' }}%</span
               >
             </td>
           </tr>
@@ -80,8 +87,8 @@
         <tr *ngIf="!item?.Volume">
           <td></td>
           <td>Total</td>
-          <td>{{ item?.Valor | currency: "BRL" }}</td>
-          <td>{{ item?.Percentual | number: "1.2-2" }}%</td>
+          <td class="text-right">{{ item?.Valor | currency: 'BRL' }}</td>
+          <td class="text-right">{{ item?.Percentual | number: '1.2-2' }}%</td>
         </tr>
       </ng-container>
     </tfoot>

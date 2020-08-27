@@ -1,5 +1,9 @@
 @import 'variables';
 
+.title-modal-detalhes {
+  font-weight: 600;
+}
+
 .thead-bg {
   background-color: #0e6ba8;
   color: #fff;
@@ -24,6 +28,10 @@
 }
 :host ::ng-deep .content-table-price .card {
   background: rgba(0, 123, 255, 0.6);
+
+  .card-body {
+    padding: 10px;
+  }
 }
 .table-price-title {
   font-family: 'Circular std', sans-serif;
@@ -32,4 +40,8 @@
 .table-price-subtitle {
   font-family: 'Circular std', sans-serif;
   color: #fff;
+}
+
+:host ::ng-deep .card-liquidacao .card {
+  margin: 8px 0;
 }

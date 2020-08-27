@@ -110,14 +110,14 @@ export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
         series.dataFields.valueY = 'ValorAcumulado'
         series.dataFields.categoryX = 'Mes'
         series.name = 'Valor Acumulado'
-        series.tooltipText = '{name}: [bold]{valueY}[/]'
+        series.tooltipText = '{name}: [bold]{valueY.formatNumber("#.00")}[/]'
         series.stacked = true
 
         const series2 = this.chart.series.push(new am4charts.ColumnSeries())
         series2.dataFields.valueY = 'ValorVenda'
         series2.dataFields.categoryX = 'Mes'
         series2.name = 'Valor Venda'
-        series2.tooltipText = '{name}: [bold]{valueY}[/]'
+        series2.tooltipText = '{name}: [bold]{valueY.formatNumber("#.00")}[/]'
         series2.stacked = true
         series2.stroke = am4core.color('#6fb142')
         series2.columns.template.fill = am4core.color('#6fb142')

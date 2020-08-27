@@ -1,4 +1,7 @@
 <div class="modal-header">
+  <div class="title-modal-detalhes">
+    <i class="fas fa-list mr-2"></i>Detalhes
+  </div>
   <button
     type="button"
     class="close pull-right"
@@ -8,7 +11,7 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="py-2 px-2 mt-3">
+<div class="py-2 px-2">
   <ft-card [icon]="'icon-list'" [title]="'Itens da venda'">
     <div class="table-responsive">
       <div class="bodycontainer scrollable">
@@ -64,11 +67,11 @@
                 <td></td>
                 <td></td>
                 <td>Total</td>
-                <td>{{ item?.ValorBruto | currency: "BRL" }}</td>
+                <td>{{ item?.ValorBruto | currency: 'BRL' }}</td>
                 <td>
-                  {{ item?.ValorDesconto | currency: "BRL" }}
+                  {{ item?.ValorDesconto | currency: 'BRL' }}
                 </td>
-                <td>{{ item?.ValorLiquido | currency: "BRL" }}</td>
+                <td>{{ item?.ValorLiquido | currency: 'BRL' }}</td>
               </tr>
             </ng-container>
           </tfoot>
@@ -85,7 +88,11 @@
     </div>
   </ft-card>
 
-  <ft-card [icon]="'icon-wallet'" [title]="'Liquidação'">
+  <ft-card
+    class="card-liquidacao"
+    [icon]="'icon-wallet'"
+    [title]="'Liquidação'"
+  >
     <div class="table-responsive">
       <table class="table table-scrollable">
         <thead class="thead-bg">
@@ -103,7 +110,7 @@
             <tr *ngIf="!item?.Total">
               <td class="text-center">{{ item?.FormaPagamento }}</td>
               <td class="text-center">
-                {{ item?.Valor | currency: "BRL" }}
+                {{ item?.Valor | currency: 'BRL' }}
               </td>
             </tr>
           </ng-container>
@@ -116,7 +123,7 @@
           >
             <tr *ngIf="item?.Total">
               <td>Total</td>
-              <td>{{ item?.Valor | currency: "BRL" }}</td>
+              <td>{{ item?.Valor | currency: 'BRL' }}</td>
             </tr>
           </ng-container>
         </tfoot>
@@ -125,11 +132,9 @@
   </ft-card>
 
   <ft-card class="content-table-price">
-    <div
-      class="d-flex flex-column justify-content-center align-items-center text-center"
-    >
-      <h4 class="table-price-title">Tabela de preço</h4>
-      <h3 class="table-price-subtitle">
+    <div class="d-flex justify-content-center align-items-center text-center">
+      <h4 class="table-price-title m-0">Tabela de preço -</h4>
+      <h3 class="table-price-subtitle m-0">
         {{ vendaFranqueadoDetalhes?.DescricaoTabelaPreco }}
       </h3>
     </div>

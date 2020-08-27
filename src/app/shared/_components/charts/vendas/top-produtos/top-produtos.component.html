@@ -32,8 +32,8 @@
           <td>
             <span>{{ item?.Produto }}</span>
           </td>
-          <td>
-            <span>{{ item?.Valor | currency: 'BRL' }}</span>
+          <td class="text-right">
+            <span>{{ item?.Valor | currency: 'BRL':'symbol':'1.2-2' }}</span>
           </td>
         </tr>
       </tbody>

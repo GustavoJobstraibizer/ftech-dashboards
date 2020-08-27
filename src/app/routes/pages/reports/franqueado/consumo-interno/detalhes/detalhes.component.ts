@@ -1,11 +1,9 @@
-import { PeriodoComponent } from './../../../../../../shared/_components/filter/periodo/periodo.component';
-import { ItensComponent } from './../../detalhamento-vendas/itens/itens.component';
-import { IVendasConsumoInternoDetalhado } from './../../../../../../shared/interfaces/vendas-consumo-interno-detalhado.interface';
-import { FranqueadosService } from './../../../../../../core/services/dashboards/franqueados.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface';
-import * as moment from 'moment/moment';
+import { Component, OnInit } from '@angular/core'
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
+import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface'
+import { FranqueadosService } from './../../../../../../core/services/dashboards/franqueados.service'
+import { IVendasConsumoInternoDetalhado } from './../../../../../../shared/interfaces/vendas-consumo-interno-detalhado.interface'
+import { ItensComponent } from './../../detalhamento-vendas/itens/itens.component'
 
 @Component({
   selector: 'ft-detalhes',
@@ -17,17 +15,14 @@ export class DetalhesComponent implements OnInit {
     dataInicio: null,
     dataFim: null,
     codigoFranqueado: 0,
-  };
+  }
 
-  public codigoPessoa: number;
-  public dataInicio = '';
-  public dataFim = '';
-  public codigoFranqueado = 0;
+  public codigoPessoa: number
+  public dataInicio = ''
+  public dataFim = ''
+  public codigoFranqueado = 0
 
-  @ViewChild('cmpnentfiltroPeriodo', { static: true })
-  cmpnentfiltroPeriodo: PeriodoComponent;
-
-  public vendasConsumoInternoDetalhes: IVendasConsumoInternoDetalhado[];
+  public vendasConsumoInternoDetalhes: IVendasConsumoInternoDetalhado[]
 
   constructor(
     public franqueadosService: FranqueadosService,
@@ -36,17 +31,10 @@ export class DetalhesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cmpnentfiltroPeriodo.formPeriodo
-      .get('dataInicio')
-      .setValue(moment(this.dataInicio, 'MM/DD/YYYY').format('DD/MM/YYYY'));
-    this.cmpnentfiltroPeriodo.formPeriodo
-      .get('dataFim')
-      .setValue(moment(this.dataFim, 'MM/DD/YYYY').format('DD/MM/YYYY'));
-    this.cmpnentfiltroPeriodo.formPeriodo
-      .get('codigoFranqueado')
-      .setValue(this.codigoFranqueado);
-
-    this.cmpnentfiltroPeriodo.handleFilter();
+    this.periodo.codigoFranqueado = this.codigoFranqueado
+    this.periodo.dataInicio = this.dataInicio
+    this.periodo.dataFim = this.dataFim
+    this.getVendasConsumoDetalhado()
   }
 
   getVendasConsumoDetalhado() {
@@ -58,27 +46,30 @@ export class DetalhesComponent implements OnInit {
         this.codigoPessoa
       )
       .subscribe((data) => {
-        this.vendasConsumoInternoDetalhes = data;
-      });
+        this.vendasConsumoInternoDetalhes = data
+        this.vendasConsumoInternoDetalhes = this.vendasConsumoInternoDetalhes.filter(
+          (item) => item.Data != '%'
+        )
+      })
   }
 
   filtroPeriodo(filter) {
-    this.periodo = filter;
-    this.vendasConsumoInternoDetalhes = [];
-    this.getVendasConsumoDetalhado();
+    this.periodo = filter
+    this.vendasConsumoInternoDetalhes = []
+    this.getVendasConsumoDetalhado()
   }
 
   openModalItens(codigoDocumento) {
     const initialState = {
       codigoDocumento,
-    };
+    }
     this.bsModalRef2 = this.modalService.show(ItensComponent, {
       initialState,
       class: 'modal-itens-detalhe',
-    });
+    })
   }
 
   closeModal() {
-    this.modalService.hide(1);
+    this.modalService.hide(1)
   }
 }

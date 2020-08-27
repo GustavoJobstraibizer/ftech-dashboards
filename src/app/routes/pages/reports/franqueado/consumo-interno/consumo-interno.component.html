@@ -31,7 +31,7 @@
         <tbody class="tbody-data">
           <ng-container *ngFor="let item of consumoInterno">
             <tr *ngIf="!item?.Total">
-              <td class="td-btn-detail align-middle">
+              <td class="td-btn-detail align-middle pl-0">
                 <button
                   type="button"
                   class="btn-detail btn-detail__centered"
@@ -45,7 +45,7 @@
                   <img
                     class="img-thumbnail rounded-circle mr-2"
                     [src]="
-                      'https://adm.ftechappdev.com.br/portal/download/imagemPessoa.aspx?codigo=' +
+                      'http://adm.ftechapp.com.br/portal/download/imagemPessoa.aspx?codigo=' +
                       item?.CodigoPessoa
                     "
                     alt="avatar usuario"
@@ -54,7 +54,7 @@
                 </div>
               </td>
               <td class="text-center align-middle">
-                {{ item?.ValorTotal | currency: "BRL" }}
+                {{ item?.ValorTotal | currency: 'BRL' }}
               </td>
             </tr>
           </ng-container>
@@ -69,7 +69,7 @@
           <tr *ngIf="item?.Total">
             <td></td>
             <td>Total</td>
-            <td>{{ item?.ValorTotal | currency: "BRL" }}</td>
+            <td>{{ item?.ValorTotal | currency: 'BRL' }}</td>
           </tr>
         </ng-container>
       </tfoot>
