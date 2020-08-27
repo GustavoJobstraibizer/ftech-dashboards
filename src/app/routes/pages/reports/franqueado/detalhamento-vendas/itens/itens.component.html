@@ -12,7 +12,7 @@
   </button>
 </div>
 <div class="py-2 px-2">
-  <ft-card [icon]="'icon-list'" [title]="'Itens da venda'">
+  <ft-card [icon]="'icon-list'" [title]="'Itens da venda'" class="card-itens">
     <div class="table-responsive">
       <div class="bodycontainer scrollable">
         <table class="table table-scrollable">
@@ -38,19 +38,19 @@
                   {{ item?.Item }}
                 </td>
                 <td class="text-center">{{ item?.NomeProduto }}</td>
-                <td class="text-center">
+                <td class="text-right">
                   {{ item?.Quantidade }}
                 </td>
-                <td class="text-center">
+                <td class="text-right">
                   {{ item?.Preco }}
                 </td>
-                <td class="text-center">
+                <td class="text-right">
                   {{ item?.ValorBruto }}
                 </td>
-                <td class="text-center">
+                <td class="text-right">
                   {{ item?.ValorDesconto }}
                 </td>
-                <td class="text-center">
+                <td class="text-right">
                   {{ item?.ValorLiquido }}
                 </td>
               </tr>
@@ -89,7 +89,7 @@
   </ft-card>
 
   <ft-card
-    class="card-liquidacao"
+    class="card-liquidacao card-itens"
     [icon]="'icon-wallet'"
     [title]="'Liquidação'"
   >

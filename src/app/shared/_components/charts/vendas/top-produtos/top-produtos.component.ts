@@ -108,12 +108,12 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
         series.columns.template.height = am4core.percent(45)
 
         const labelBullet = series.bullets.push(new am4charts.LabelBullet())
-        labelBullet.label.text = '{valueX}'
+        labelBullet.label.text = '{valueX.formatNumber("#.00")}'
         labelBullet.label.truncate = false
         labelBullet.label.fontSize = 16
         labelBullet.label.fontWeight = 'bold'
-        // labelBullet.label.horizontalCenter = 'left'
-        labelBullet.dx = 10
+        labelBullet.label.horizontalCenter = 'left'
+        labelBullet.dx = 2
         labelBullet.valign = 'middle'
 
         this.chart.cursor = new am4charts.XYCursor()

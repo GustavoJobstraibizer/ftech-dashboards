@@ -53,7 +53,7 @@
                   {{ item?.NomePessoa }}
                 </div>
               </td>
-              <td class="text-center align-middle">
+              <td class="text-right align-middle">
                 {{ item?.ValorTotal | currency: 'BRL' }}
               </td>
             </tr>
@@ -69,7 +69,7 @@
           <tr *ngIf="item?.Total">
             <td></td>
             <td>Total</td>
-            <td>{{ item?.ValorTotal | currency: 'BRL' }}</td>
+            <td class="text-right">{{ item?.ValorTotal | currency: 'BRL' }}</td>
           </tr>
         </ng-container>
       </tfoot>
