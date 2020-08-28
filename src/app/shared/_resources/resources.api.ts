@@ -30,4 +30,38 @@ export const ApiRoutes = {
     listaPessoaFranqueado:
       'administracao/franqueados/recuperarListaPessoaFranqueadoPerfil',
   },
-};
+}
+
+export const ApiRoutesDemo = {
+  auth: {
+    signin: {
+      post: 'portal/autenticacao/login',
+    },
+    refresh: {
+      post: 'portal/autenticacao/refresh',
+    },
+  },
+  dashboards: {
+    franqueados: {
+      faturamento: 'demo/dashboards/franqueados/faturamento',
+      vendasTipoPagamento: 'demo/dashboards/franqueados/vendasTipoPagamento',
+      vendasMensal: 'demo/dashboards/franqueados/vendasMensal',
+      vendasAcumuladas: 'demo/dashboards/franqueados/vendasAcumuladas',
+      vendasTopProdutos: 'demo/dashboards/franqueados/vendasTopProdutos',
+      vendasHistorico: 'demo/dashboards/franqueados/vendasHistorico',
+      vendasPorHora: 'demo/dashboards/franqueados/vendasPorHora',
+      vendasPorCategoriaProduto:
+        'demo/dashboards/franqueados/vendasPorCategoriaProduto',
+      vendasFranqueado: 'demo/dashboards/franqueados/vendasFranqueado',
+      vendasFranqueadoDetalhado:
+        'demo/dashboards/franqueados/VendasFranqueadoDetalhado',
+      vendasConsumoInterno: 'demo/dashboards/franqueados/vendasConsumoInterno',
+      vendasConsumoInternoDetalhado:
+        'demo/dashboards/franqueados/vendasConsumoInternoDetalhado',
+    },
+  },
+  adm: {
+    listaPessoaFranqueado:
+      'administracao/franqueados/recuperarListaPessoaFranqueadoPerfil',
+  },
+}

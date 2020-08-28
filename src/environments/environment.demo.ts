@@ -1,9 +1,9 @@
-import { ApiRoutes } from './../app/shared/_resources/resources.api'
+import { ApiRoutesDemo } from './../app/shared/_resources/resources.api'
 
 export const environment = {
   production: true,
   API: {
-    URL: 'https://api-demo.ftechapp.com.br/api/v1/',
-    Routes: ApiRoutes,
+    URL: 'https://api.ftechapp.com.br/api/v1/',
+    Routes: ApiRoutesDemo,
   },
 }
