@@ -80,7 +80,7 @@ td {
 }
 
 .bodycontainer {
-  max-height: 450px;
+  max-height: 390px;
   width: 100%;
   margin: 0;
   overflow-y: auto;
@@ -94,9 +94,9 @@ td {
   display: initial;
 }
 
-.icon-info,
+.icon-plus,
 .icon-eye {
-  font-size: 11px;
+  // font-size: 11px;
   font-weight: 600;
   color: #007bff;
 }
@@ -105,8 +105,24 @@ td {
   color: #818181;
 }
 
+.thead-mobile-mode {
+  display: table-header-group;
+}
+
+.table-desktop-mode {
+  display: none;
+}
+
 @media screen and (min-width: 768px) {
   td {
     font-size: 14px;
+  }
+
+  .table-desktop-mode {
+    display: table;
+  }
+
+  .thead-mobile-mode {
+    display: none;
   }
 }

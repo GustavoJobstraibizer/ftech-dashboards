@@ -67,8 +67,14 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
     this.disposeChart()
     this.chart = am4core.create('chartTopProdutos', am4charts.XYChart)
     this.chart.language.locale = am4lang_pt_BR
+    this.chart.numberFormatter.language = new am4core.Language()
+    this.chart.numberFormatter.language.locale = am4lang_pt_BR
     this.chart.responsive.enabled = true
     this.chart.logo.disabled = true
+
+    this.chart.events.on('beforedatavalidated', (ev) => {
+      this.chart.data.sort(this.sortByValueAsc)
+    })
 
     this.loading = true
     this.franqueadosDashBoardsService
@@ -79,22 +85,22 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
         })
       )
       .subscribe((response) => {
-        debugger
         if (!response.length) {
           return
         }
-        this.topProdutos = response
-        this.topProdutos = this.topProdutos.sort(this.sortByValueAsc)
-
-        // const topProds = this.topProdutos
-
-        this.topProdTable = this.topProdutos
-        console.log(this.topProdTable.sort(this.sortByValueDesc))
+        this.topProdutos = response.map((item) => {
+          if (item.Valor) {
+            item.Valor = parseFloat(item.Valor.toString()).toFixed(2)
+          }
+          return item
+        })
+        this.topProdutos = this.topProdutos.sort(this.sortByValueDesc)
+        console.log(response)
 
         this.chart.data = this.topProdutos
-        this.chart.language.locale = am4lang_pt_BR
-        this.chart.numberFormatter.language = new am4core.Language()
-        this.chart.numberFormatter.language.locale = am4lang_pt_BR
+
+        this.topProdTable = Object.assign([], this.chart.data)
+        this.topProdTable.sort(this.sortByValueDesc)
 
         const categoryAxis = this.chart.yAxes.push(new am4charts.CategoryAxis())
         categoryAxis.dataFields.category = 'Produto'
@@ -116,9 +122,9 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
         series.columns.template.height = am4core.percent(45)
 
         const labelBullet = series.bullets.push(new am4charts.LabelBullet())
-        // labelBullet.language.locale = am4lang_pt_BR
-        // labelBullet.numberFormatter.language.locale = am4lang_pt_BR
-        labelBullet.label.text = '{valueX.formatNumber("#.##")}'
+        labelBullet.language.locale = am4lang_pt_BR
+        labelBullet.numberFormatter.language.locale = am4lang_pt_BR
+        labelBullet.label.text = '{valueX}'
         labelBullet.label.truncate = false
         labelBullet.label.fontSize = 16
         labelBullet.label.fontWeight = 'bold'

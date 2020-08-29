@@ -16,7 +16,7 @@
 
 <ft-card>
   <div class="table-responsive">
-    <table class="table table-condensed">
+    <table class="table table-condensed table-desktop-mode">
       <thead class="thead-bg">
         <tr>
           <th class="text-center"></th>
@@ -30,20 +30,29 @@
 
     <div class="bodycontainer scrollable">
       <table class="table table-condensed table-scrollable">
+        <thead class="thead-bg thead-mobile-mode">
+          <tr>
+            <th class="text-center"></th>
+            <th class="text-center">DATA</th>
+            <th class="text-right">VALOR BRUTO</th>
+            <th class="text-right">DESCONTO</th>
+            <th class="text-right">VALOR LÍQUIDO</th>
+          </tr>
+        </thead>
         <tbody class="tbody-data">
           <ng-container *ngFor="let item of vendasFranqueado">
             <tr>
               <td class="text-left pl-0">
                 <button
                   type="button"
-                  class="btn-detail"
+                  class="btn-detail align-items-center"
                   (click)="openModalItens(item?.CodigoDocumento)"
                 >
-                  <em class="icon-info"></em>
+                  <em class="icon-plus"></em>
                 </button>
                 <button
                   type="button"
-                  class="btn-detail btn-expand"
+                  class="btn-detail align-items-center btn-expand"
                   (click)="item?.Cliente.Expanded = !item?.Cliente.Expanded"
                 >
                   <em class="icon-eye"></em>

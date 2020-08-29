@@ -1,5 +1,6 @@
 import * as am4charts from '@amcharts/amcharts4/charts'
 import * as am4core from '@amcharts/amcharts4/core'
+import am4lang_pt_BR from '@amcharts/amcharts4/lang/pt_BR'
 import {
   default as am4themes_animated,
   default as am4themes_kelly,
@@ -102,6 +103,9 @@ export class MensalComponent extends FtechChartXY
 
         this.chart.paddingLeft = 0
         this.chart.data = [...this.vendasMensal]
+        this.chart.language.locale = am4lang_pt_BR
+        this.chart.numberFormatter.language = new am4core.Language()
+        this.chart.numberFormatter.language.locale = am4lang_pt_BR
 
         this.categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis())
         this.categoryAxis.dataFields.category = 'Mes'
@@ -134,7 +138,9 @@ export class MensalComponent extends FtechChartXY
         this.lineSeries.dataFields.valueY = 'Media'
         this.lineSeries.dataFields.categoryX = 'Mes'
         this.lineSeries.name = 'Média 1 ano'
-        this.lineSeries.tooltipText = '{name}: [bold]{valueY}[/]'
+        this.lineSeries.numberFormatter.language.locale = am4lang_pt_BR
+        this.lineSeries.tooltipText =
+          '{name}: [bold]{valueY.formatNumber("#.##")}[/]'
         this.lineSeries.stroke = am4core.color('#4472c4')
         this.lineSeries.strokeWidth = 5
 

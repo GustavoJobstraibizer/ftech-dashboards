@@ -39,19 +39,19 @@
                 </td>
                 <td class="text-center">{{ item?.NomeProduto }}</td>
                 <td class="text-right">
-                  {{ item?.Quantidade }}
+                  {{ item?.Quantidade | number }}
                 </td>
                 <td class="text-right">
-                  {{ item?.Preco }}
+                  {{ item?.Preco | currency: 'BRL':'symbol':'1.2-2' }}
                 </td>
                 <td class="text-right">
-                  {{ item?.ValorBruto }}
+                  {{ item?.ValorBruto | currency: 'BRL':'symbol':'1.2-2' }}
                 </td>
                 <td class="text-right">
-                  {{ item?.ValorDesconto }}
+                  {{ item?.ValorDesconto | currency: 'BRL':'symbol':'1.2-2' }}
                 </td>
                 <td class="text-right">
-                  {{ item?.ValorLiquido }}
+                  {{ item?.ValorLiquido | currency: 'BRL':'symbol':'1.2-2' }}
                 </td>
               </tr>
             </ng-container>
@@ -80,15 +80,7 @@
             </ng-container>
           </tfoot>
         </table>
-        <!-- <ft-empty-content
-          [(items)]="
-            vendaFranqueadoDetalhes?.ListaDetalhamentoVendaFranqueadoItens.length
-          "
-        ></ft-empty-content> -->
       </div>
-      <!-- <table class="table table-hover table-striped table-condensed">
-
-      </table> -->
     </div>
   </ft-card>
 
