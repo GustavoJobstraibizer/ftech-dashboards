@@ -1,5 +1,6 @@
 import * as am4charts from '@amcharts/amcharts4/charts'
 import * as am4core from '@amcharts/amcharts4/core'
+import am4lang_pt_BR from '@amcharts/amcharts4/lang/pt_BR'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import {
   Component,
@@ -72,6 +73,9 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
 
         // this.chart.data = []
         this.chart.data = [...this.vendasTipoPagamento]
+        this.chart.language.locale = am4lang_pt_BR
+        this.chart.numberFormatter.language = new am4core.Language()
+        this.chart.numberFormatter.language.locale = am4lang_pt_BR
 
         const pieSeries = this.chart.series.push(new am4charts.PieSeries())
         pieSeries.dataFields.value = 'Valor'
@@ -80,8 +84,9 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
         pieSeries.labels.template.align = 'center'
         pieSeries.ticks.template.length = 0
         pieSeries.ticks.template.width = 10
-        pieSeries.slices.template.tooltipText =
-          '{category}: R$ {value.formatNumber("#.00")}'
+        pieSeries.language.locale = am4lang_pt_BR
+        pieSeries.numberFormatter.language.locale = am4lang_pt_BR
+        pieSeries.slices.template.tooltipText = '{category}: R$ {value}'
 
         pieSeries.slices.template.propertyFields.fill = 'color'
 

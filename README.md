@@ -21,7 +21,7 @@ Após ter instalado o node, execute os seguintes comandos:
 npm install
 
 # Executa o projeto em ambiente de desenvolvimento
-npm run dev
+npm start
 ```
 
 Abra o navegador e digite a URL http://localhost:4200

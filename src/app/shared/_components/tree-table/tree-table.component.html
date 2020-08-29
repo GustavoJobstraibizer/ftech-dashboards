@@ -3,9 +3,9 @@
     <thead class="thead-bg">
       <tr>
         <th scope="col" class="text-truncate">Categoria/Produto</th>
-        <th scope="col">Volume</th>
-        <th scope="col">Valor</th>
-        <th scope="col">%</th>
+        <th scope="col" class="text-right">Volume</th>
+        <th scope="col" class="text-right">Valor</th>
+        <th scope="col" class="text-right">%</th>
       </tr>
     </thead>
   </table>
@@ -85,8 +85,8 @@
     <tfoot class="tfoot-data">
       <ng-container *ngFor="let item of listValues">
         <tr *ngIf="!item?.Volume">
-          <td></td>
           <td>Total</td>
+          <td></td>
           <td class="text-right">{{ item?.Valor | currency: 'BRL' }}</td>
           <td class="text-right">{{ item?.Percentual | number: '1.2-2' }}%</td>
         </tr>

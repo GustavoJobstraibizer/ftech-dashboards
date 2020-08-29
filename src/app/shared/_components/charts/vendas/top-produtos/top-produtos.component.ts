@@ -79,14 +79,22 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
         })
       )
       .subscribe((response) => {
+        debugger
+        if (!response.length) {
+          return
+        }
         this.topProdutos = response
-        this.topProdutos.sort(this.sortByValueAsc)
+        this.topProdutos = this.topProdutos.sort(this.sortByValueAsc)
 
         // const topProds = this.topProdutos
 
         this.topProdTable = this.topProdutos
+        console.log(this.topProdTable.sort(this.sortByValueDesc))
 
         this.chart.data = this.topProdutos
+        this.chart.language.locale = am4lang_pt_BR
+        this.chart.numberFormatter.language = new am4core.Language()
+        this.chart.numberFormatter.language.locale = am4lang_pt_BR
 
         const categoryAxis = this.chart.yAxes.push(new am4charts.CategoryAxis())
         categoryAxis.dataFields.category = 'Produto'
@@ -108,7 +116,9 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
         series.columns.template.height = am4core.percent(45)
 
         const labelBullet = series.bullets.push(new am4charts.LabelBullet())
-        labelBullet.label.text = '{valueX.formatNumber("#.00")}'
+        // labelBullet.language.locale = am4lang_pt_BR
+        // labelBullet.numberFormatter.language.locale = am4lang_pt_BR
+        labelBullet.label.text = '{valueX.formatNumber("#.##")}'
         labelBullet.label.truncate = false
         labelBullet.label.fontSize = 16
         labelBullet.label.fontWeight = 'bold'
