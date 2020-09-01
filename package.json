@@ -6,7 +6,7 @@
     "dev": "ng serve",
     "start": "npm run dev",
     "build:qa": "ng build",
-    "build:prod": "ng build --prod --configuration=production",
+    "build:prod": "ng build --prod --configuration=production && cp ./web.config dist/dashboards-fetch",
     "build:demo": "ng build --prod --configuration=demo",
     "build:deploy": "ng build --prod --base-href https://GustavoJobstraibizer.github.io/ftech-dashboards/",
     "test": "ng test",
