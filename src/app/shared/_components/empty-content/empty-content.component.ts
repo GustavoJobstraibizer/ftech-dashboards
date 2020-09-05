@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core'
 
 @Component({
   selector: 'ft-empty-content',
@@ -6,6 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./empty-content.component.scss'],
 })
 export class EmptyContentComponent implements OnInit {
+  @Input() loading = false
+
   constructor() {}
 
   ngOnInit(): void {}

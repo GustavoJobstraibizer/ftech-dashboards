@@ -13,7 +13,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core'
-import { finalize } from 'rxjs/operators'
+import { finalize, take } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { FtechChartXY } from 'src/app/shared/models/ftech-chart.models'
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
@@ -97,8 +97,12 @@ export class MensalComponent extends FtechChartXY
     this.loading = true
     this.franqueadosDashBoardsService
       .getVendasMensal(this.filtroFranqueado)
-      .pipe(finalize(() => (this.loading = false)))
+      .pipe(
+        take(1),
+        finalize(() => (this.loading = false))
+      )
       .subscribe((response) => {
+        if (!response.length) return
         this.vendasMensal = response
 
         this.chart.paddingLeft = 0

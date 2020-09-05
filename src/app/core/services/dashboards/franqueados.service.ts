@@ -70,10 +70,12 @@ export class FranqueadosService {
 
   getVendasAcumuladas(
     filtroFranqueado: FiltroFranqueado
-  ): Observable<IVendasAcumuladas> {
-    return this.http.get<IVendasAcumuladas>(
-      `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasAcumuladas}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}&escala=${this.escala}`
-    )
+  ): Observable<IVendasAcumuladas[]> {
+    return this.http
+      .get<IVendasAcumuladas[]>(
+        `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasAcumuladas}?ano=${filtroFranqueado.ano}&mes=${filtroFranqueado.mes}&codigoFranqueado=${filtroFranqueado.codigoFranqueado}&escala=${this.escala}`
+      )
+      .pipe(map((data) => data['Data'] || []))
   }
 
   getVendasTopProdutos(

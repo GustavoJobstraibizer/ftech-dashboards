@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import * as moment from 'moment/moment'
 import { defineLocale, ptBrLocale } from 'ngx-bootstrap/chronos'
@@ -13,6 +13,8 @@ defineLocale('pt-br', ptBrLocale)
 })
 export class PeriodoComponent implements OnInit {
   @Output() periodoFilterEmit = new EventEmitter()
+  @Output() periodoFilterOnInitEmit = new EventEmitter()
+  @Input() getTodayDate = false
 
   public formPeriodo: FormGroup
   public items: IListaFranqueadoPerfil[]
@@ -33,6 +35,10 @@ export class PeriodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.localeService.use('pt-br')
+    const dataInicio = this.getTodayDate
+      ? moment(new Date()).format('DD/MM/YYYY')
+      : moment(new Date()).subtract(1, 'M').format('DD/MM/YYYY')
+    this.formPeriodo.get('dataInicio').setValue(dataInicio)
   }
 
   handleFilter() {
@@ -43,12 +49,20 @@ export class PeriodoComponent implements OnInit {
 
     this.submitted = false
 
+    this.periodoFilterEmit.emit(this.formValueFilter())
+  }
+
+  formValueFilter() {
     const { dataInicio, dataFim, codigoFranqueado } = this.formPeriodo.value
-    this.periodoFilterEmit.emit({
+    return {
       dataInicio: moment(dataInicio, 'DD/MM/YYYY').format('MM/DD/YYYY'),
       dataFim: moment(dataFim, 'DD/MM/YYYY').format('MM/DD/YYYY'),
       codigoFranqueado,
-    })
+    }
+  }
+
+  codigoFranqueadoEmit() {
+    this.periodoFilterOnInitEmit.emit(this.formValueFilter())
   }
 
   isFieldValid(field: string) {

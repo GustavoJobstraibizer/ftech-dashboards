@@ -10,6 +10,7 @@
 }
 
 @import 'variables';
+@import 'mixins';
 
 //== Vendor
 // @import '~@fortawesome/fontawesome-free-webfonts/webfonts';
@@ -124,6 +125,20 @@ input.form-control {
 .modal-itens-detalhe {
   width: 100%;
   max-width: 1140px !important;
+}
+
+table {
+  tbody {
+    tr {
+      td[class^='text-'] {
+        font-size: 12px;
+
+        @include mediaUp('lg') {
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }
 
 //---------------------------------------------

@@ -13,12 +13,12 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core'
-import { finalize } from 'rxjs/operators'
+import { finalize, take } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
 
-am4core.useTheme(am4themes_kelly)
 am4core.useTheme(am4themes_animated)
+am4core.useTheme(am4themes_kelly)
 
 @Component({
   selector: 'chart-historico',
@@ -40,7 +40,7 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
   constructor(public franqueadosDashBoardsService: FranqueadosService) {}
 
   ngOnInit(): void {
-    this.getHistoricoVendas()
+    this.disposeChart()
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -90,16 +90,20 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
     this.chart = am4core.create('chartHistoricoVendas', am4charts.XYChart)
     this.chart.language.locale = am4lang_pt_BR
     this.chart.logo.disabled = true
-    this.responsiveConfig()
+    // this.responsiveConfig()
     this.loading = true
 
     this.franqueadosDashBoardsService
       .getVendasHistorico(this.filtroFranqueado)
-      .pipe(finalize(() => (this.loading = false)))
+      .pipe(
+        take(1),
+        finalize(() => (this.loading = false))
+      )
       .subscribe((response) => {
-        this.historicoVendas = response.Vendas
+        if (!response?.Vendas.length) return
+        this.historicoVendas = response.Vendas || []
 
-        this.chart.paddingRight = 20
+        // this.chart.paddingRight = 400
         this.chart.data = [...this.historicoVendas]
 
         this.categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis())
@@ -108,40 +112,42 @@ export class HistoricoComponent implements OnInit, OnChanges, OnDestroy {
         this.categoryAxis.renderer.minGridDistance = 10
         this.categoryAxis.renderer.labels.template.fontSize = 14
 
-        // First value axis
-        this.valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis())
+        // Eixo X
+        this.chart.yAxes.push(new am4charts.ValueAxis())
 
-        // First series
+        // Coluna Ano anterior
         const series = this.chart.series.push(new am4charts.ColumnSeries())
         series.dataFields.valueY = 'VendaAnoAnterior'
         series.dataFields.categoryX = 'Mes'
-        series.name = response.AnoAnterior
+        series.name = response?.AnoAnterior
         series.tooltipText = '{name}: [bold]{valueY.formatNumber("#.00")}[/]'
         series.stroke = am4core.color('#818181')
         series.columns.template.fill = am4core.color('#818181')
 
+        // Coluna Ano atual
         const serie3 = this.chart.series.push(new am4charts.ColumnSeries())
         serie3.dataFields.valueY = 'VendaAnoAtual'
         serie3.dataFields.categoryX = 'Mes'
-        serie3.name = response.AnoAtual
+        serie3.name = response?.AnoAtual
         serie3.tooltipText = '{name}: [bold]{valueY.formatNumber("#.00")}[/]'
         serie3.stroke = am4core.color('#6fb142')
         serie3.columns.template.fill = am4core.color('#6fb142')
 
-        // Second series
+        // Linhas
         const series2 = this.chart.series.push(new am4charts.LineSeries())
         series2.dataFields.valueY = 'MediaAnoAnterior'
         series2.dataFields.categoryX = 'Mes'
-        series2.name = `Média ${response.AnoAnterior}`
+        series2.name = `Média ${response?.AnoAnterior}`
         series2.tooltipText = '{name}: [bold]{valueY.formatNumber("#.00")}[/]'
         series2.strokeWidth = 5
-        // series2.yAxis = valueAxis2;
+        // series2.yAxis = valueAxis2
 
         // Adiciona a legenda
         this.chart.legend = new am4charts.Legend()
 
         // Adiciona os cursores
         this.chart.cursor = new am4charts.XYCursor()
+        this.chart.cursor.behavior = 'none'
       })
   }
 }

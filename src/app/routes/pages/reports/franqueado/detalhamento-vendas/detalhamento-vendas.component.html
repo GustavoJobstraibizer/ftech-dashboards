@@ -4,7 +4,11 @@
 ></ft-page-title>
 
 <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
-  <ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+  <ft-periodo
+    #filters
+    [getTodayDate]="true"
+    (periodoFilterEmit)="filtroPeriodo($event)"
+  ></ft-periodo>
 </div>
 
 <ft-button-filter
@@ -81,7 +85,10 @@
           </ng-container>
         </tbody>
       </table>
-      <ft-empty-content *ngIf="!vendasFranqueado.length"></ft-empty-content>
+      <ft-empty-content
+        [loading]="loading"
+        *ngIf="!vendasFranqueado.length"
+      ></ft-empty-content>
     </div>
 
     <table class="table table-condensed">

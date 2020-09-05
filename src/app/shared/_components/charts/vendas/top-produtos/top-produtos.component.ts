@@ -10,7 +10,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core'
-import { finalize } from 'rxjs/operators'
+import { finalize, take } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
 import { IVendasTopProdutos } from './../../../../interfaces/vendas-top-produtos.interface'
@@ -80,6 +80,7 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
     this.franqueadosDashBoardsService
       .getVendasTopProdutos(this.filtroFranqueado)
       .pipe(
+        take(1),
         finalize(() => {
           this.loading = false
         })
@@ -95,7 +96,6 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
           return item
         })
         this.topProdutos = this.topProdutos.sort(this.sortByValueDesc)
-        console.log(response)
 
         this.chart.data = this.topProdutos
 

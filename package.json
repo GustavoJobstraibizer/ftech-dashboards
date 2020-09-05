@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve",
+    "dev": "ng serve --host 0.0.0.0",
     "start": "npm run dev",
     "build:qa": "ng build",
     "build:prod": "ng build --prod --configuration=production && cp ./web.config dist/dashboards-fetch",

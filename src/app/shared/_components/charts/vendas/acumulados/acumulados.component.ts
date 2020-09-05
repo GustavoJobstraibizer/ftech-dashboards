@@ -13,7 +13,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core'
-import { finalize } from 'rxjs/operators'
+import { finalize, take } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
 
@@ -89,9 +89,13 @@ export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
 
     this.franqueadosDashBoardsService
       .getVendasAcumuladas(this.filtroFranqueado)
-      .pipe(finalize(() => (this.loading = false)))
+      .pipe(
+        take(1),
+        finalize(() => (this.loading = false))
+      )
       .subscribe((response) => {
-        this.acumulados = response?.Data || []
+        if (!response.length) return
+        this.acumulados = response
 
         this.chart.marginRight = 400
 
@@ -124,6 +128,7 @@ export class AcumuladosComponent implements OnInit, OnChanges, OnDestroy {
 
         // Add cursor
         this.chart.cursor = new am4charts.XYCursor()
+        this.chart.cursor.behavior = 'none'
       })
   }
 }

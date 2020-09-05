@@ -27,6 +27,7 @@ export class FtechChartXY extends BaseChart<am4charts.XYChart>
 
   addXYCursor() {
     this.chart.cursor = new am4charts.XYCursor()
+    this.chart.cursor.behavior = 'none'
   }
 }
 
