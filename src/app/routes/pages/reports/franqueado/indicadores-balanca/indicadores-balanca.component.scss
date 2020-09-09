@@ -15,7 +15,8 @@
 
         .p-datatable-tbody > tr > td {
           text-align: left;
-          display: block;
+          display: flex;
+          justify-content: space-between;
           width: 100%;
           float: left;
           clear: left;

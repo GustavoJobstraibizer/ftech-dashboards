@@ -1,0 +1,32 @@
+<div class="indicadores-resumo-balanca">
+  <ft-indicador>
+    <span indicador-value>{{ indicadorBalanca?.QtdePesos | number }}</span>
+    <span indicador-footer>Qtde pesos</span>
+  </ft-indicador>
+
+  <ft-indicador>
+    <span indicador-value>{{
+      indicadorBalanca?.TotalEmKG | number: '1.2-3'
+    }}</span>
+    <span indicador-footer>Total em KG</span>
+  </ft-indicador>
+
+  <ft-indicador>
+    <span indicador-value>{{
+      indicadorBalanca?.ValorTotal || 0 | currency: 'BRL':'symbol':'1.2-2'
+    }}</span>
+    <span indicador-footer>Valor total / 1.000</span>
+  </ft-indicador>
+
+  <ft-indicador>
+    <span indicador-value>{{
+      indicadorBalanca?.TicketMedioPeso || 0 | currency: 'BRL'
+    }}</span>
+    <span indicador-footer>Ticket médio peso</span>
+  </ft-indicador>
+
+  <ft-indicador>
+    <span indicador-value>{{ indicadorBalanca?.EstornoPesos | number }}%</span>
+    <span indicador-footer>Estorno dos pesos</span>
+  </ft-indicador>
+</div>

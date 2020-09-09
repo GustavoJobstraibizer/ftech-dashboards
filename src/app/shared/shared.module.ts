@@ -1,51 +1,52 @@
-import { MaskDateDirective } from './../core/directives/mask-date.directive';
-import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common'
+import { ModuleWithProviders, NgModule } from '@angular/core'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { RouterModule } from '@angular/router'
+import { NgSelectModule } from '@ng-select/ng-select'
+import { TranslateModule } from '@ngx-translate/core'
 // import { ToasterModule } from 'angular2-toaster/angular2-toaster';
-import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { AlertModule } from 'ngx-bootstrap/alert';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { BsDatepickerModule, DatepickerModule } from 'ngx-bootstrap/datepicker';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { PopoverModule } from 'ngx-bootstrap/popover';
-import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
-import { RatingModule } from 'ngx-bootstrap/rating';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { ColorsService } from './colors/colors.service';
-import { CheckallDirective } from './directives/checkall/checkall.directive';
-import { EasypiechartDirective } from './directives/easypiechart/easypiechart.directive';
-import { FlotDirective } from './directives/flot/flot.directive';
-import { JqcloudDirective } from './directives/jqcloud/jqcloud.directive';
-import { NowDirective } from './directives/now/now.directive';
-import { ScrollableDirective } from './directives/scrollable/scrollable.directive';
-import { SparklineDirective } from './directives/sparkline/sparkline.directive';
-import { VectormapDirective } from './directives/vectormap/vectormap.directive';
-import { CardComponent } from './_components/card/card.component';
-import { TipoPagamentoComponent } from './_components/charts/vendas/tipo-pagamento/tipo-pagamento.component';
-import { MensalComponent } from './_components/charts/vendas/mensal/mensal.component';
-import { HistoricoComponent } from './_components/charts/vendas/historico/historico.component';
-import { AcumuladosComponent } from './_components/charts/vendas/acumulados/acumulados.component';
-import { TopProdutosComponent } from './_components/charts/vendas/top-produtos/top-produtos.component';
-import { IndicadoresComponent } from './_components/indicadores/indicadores.component';
-import { SkeletonLoaderComponent } from './_components/skeleton-loader/skeleton-loader.component';
-import { PageTitleComponent } from './_components/page-title/page-title.component';
-import { ComboFranquiasComponent } from './_components/filter/combo-franquias/combo-franquias.component';
-import { PeriodoComponent } from './_components/filter/periodo/periodo.component';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { TreeTableComponent } from './_components/tree-table/tree-table.component';
-import { EmptyContentComponent } from './_components/empty-content/empty-content.component';
-import { ButtonFilterComponent } from './_components/buttons/button-filter/button-filter.component';
-import { ModalPeriodoComponent } from './_components/filter/modal-periodo/modal-periodo.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion'
+import { AlertModule } from 'ngx-bootstrap/alert'
+import { ButtonsModule } from 'ngx-bootstrap/buttons'
+import { CarouselModule } from 'ngx-bootstrap/carousel'
+import { CollapseModule } from 'ngx-bootstrap/collapse'
+import { BsDatepickerModule, DatepickerModule } from 'ngx-bootstrap/datepicker'
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
+import { ModalModule } from 'ngx-bootstrap/modal'
+import { PaginationModule } from 'ngx-bootstrap/pagination'
+import { PopoverModule } from 'ngx-bootstrap/popover'
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar'
+import { RatingModule } from 'ngx-bootstrap/rating'
+import { TabsModule } from 'ngx-bootstrap/tabs'
+import { TimepickerModule } from 'ngx-bootstrap/timepicker'
+import { TooltipModule } from 'ngx-bootstrap/tooltip'
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead'
+import { MaskDateDirective } from './../core/directives/mask-date.directive'
+import { ColorsService } from './colors/colors.service'
+import { CheckallDirective } from './directives/checkall/checkall.directive'
+import { EasypiechartDirective } from './directives/easypiechart/easypiechart.directive'
+import { FlotDirective } from './directives/flot/flot.directive'
+import { JqcloudDirective } from './directives/jqcloud/jqcloud.directive'
+import { NowDirective } from './directives/now/now.directive'
+import { ScrollableDirective } from './directives/scrollable/scrollable.directive'
+import { SparklineDirective } from './directives/sparkline/sparkline.directive'
+import { VectormapDirective } from './directives/vectormap/vectormap.directive'
+import { ButtonFilterComponent } from './_components/buttons/button-filter/button-filter.component'
+import { CardComponent } from './_components/card/card.component'
+import { AcumuladosComponent } from './_components/charts/vendas/acumulados/acumulados.component'
+import { HistoricoComponent } from './_components/charts/vendas/historico/historico.component'
+import { MensalComponent } from './_components/charts/vendas/mensal/mensal.component'
+import { TipoPagamentoComponent } from './_components/charts/vendas/tipo-pagamento/tipo-pagamento.component'
+import { TopProdutosComponent } from './_components/charts/vendas/top-produtos/top-produtos.component'
+import { EmptyContentComponent } from './_components/empty-content/empty-content.component'
+import { ComboFranquiasComponent } from './_components/filter/combo-franquias/combo-franquias.component'
+import { ModalPeriodoComponent } from './_components/filter/modal-periodo/modal-periodo.component'
+import { PeriodoComponent } from './_components/filter/periodo/periodo.component'
+import { IndicadorComponent } from './_components/indicador/indicador.component'
+import { IndicadoresComponent } from './_components/indicadores/indicadores.component'
+import { PageTitleComponent } from './_components/page-title/page-title.component'
+import { SkeletonLoaderComponent } from './_components/skeleton-loader/skeleton-loader.component'
+import { TreeTableComponent } from './_components/tree-table/tree-table.component'
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -99,6 +100,7 @@ import { ModalPeriodoComponent } from './_components/filter/modal-periodo/modal-
     EmptyContentComponent,
     ButtonFilterComponent,
     ModalPeriodoComponent,
+    IndicadorComponent,
   ],
   exports: [
     CommonModule,
@@ -147,6 +149,7 @@ import { ModalPeriodoComponent } from './_components/filter/modal-periodo/modal-
     TreeTableComponent,
     EmptyContentComponent,
     ButtonFilterComponent,
+    IndicadorComponent,
   ],
 })
 
@@ -155,6 +158,6 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-    };
+    }
   }
 }

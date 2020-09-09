@@ -3,12 +3,16 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { IFaturamento } from 'src/app/shared/interfaces/faturamento.interface'
+import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface'
 import { IVendaCategoriaProduto } from 'src/app/shared/interfaces/venda-categoria-produto.interface'
 import { IVendasFranqueadoDetalhes } from 'src/app/shared/interfaces/vendas-franqueado-detalhes.interface'
 import { IVendasFranqueado } from 'src/app/shared/interfaces/vendas-franqueado.interface'
 import { IVendasMensal } from 'src/app/shared/interfaces/vendas-mensal.interface'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { environment } from './../../../../environments/environment'
+import { IDetalhamentoRegistrosBalanca } from './../../../shared/interfaces/detalhamento-registros-balanca.interface'
+import { IIndicadoresBalanca } from './../../../shared/interfaces/indicadores-balanca.interface'
+import { IResumoCaixa } from './../../../shared/interfaces/resumo-caixa.inteface'
 import { IVendasAcumuladas } from './../../../shared/interfaces/vendas-acumuladas.interface'
 import { IVendasConsumoInternoDetalhado } from './../../../shared/interfaces/vendas-consumo-interno-detalhado.interface'
 import { IVendasConsumoInterno } from './../../../shared/interfaces/vendas-consumo-interno.interface'
@@ -253,6 +257,26 @@ export class FranqueadosService {
         `${environment.API.URL}${environment.API.Routes.dashboards.franqueados.vendasPorHora}?${queryParams}`
       )
       .pipe(map((vendas) => vendas['Data'] || []))
+  }
+
+  getResumoCaixa(periodo: IPeriodoBusca): Observable<IResumoCaixa[]> {
+    return this.http.get<IResumoCaixa[]>('assets/mocks/resumo-caixa.json')
+  }
+
+  getIndicadoresBalanca(
+    periodo: IPeriodoBusca
+  ): Observable<IIndicadoresBalanca> {
+    return this.http.get<IIndicadoresBalanca>(
+      'assets/mocks/indicadores-balanca.json'
+    )
+  }
+
+  getDetalhamentoRegistrosBalanca(): Observable<
+    IDetalhamentoRegistrosBalanca[]
+  > {
+    return this.http.get<IDetalhamentoRegistrosBalanca[]>(
+      'assets/mocks/detalhamento-registros-balanca.json'
+    )
   }
 
   dividirPelaEscala(valor: number) {

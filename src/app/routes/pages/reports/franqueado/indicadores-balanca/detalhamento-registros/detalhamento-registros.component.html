@@ -1,0 +1,62 @@
+<div class="modal-header">
+  <div class="title-modal-detalhes">
+    <i class="fas fa-list mr-2"></i>Detalhamento dos registros da balança
+  </div>
+  <button
+    type="button"
+    class="close pull-right"
+    aria-label="Close"
+    (click)="closeModal()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="card">
+  <!-- <h5>Detalhamento dos registros da balança</h5> -->
+  <p-table
+    [value]="detalhamentoRegistrosBalanca"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} para {last} de {totalRecords} detalhamento balança"
+    [rowsPerPageOptions]="[5, 10, 25]"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Data</th>
+        <th>Nº da Venda</th>
+        <th>Peso(KG)</th>
+        <th>Valor(R$)</th>
+        <th>Caixa</th>
+        <th>Operador</th>
+        <th>Observação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-detalheBalanca>
+      <tr>
+        <td>{{ detalheBalanca.Data }}</td>
+        <td>{{ detalheBalanca.NumeroVenda }}</td>
+        <td>{{ detalheBalanca.PesoKG | number: '1.2-3' }}</td>
+        <td>{{ detalheBalanca.Valor | number: '1.2-2' }}</td>
+        <td>{{ detalheBalanca.Caixa }}</td>
+        <td>{{ detalheBalanca.Operador }}</td>
+        <td>{{ detalheBalanca.Observacao }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <p-button
+        type="button"
+        icon="pi pi-plus"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+      <p-button
+        type="button"
+        icon="pi pi-cloud"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,14 @@
+<ft-card class="w-auto card-indicador">
+  <div class="indicador">
+    <span *ngIf="!loading" class="indicador__value">
+      <ng-content select="[indicador-value]"></ng-content>
+    </span>
+    <ft-skeleton-loader
+      *ngIf="loading"
+      [theme]="{ width: '100px', height: '30px', margin: '0 auto' }"
+    ></ft-skeleton-loader>
+    <small class="indicador__footer">
+      <ng-content select="[indicador-footer]"></ng-content>
+    </small>
+  </div>
+</ft-card>

@@ -1,9 +1,9 @@
-import { DetalhesComponent } from './detalhes/detalhes.component';
-import { IVendasConsumoInterno } from './../../../../../shared/interfaces/vendas-consumo-interno.interface';
-import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service';
-import { Component, OnInit } from '@angular/core';
-import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component, OnInit } from '@angular/core'
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
+import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface'
+import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
+import { IVendasConsumoInterno } from './../../../../../shared/interfaces/vendas-consumo-interno.interface'
+import { DetalhesComponent } from './detalhes/detalhes.component'
 
 @Component({
   selector: 'ft-consumo-interno',
@@ -15,10 +15,10 @@ export class ConsumoInternoComponent implements OnInit {
     dataInicio: null,
     dataFim: null,
     codigoFranqueado: 0,
-  };
+  }
 
-  public consumoInterno: IVendasConsumoInterno[] = [];
-  bsModalRef: BsModalRef;
+  public consumoInterno: IVendasConsumoInterno[] = []
+  bsModalRef: BsModalRef
 
   constructor(
     public franqueadosService: FranqueadosService,
@@ -26,7 +26,7 @@ export class ConsumoInternoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getVendasConsumoInterno();
+    this.getVendasConsumoInterno()
   }
 
   getVendasConsumoInterno() {
@@ -37,14 +37,14 @@ export class ConsumoInternoComponent implements OnInit {
         this.periodo.codigoFranqueado
       )
       .subscribe((data) => {
-        this.consumoInterno = data;
-      });
+        this.consumoInterno = data
+      })
   }
 
   filtroPeriodo(filter: any) {
-    this.periodo = filter;
-    this.consumoInterno = [];
-    this.getVendasConsumoInterno();
+    this.periodo = filter
+    this.consumoInterno = []
+    this.getVendasConsumoInterno()
   }
 
   openModalDetalhes(codigoPessoa) {
@@ -53,10 +53,10 @@ export class ConsumoInternoComponent implements OnInit {
       dataInicio: this.periodo.dataInicio,
       dataFim: this.periodo.dataFim,
       codigoFranqueado: this.periodo.codigoFranqueado,
-    };
+    }
     this.bsModalRef = this.modalService.show(DetalhesComponent, {
       initialState,
       class: 'modal-detalhes-consumo',
-    });
+    })
   }
 }

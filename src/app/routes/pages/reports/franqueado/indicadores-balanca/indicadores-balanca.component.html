@@ -1,18 +1,53 @@
-<p-table [value]="cars" styleClass="p-datatable-responsive-demo">
+<ft-page-title [title]="'Indicadores da Balança'"></ft-page-title>
+
+<div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+  <ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+</div>
+
+<ft-resumo [indicadorBalanca]="indicadorBalanca"></ft-resumo>
+
+<p-table [value]="listResult" styleClass="p-datatable-responsive-demo">
   <ng-template pTemplate="header">
     <tr>
-      <th>Vin</th>
-      <th>Year</th>
-      <th>Brand</th>
-      <th>Color</th>
+      <th>Caixa</th>
+      <th>Pesado(KG)</th>
+      <th>Estorno(KG)</th>
+      <th>Estorno(%)</th>
+      <th>Sistema fechado(KG)</th>
+      <th>Pesado(R$)</th>
+      <th>Estorno(R$)</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-car>
+  <ng-template pTemplate="body" let-resumo>
     <tr>
-      <td>{{ car.vin }}</td>
-      <td>{{ car.year }}</td>
-      <td>{{ car.brand }}</td>
-      <td>{{ car.color }}</td>
+      <td>
+        <span class="p-column-title">Caixa</span>
+        <span class="p-column-value">{{ resumo.Caixa }}</span>
+      </td>
+      <td (click)="openModalDetalhesBalanca()">
+        <span class="p-column-title">Pesado(KG)</span>
+        {{ resumo.PesadoKG | number: '1.2-3' }}
+      </td>
+      <td (click)="openModalDetalhesBalanca()">
+        <span class="p-column-title">Estorno(KG)</span>
+        {{ resumo.EstornoKG | number: '1.2-3' }}
+      </td>
+      <td (click)="openModalDetalhesBalanca()">
+        <span class="p-column-title">Estorno(%)</span>
+        {{ resumo.EstornoPercent }}%
+      </td>
+      <td (click)="openModalDetalhesBalanca()">
+        <span class="p-column-title">Sistema fechado(KG)</span>
+        {{ resumo.SistemaFechado | number: '1.2-3' }}
+      </td>
+      <td (click)="openModalDetalhesBalanca()">
+        <span class="p-column-title">Pesado(R$)</span>
+        {{ resumo.PesadoMon | number: '1.2-2' }}
+      </td>
+      <td (click)="openModalDetalhesBalanca()">
+        <span class="p-column-title">Estorno(R$)</span>
+        {{ resumo.EstornoMon | number: '1.2-2' }}
+      </td>
     </tr>
   </ng-template>
 </p-table>
