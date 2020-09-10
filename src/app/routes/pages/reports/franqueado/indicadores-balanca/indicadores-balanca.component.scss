@@ -3,6 +3,27 @@
     display: none;
   }
 }
+:host ::ng-deep {
+  .p-datatable-thead {
+    tr {
+      th {
+        background-color: var(--color-blue-dark);
+        color: #fff;
+      }
+    }
+  }
+}
+
+:host ::ng-deep {
+  .p-datatable-tbody {
+    .p-footer-total {
+      td {
+        background: var(--color-blue-light);
+        font-weight: 600;
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 40rem) {
   :host ::ng-deep {

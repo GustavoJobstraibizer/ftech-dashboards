@@ -6,4 +6,5 @@ export interface IResumoCaixa {
   SistemaFechado: number
   PesadoMon: number
   EstornoMon: number
+  UltimaLinha?: boolean
 }

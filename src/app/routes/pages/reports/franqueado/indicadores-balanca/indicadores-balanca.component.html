@@ -4,6 +4,13 @@
   <ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
 </div>
 
+<ft-button-filter
+  (filteredValueEmit)="filtroPeriodo($event)"
+  [titleModalFilter]="
+    'Selecione um período para visualizar o resumo de indicadores da Balança'
+  "
+></ft-button-filter>
+
 <ft-resumo [indicadorBalanca]="indicadorBalanca"></ft-resumo>
 
 <p-table [value]="listResult" styleClass="p-datatable-responsive-demo">
@@ -19,35 +26,48 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-resumo>
-    <tr>
+    <tr [ngClass]="{ 'p-footer-total': resumo?.UltimaLinha }">
       <td>
         <span class="p-column-title">Caixa</span>
         <span class="p-column-value">{{ resumo.Caixa }}</span>
       </td>
-      <td (click)="openModalDetalhesBalanca()">
+      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
         <span class="p-column-title">Pesado(KG)</span>
-        {{ resumo.PesadoKG | number: '1.2-3' }}
+        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
+          resumo.PesadoKG | number: '1.2-3'
+        }}</span>
       </td>
-      <td (click)="openModalDetalhesBalanca()">
+      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
         <span class="p-column-title">Estorno(KG)</span>
-        {{ resumo.EstornoKG | number: '1.2-3' }}
+        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
+          resumo.EstornoKG | number: '1.2-3'
+        }}</span>
       </td>
-      <td (click)="openModalDetalhesBalanca()">
+      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
         <span class="p-column-title">Estorno(%)</span>
-        {{ resumo.EstornoPercent }}%
+        <span class="p-column-value" [tooltip]="verDetalhesTooltip"
+          >{{ resumo.EstornoPercent }}%</span
+        >
       </td>
-      <td (click)="openModalDetalhesBalanca()">
+      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
         <span class="p-column-title">Sistema fechado(KG)</span>
-        {{ resumo.SistemaFechado | number: '1.2-3' }}
+        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
+          resumo.SistemaFechado | number: '1.2-3'
+        }}</span>
       </td>
-      <td (click)="openModalDetalhesBalanca()">
+      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
         <span class="p-column-title">Pesado(R$)</span>
-        {{ resumo.PesadoMon | number: '1.2-2' }}
+        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
+          resumo.PesadoMon | number: '1.2-2'
+        }}</span>
       </td>
-      <td (click)="openModalDetalhesBalanca()">
+      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
         <span class="p-column-title">Estorno(R$)</span>
-        {{ resumo.EstornoMon | number: '1.2-2' }}
+        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
+          resumo.EstornoMon | number: '1.2-2'
+        }}</span>
       </td>
     </tr>
   </ng-template>
 </p-table>
+<ng-template #verDetalhesTooltip>Clique para mais detalhes</ng-template>

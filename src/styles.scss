@@ -12,19 +12,13 @@
 @import 'variables';
 @import 'mixins';
 
-//== Vendor
-// @import '~@fortawesome/fontawesome-free-webfonts/webfonts';
-// @import '../node_modules/~@fortawesome/fontawesome-free-webfonts/scss/regular.css';
-// @import '../node_modules/~@fortawesome/fontawesome-free-webfonts/scss/solid.css';
-// @import '../node_modules/~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.css';
+:root {
+  @each $prop, $value in $ftech-colors {
+    --color-#{$prop}: #{$value};
+  }
+}
+
 @import '~simple-line-icons/css/simple-line-icons.css';
-
-// $fa-font-path: "../node_modules/@fortawesome/fontawesome-free-webfonts/webfonts";
-// @import "@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
-// @import "@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
-
-//== Bootstrap
-// @import "./app/shared/styles/bootstrap.scss";
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
 //== Application
@@ -100,9 +94,9 @@ input.form-control {
 //------------------------------------------
 
 .thead-bg {
-  background-color: #0d4c8f;
+  background-color: var(--color-blue-dark);
   color: #fff;
-  text-transform: uppercase;
+  // text-transform: uppercase;
 
   font-size: 12px;
 }

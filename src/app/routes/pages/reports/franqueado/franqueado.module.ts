@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+import { TooltipModule } from 'ngx-bootstrap/tooltip'
 import { ButtonModule } from 'primeng/button'
 import { TableModule } from 'primeng/table'
 import { SharedModule } from './../../../../shared/shared.module'
@@ -54,6 +55,7 @@ const routes: Routes = [
     SharedModule,
     TableModule,
     ButtonModule,
+    TooltipModule,
   ],
   exports: [RouterModule],
 })

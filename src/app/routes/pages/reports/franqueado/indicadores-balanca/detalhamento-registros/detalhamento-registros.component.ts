@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core'
+import { FormControl } from '@angular/forms'
+import { BsModalRef } from 'ngx-bootstrap/modal'
 import { FranqueadosService } from './../../../../../../core/services/dashboards/franqueados.service'
 import { IDetalhamentoRegistrosBalanca } from './../../../../../../shared/interfaces/detalhamento-registros-balanca.interface'
 
@@ -10,7 +12,17 @@ import { IDetalhamentoRegistrosBalanca } from './../../../../../../shared/interf
 export class DetalhamentoRegistrosComponent implements OnInit {
   detalhamentoRegistrosBalanca: IDetalhamentoRegistrosBalanca[]
 
-  constructor(public franqueadoService: FranqueadosService) {}
+  inputSearch = new FormControl('')
+  public checkFilters = {
+    pesadoVendido: false,
+    estorno: true,
+    sistemaFechado: false,
+  }
+
+  constructor(
+    public franqueadoService: FranqueadosService,
+    public bsModalRef: BsModalRef
+  ) {}
 
   ngOnInit(): void {
     this.getDetalhamentoRegistrosBalanca()
@@ -24,5 +36,7 @@ export class DetalhamentoRegistrosComponent implements OnInit {
       })
   }
 
-  closeModal() {}
+  closeModal() {
+    this.bsModalRef.hide()
+  }
 }

@@ -13,24 +13,100 @@
 </div>
 
 <div class="card">
-  <!-- <h5>Detalhamento dos registros da balança</h5> -->
+  <div class="filters">
+    <div class="filters__check">
+      <div class="clearfix">
+        <div class="checkbox c-checkbox float-left mt0">
+          <label>
+            <input
+              type="checkbox"
+              [(ngModel)]="checkFilters.pesadoVendido"
+              name="pesadoVendido"
+            />
+            <span class="fa fa-check"></span>Pesado e vendido</label
+          >
+        </div>
+      </div>
+      <div class="clearfix">
+        <div class="checkbox c-checkbox float-left mt0">
+          <label>
+            <input
+              type="checkbox"
+              [(ngModel)]="checkFilters.estorno"
+              name="estorno"
+            />
+            <span class="fa fa-check"></span>Estorno</label
+          >
+        </div>
+      </div>
+      <div class="clearfix">
+        <div class="checkbox c-checkbox float-left mt0">
+          <label>
+            <input
+              type="checkbox"
+              [(ngModel)]="checkFilters.sistemaFechado"
+              name="sistemaFechado"
+            />
+            <span class="fa fa-check"></span>Sistema Fechado</label
+          >
+        </div>
+      </div>
+    </div>
+    <span class="filters-icon-left">
+      <i class="icon-magnifier"></i>
+      <input
+        type="text"
+        class="form-control"
+        [formControl]="inputSearch"
+        placeholder="Pesquisar"
+      />
+    </span>
+  </div>
   <p-table
+    class="px-3"
     [value]="detalhamentoRegistrosBalanca"
+    [scrollable]="true"
+    scrollHeight="590px"
     [paginator]="true"
-    [rows]="5"
+    [rows]="10"
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Mostrando {first} para {last} de {totalRecords} detalhamento balança"
-    [rowsPerPageOptions]="[5, 10, 25]"
+    [rowsPerPageOptions]="[10, 25, 50]"
   >
+    <ng-template pTemplate="colgroup" let-columns>
+      <colgroup>
+        <col style="width: 250px;" />
+        <col style="width: 180px;" />
+        <col style="width: 250px;" />
+        <col style="width: 250px;" />
+        <col style="width: 250px;" />
+        <col style="width: 250px;" />
+        <col style="width: 250px;" />
+      </colgroup>
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th>Data</th>
-        <th>Nº da Venda</th>
-        <th>Peso(KG)</th>
-        <th>Valor(R$)</th>
-        <th>Caixa</th>
-        <th>Operador</th>
-        <th>Observação</th>
+        <th pSortableColumn="Data">
+          Data <p-sortIcon field="Data"></p-sortIcon>
+        </th>
+        <th pSortableColumn="NumeroVenda">
+          Nº da Venda <p-sortIcon field="NumeroVenda"></p-sortIcon>
+        </th>
+        <th pSortableColumn="PesoKG">
+          Peso(KG) <p-sortIcon field="PesoKG"></p-sortIcon>
+        </th>
+        <th pSortableColumn="Valor">
+          Valor(R$) <p-sortIcon field="Valor"></p-sortIcon>
+        </th>
+        <th pSortableColumn="Caixa">
+          Caixa <p-sortIcon field="Caixa"></p-sortIcon>
+        </th>
+        <th pSortableColumn="Operador">
+          Operador <p-sortIcon field="Operador"></p-sortIcon>
+        </th>
+        <th pSortableColumn="Observacao">
+          Observação <p-sortIcon field="Observacao"></p-sortIcon>
+        </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-detalheBalanca>
@@ -43,20 +119,6 @@
         <td>{{ detalheBalanca.Operador }}</td>
         <td>{{ detalheBalanca.Observacao }}</td>
       </tr>
-    </ng-template>
-    <ng-template pTemplate="paginatorleft">
-      <p-button
-        type="button"
-        icon="pi pi-plus"
-        styleClass="p-button-text"
-      ></p-button>
-    </ng-template>
-    <ng-template pTemplate="paginatorright">
-      <p-button
-        type="button"
-        icon="pi pi-cloud"
-        styleClass="p-button-text"
-      ></p-button>
     </ng-template>
   </p-table>
 </div>

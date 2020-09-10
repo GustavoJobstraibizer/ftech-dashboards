@@ -15,6 +15,14 @@ $ft-black-solid: #172b3e;
 $ft-blue-light: #dbe9f5;
 $ft-gray: #8498ae;
 
+$ftech-colors: (
+  'black-solid': #172b3e,
+  'blue-light': #dbe9f5,
+  'blue-light-2': #5b9fde,
+  'blue-dark': #2e75b6,
+  'gray-1': #8498ae,
+);
+
 // --------------------------------------------------
 // 2. Miscellaneous
 // --------------------------------------------------
@@ -31,4 +39,4 @@ $box-shadow: 0 4px 6px 0 rgba(31, 70, 88, 0.04);
 // 4. Fonts
 // --------------------------------------------------
 
-$ft-font-default: "Circular std", sans-serif;
+$ft-font-default: 'Circular std', sans-serif;
