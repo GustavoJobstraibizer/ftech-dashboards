@@ -11,7 +11,11 @@
           formControlName="dataInicio"
           bsDatepicker
           #dpInicio="bsDatepicker"
-          [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+          [bsConfig]="{
+            isAnimated: true,
+            dateInputFormat: 'DD/MM/YYYY',
+            showWeekNumbers: false
+          }"
           maskDate
         />
         <i
@@ -39,7 +43,11 @@
           formControlName="dataFim"
           bsDatepicker
           #dpFim="bsDatepicker"
-          [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }"
+          [bsConfig]="{
+            isAnimated: true,
+            dateInputFormat: 'DD/MM/YYYY',
+            showWeekNumbers: false
+          }"
           maskDate
         />
         <i

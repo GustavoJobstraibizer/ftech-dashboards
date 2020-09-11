@@ -123,7 +123,8 @@ input.form-control {
 table {
   tbody {
     tr {
-      td[class^='text-'] {
+      td[class^='text-'],
+      td > span {
         font-size: var(--space-xxs);
 
         @include mediaUp('lg') {
