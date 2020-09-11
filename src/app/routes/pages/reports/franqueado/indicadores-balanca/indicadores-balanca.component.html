@@ -1,7 +1,10 @@
 <ft-page-title [title]="'Indicadores da Balança'"></ft-page-title>
 
 <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
-  <ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+  <ft-periodo
+    [getTodayDate]="true"
+    (periodoFilterEmit)="filtroPeriodo($event)"
+  ></ft-periodo>
 </div>
 
 <ft-button-filter

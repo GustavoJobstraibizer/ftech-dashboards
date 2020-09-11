@@ -44,6 +44,7 @@ import { ModalPeriodoComponent } from './_components/filter/modal-periodo/modal-
 import { PeriodoComponent } from './_components/filter/periodo/periodo.component'
 import { IndicadorComponent } from './_components/indicador/indicador.component'
 import { IndicadoresComponent } from './_components/indicadores/indicadores.component'
+import { ModalHeaderActionsComponent } from './_components/modal/modal-header-actions/modal-header-actions.component'
 import { PageTitleComponent } from './_components/page-title/page-title.component'
 import { SkeletonLoaderComponent } from './_components/skeleton-loader/skeleton-loader.component'
 import { TreeTableComponent } from './_components/tree-table/tree-table.component'
@@ -101,6 +102,7 @@ import { TreeTableComponent } from './_components/tree-table/tree-table.componen
     ButtonFilterComponent,
     ModalPeriodoComponent,
     IndicadorComponent,
+    ModalHeaderActionsComponent,
   ],
   exports: [
     CommonModule,
@@ -150,6 +152,7 @@ import { TreeTableComponent } from './_components/tree-table/tree-table.componen
     EmptyContentComponent,
     ButtonFilterComponent,
     IndicadorComponent,
+    ModalHeaderActionsComponent,
   ],
 })
 

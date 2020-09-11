@@ -2,14 +2,18 @@
   <div class="title-modal-detalhes">
     <i class="fas fa-list mr-2"></i>Detalhes
   </div>
-  <button
+  <ft-modal-header-actions
+    [modalId]="'.modal-itens-detalhe'"
+    (modalCloseEmit)="closeModal()"
+  ></ft-modal-header-actions>
+  <!-- <button
     type="button"
     class="close pull-right"
     aria-label="Close"
     (click)="closeModal()"
   >
     <span aria-hidden="true">&times;</span>
-  </button>
+  </button> -->
 </div>
 <div class="py-2 px-2">
   <ft-card [icon]="'icon-list'" [title]="'Itens da venda'" class="card-itens">
@@ -19,12 +23,12 @@
           <thead class="thead-bg">
             <tr>
               <th class="text-center">#</th>
-              <th class="text-center">PRODUTO</th>
-              <th class="text-right">QTD</th>
-              <th class="text-right">PREÇO UNT.</th>
-              <th class="text-right">SUB TOTAL</th>
-              <th class="text-right">DESC.</th>
-              <th class="text-right">TOTAL</th>
+              <th class="text-center">Produto</th>
+              <th class="text-right">Qtde.</th>
+              <th class="text-right">Preço unt.</th>
+              <th class="text-right">Sub total</th>
+              <th class="text-right">Desc.</th>
+              <th class="text-right">Total</th>
             </tr>
           </thead>
           <tbody class="tbody-data">
@@ -93,8 +97,8 @@
       <table class="table table-scrollable">
         <thead class="thead-bg">
           <tr>
-            <th class="text-center">FORMA PAGTO.</th>
-            <th class="text-center">VALOR</th>
+            <th class="text-center">Forma pagto.</th>
+            <th class="text-center">Valor</th>
           </tr>
         </thead>
         <tbody class="tbody-data">

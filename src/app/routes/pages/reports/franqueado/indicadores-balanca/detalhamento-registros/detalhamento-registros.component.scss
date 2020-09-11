@@ -58,7 +58,6 @@
     position: relative;
     width: 100%;
     max-width: 450px;
-    margin-left: 1rem;
 
     .icon-magnifier {
       position: absolute;
@@ -70,11 +69,23 @@
     .form-control {
       padding-left: 2rem;
     }
+
+    @include mediaUp('md') {
+      margin-left: 1rem;
+    }
   }
 
   .clearfix {
     &:nth-child(2) {
       margin: 0 1rem;
     }
+  }
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  padding: 0.75rem 1rem;
+
+  @include mediaUp('lg') {
+    padding: 1rem 1rem;
   }
 }

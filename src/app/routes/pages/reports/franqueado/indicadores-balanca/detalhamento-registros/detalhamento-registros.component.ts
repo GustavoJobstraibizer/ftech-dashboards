@@ -39,4 +39,11 @@ export class DetalhamentoRegistrosComponent implements OnInit {
   closeModal() {
     this.bsModalRef.hide()
   }
+
+  maximize() {
+    const modal = document.querySelector(
+      '.modal-detalhamento-registros-balanca'
+    )
+    modal.classList.toggle('modal-maximize')
+  }
 }

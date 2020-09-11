@@ -16,6 +16,17 @@
   @each $prop, $value in $ftech-colors {
     --color-#{$prop}: #{$value};
   }
+
+  @each $prop, $value in $spaces {
+    --space-#{$prop}: #{$value};
+  }
+}
+
+html {
+  font-size: 100% !important;
+  -moz-osx-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
 }
 
 @import '~simple-line-icons/css/simple-line-icons.css';
@@ -96,44 +107,27 @@ input.form-control {
 .thead-bg {
   background-color: var(--color-blue-dark);
   color: #fff;
-  // text-transform: uppercase;
+  font-size: var(--space-xs);
 
-  font-size: 12px;
+  @include mediaUp('lg') {
+    font-size: var(--space-sm);
+  }
 }
 
 .tfoot-data {
   background-color: rgba(0, 123, 255, 0.1);
 }
 
-.modal-detalhes-consumo {
-  width: 100%;
-  max-width: 1140px !important;
-}
-
-.modal-detalhamento-registros-balanca {
-  width: 100%;
-  max-width: 1140px !important;
-}
-
-.modal-filter {
-  .modal-content {
-    border-radius: 12px;
-  }
-}
-
-.modal-itens-detalhe {
-  width: 100%;
-  max-width: 1140px !important;
-}
+// Modal
 
 table {
   tbody {
     tr {
       td[class^='text-'] {
-        font-size: 12px;
+        font-size: var(--space-xxs);
 
         @include mediaUp('lg') {
-          font-size: 16px;
+          font-size: var(--space-sm);
         }
       }
     }
@@ -194,4 +188,50 @@ table {
     background-color: #6a52ff !important;
     border-color: #6a52ff !important;
   }
+}
+
+//---------------------------------------------
+// Modal
+//---------------------------------------------
+
+.modal-detalhes-consumo {
+  width: 100%;
+  max-width: 1140px !important;
+}
+
+.modal-detalhamento-registros-balanca {
+  width: 100%;
+  max-width: 1140px !important;
+}
+
+.modal-filter {
+  .modal-content {
+    border-radius: 12px;
+  }
+}
+
+.modal-itens-detalhe {
+  width: 100%;
+  max-width: 1140px !important;
+}
+
+.modal-header {
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+
+    .icon-maximize {
+      cursor: pointer;
+
+      &:hover {
+        color: var(--color-gray-1);
+      }
+    }
+  }
+}
+
+.modal-maximize {
+  max-width: 100% !important;
+  margin: 0;
 }

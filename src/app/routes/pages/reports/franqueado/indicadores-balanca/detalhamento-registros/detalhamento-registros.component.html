@@ -2,14 +2,11 @@
   <div class="title-modal-detalhes">
     <i class="fas fa-list mr-2"></i>Detalhamento dos registros da balança
   </div>
-  <button
-    type="button"
-    class="close pull-right"
-    aria-label="Close"
-    (click)="closeModal()"
-  >
-    <span aria-hidden="true">&times;</span>
-  </button>
+
+  <ft-modal-header-actions
+    [modalId]="'.modal-detalhamento-registros-balanca'"
+    (modalCloseEmit)="closeModal()"
+  ></ft-modal-header-actions>
 </div>
 
 <div class="card">
