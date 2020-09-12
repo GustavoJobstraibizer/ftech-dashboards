@@ -10,9 +10,7 @@ import { IVendasFranqueado } from 'src/app/shared/interfaces/vendas-franqueado.i
 import { IVendasMensal } from 'src/app/shared/interfaces/vendas-mensal.interface'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { environment } from './../../../../environments/environment'
-import { IDetalhamentoRegistrosBalanca } from './../../../shared/interfaces/detalhamento-registros-balanca.interface'
 import { IIndicadoresBalanca } from './../../../shared/interfaces/indicadores-balanca.interface'
-import { IResumoCaixa } from './../../../shared/interfaces/resumo-caixa.inteface'
 import { IVendasAcumuladas } from './../../../shared/interfaces/vendas-acumuladas.interface'
 import { IVendasConsumoInternoDetalhado } from './../../../shared/interfaces/vendas-consumo-interno-detalhado.interface'
 import { IVendasConsumoInterno } from './../../../shared/interfaces/vendas-consumo-interno.interface'
@@ -259,23 +257,15 @@ export class FranqueadosService {
       .pipe(map((vendas) => vendas['Data'] || []))
   }
 
-  getResumoCaixa(periodo: IPeriodoBusca): Observable<IResumoCaixa[]> {
-    return this.http.get<IResumoCaixa[]>('assets/mocks/resumo-caixa.json')
-  }
+  // getResumoCaixa(periodo: IPeriodoBusca): Observable<IResumoCaixa[]> {
+  //   return this.http.get<IResumoCaixa[]>('assets/mocks/resumo-caixa.json')
+  // }
 
   getIndicadoresBalanca(
     periodo: IPeriodoBusca
   ): Observable<IIndicadoresBalanca> {
     return this.http.get<IIndicadoresBalanca>(
       'assets/mocks/indicadores-balanca.json'
-    )
-  }
-
-  getDetalhamentoRegistrosBalanca(): Observable<
-    IDetalhamentoRegistrosBalanca[]
-  > {
-    return this.http.get<IDetalhamentoRegistrosBalanca[]>(
-      'assets/mocks/detalhamento-registros-balanca.json'
     )
   }
 

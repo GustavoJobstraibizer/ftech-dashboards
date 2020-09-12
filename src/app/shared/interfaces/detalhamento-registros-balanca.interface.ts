@@ -1,9 +1,9 @@
-export interface IDetalhamentoRegistrosBalanca {
-  Data: string
+export interface IResumoBalancaDetalhes {
+  DataPesagem: string
   NumeroVenda: number
-  PesoKG: number
-  Valor: number
-  Caixa: string
-  Operador: string
+  VolumePeso: number
+  ValorPeso: number
+  OperadorCaixa: string
+  DescricaoCaixa: string
   Observacao: string
 }
