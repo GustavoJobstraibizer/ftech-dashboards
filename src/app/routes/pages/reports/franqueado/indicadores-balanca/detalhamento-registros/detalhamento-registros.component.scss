@@ -37,6 +37,22 @@
       }
     }
   }
+
+  .p-datatable .p-datatable-thead > tr > th {
+    padding: 0.75rem 1rem;
+
+    @include mediaUp('lg') {
+      padding: 1rem 1rem;
+    }
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    font-size: var(--space-xs);
+
+    @include mediaUp('lg') {
+      font-size: var(--space-sm);
+    }
+  }
 }
 
 .filters {
@@ -82,10 +98,10 @@
   }
 }
 
-:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-  padding: 0.75rem 1rem;
+// :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+//   padding: 0.75rem 1rem;
 
-  @include mediaUp('lg') {
-    padding: 1rem 1rem;
-  }
-}
+//   @include mediaUp('lg') {
+//     padding: 1rem 1rem;
+//   }
+// }

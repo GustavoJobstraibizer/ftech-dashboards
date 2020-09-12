@@ -26,6 +26,7 @@
       <th>Sistema fechado(KG)</th>
       <th>Pesado(R$)</th>
       <th>Estorno(R$)</th>
+      <th>Sistema fechado(KG)</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-resumo>
@@ -43,7 +44,7 @@
       <td class="c-pointer" (click)="openModalDetalhesBalanca()">
         <span class="p-column-title">Estorno(KG)</span>
         <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
-          resumo.EstornoKG | number: '1.2-3'
+          resumo.EstornoKG | number: '1.3-3'
         }}</span>
       </td>
       <td class="c-pointer" (click)="openModalDetalhesBalanca()">
@@ -55,7 +56,7 @@
       <td class="c-pointer" (click)="openModalDetalhesBalanca()">
         <span class="p-column-title">Sistema fechado(KG)</span>
         <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
-          resumo.SistemaFechado | number: '1.2-3'
+          resumo.SistemaFechado | number: '1.3-3'
         }}</span>
       </td>
       <td class="c-pointer" (click)="openModalDetalhesBalanca()">
@@ -68,6 +69,12 @@
         <span class="p-column-title">Estorno(R$)</span>
         <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
           resumo.EstornoMon | number: '1.2-2'
+        }}</span>
+      </td>
+      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
+        <span class="p-column-title">Sistema fechado (KG)</span>
+        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
+          resumo.SistemaFechadoKG | number: '1.3-3'
         }}</span>
       </td>
     </tr>
