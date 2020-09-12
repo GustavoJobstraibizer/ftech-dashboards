@@ -1,0 +1,49 @@
+@import 'mixins';
+
+.indicador {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &__value {
+    font-size: 27px;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: -0.7px;
+  }
+
+  &__footer {
+    color: #121213;
+    font-size: 12px;
+  }
+
+  @include mediaUp('md') {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    &__value {
+      font-size: 32px;
+    }
+
+    &__footer {
+      font-size: 14px;
+    }
+  }
+}
+
+// :host ::ng-deep .card-indicador {
+//   .card {
+//     background: linear-gradient(to right, #a6adf0 30%, #ccd1ff);
+
+//     @include mediaUp('md') {
+//       width: auto;
+//       min-width: 200px !important;
+//       height: 125px;
+//       // margin-right: 0.5rem;
+//       &:not(:nth-last-of-type(5)) {
+//         margin-right: 0.5rem;
+//       }
+//     }
+//   }
+// }

@@ -71,5 +71,6 @@ export class DetalhesComponent implements OnInit {
 
   closeModal() {
     this.modalService.hide(1)
+    document.body.classList.remove('modal-open')
   }
 }

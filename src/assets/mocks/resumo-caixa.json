@@ -1,0 +1,33 @@
+[
+  {
+    "Caixa": "Caixa Cartões",
+    "PesadoKG": 280.122,
+    "EstornoKG": 8.404,
+    "EstornoPercent": 3,
+    "SistemaFechado": 0.000,
+    "PesadoMon": 8.37565,
+    "EstornoMon": 251.27,
+    "SistemaFechadoKG": 0.00
+  },
+  {
+    "Caixa": "Caixa Dinheiro",
+    "PesadoKG": 100.501,
+    "EstornoKG": 9.045,
+    "EstornoPercent": 9,
+    "SistemaFechado": 0.250,
+    "PesadoMon": 3.00498,
+    "EstornoMon": 270.45,
+    "SistemaFechadoKG": 7.48
+  },
+  {
+    "Caixa": "Total",
+    "PesadoKG": 380.623,
+    "EstornoKG": 17.449,
+    "EstornoPercent": 5,
+    "SistemaFechado": 0.250,
+    "PesadoMon": 11.38063,
+    "EstornoMon": 521.72,
+    "UltimaLinha": true,
+    "SistemaFechadoKG": 7.48
+  }
+]

@@ -1,0 +1,21 @@
+image: node:latest
+
+pipelines:
+  branches:
+    master:
+      - step:
+        name: Build and deploy to ftp
+        caches:
+          - node
+        services:
+          - docker
+        script:
+          - npm install
+          - npm run build:prod
+          - pipe: atlassian/ftp-deploy:0.3.3
+            variables:
+              USER: $ftp_user
+              PASSWORD: $ftp_password
+              SERVER: $ftp_host
+              REMOTE_PATH: $ftp_remote_path
+              LOCAL_PATH: $ftp_local_path

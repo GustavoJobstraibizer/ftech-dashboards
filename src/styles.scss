@@ -10,20 +10,26 @@
 }
 
 @import 'variables';
+@import 'mixins';
 
-//== Vendor
-// @import '~@fortawesome/fontawesome-free-webfonts/webfonts';
-// @import '../node_modules/~@fortawesome/fontawesome-free-webfonts/scss/regular.css';
-// @import '../node_modules/~@fortawesome/fontawesome-free-webfonts/scss/solid.css';
-// @import '../node_modules/~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.css';
+:root {
+  @each $prop, $value in $ftech-colors {
+    --color-#{$prop}: #{$value};
+  }
+
+  @each $prop, $value in $spaces {
+    --space-#{$prop}: #{$value};
+  }
+}
+
+html {
+  font-size: 100% !important;
+  -moz-osx-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+}
+
 @import '~simple-line-icons/css/simple-line-icons.css';
-
-// $fa-font-path: "../node_modules/@fortawesome/fontawesome-free-webfonts/webfonts";
-// @import "@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
-// @import "@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
-
-//== Bootstrap
-// @import "./app/shared/styles/bootstrap.scss";
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
 //== Application
@@ -99,31 +105,34 @@ input.form-control {
 //------------------------------------------
 
 .thead-bg {
-  background-color: #0d4c8f;
+  background-color: var(--color-blue-dark);
   color: #fff;
-  text-transform: uppercase;
+  font-size: var(--space-xs);
 
-  font-size: 12px;
+  @include mediaUp('lg') {
+    font-size: var(--space-sm);
+  }
 }
 
 .tfoot-data {
   background-color: rgba(0, 123, 255, 0.1);
 }
 
-.modal-detalhes-consumo {
-  width: 100%;
-  max-width: 1140px !important;
-}
+// Modal
 
-.modal-filter {
-  .modal-content {
-    border-radius: 12px;
+table {
+  tbody {
+    tr {
+      td[class^='text-'],
+      td > span {
+        font-size: var(--space-xxs);
+
+        @include mediaUp('lg') {
+          font-size: var(--space-sm);
+        }
+      }
+    }
   }
-}
-
-.modal-itens-detalhe {
-  width: 100%;
-  max-width: 1140px !important;
 }
 
 //---------------------------------------------
@@ -180,4 +189,50 @@ input.form-control {
     background-color: #6a52ff !important;
     border-color: #6a52ff !important;
   }
+}
+
+//---------------------------------------------
+// Modal
+//---------------------------------------------
+
+.modal-detalhes-consumo {
+  width: 100%;
+  max-width: 1140px !important;
+}
+
+.modal-detalhamento-registros-balanca {
+  width: 100%;
+  max-width: 1280px !important;
+}
+
+.modal-filter {
+  .modal-content {
+    border-radius: 12px;
+  }
+}
+
+.modal-itens-detalhe {
+  width: 100%;
+  max-width: 1140px !important;
+}
+
+.modal-header {
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+
+    .icon-maximize {
+      cursor: pointer;
+
+      &:hover {
+        color: var(--color-gray-1);
+      }
+    }
+  }
+}
+
+.modal-maximize {
+  max-width: 100% !important;
+  margin: 0;
 }

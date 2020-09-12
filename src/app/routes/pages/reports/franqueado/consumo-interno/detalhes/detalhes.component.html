@@ -12,67 +12,67 @@
   </button>
 </div>
 
-<div class="py-2 px-2">
-  <ft-card>
-    <div class="table-responsive">
-      <div class="bodycontainer scrollable">
-        <table class="table table-scrollable">
-          <thead class="thead-bg">
-            <tr>
-              <th></th>
-              <th class="text-center">DATA</th>
-              <th class="text-right">VALOR TOTAL</th>
-              <th class="text-center">CPF CLIENTE</th>
-              <th class="text-center">NOME CLIENTE</th>
-              <th class="text-center">VENDEDOR</th>
+<div class="py-3 px-3">
+  <!-- <ft-card> -->
+  <div class="table-responsive">
+    <div class="bodycontainer scrollable">
+      <table class="table table-scrollable">
+        <thead class="thead-bg">
+          <tr>
+            <th></th>
+            <th class="text-center">Data</th>
+            <th class="text-right">Valor total</th>
+            <th class="text-center">CPF cliente</th>
+            <th class="text-center">Nome cliente</th>
+            <th class="text-center">Vendedor</th>
+          </tr>
+        </thead>
+        <tbody class="tbody-data">
+          <ng-container *ngFor="let item of vendasConsumoInternoDetalhes">
+            <tr *ngIf="!item?.Total">
+              <td class="td-btn-detail pl-0">
+                <button
+                  type="button"
+                  class="btn-detail btn-detail__centered"
+                  (click)="openModalItens(item?.CodigoDocumento)"
+                >
+                  <em class="icon-plus"></em>
+                </button>
+              </td>
+              <td class="text-center">
+                {{ item?.Data }}
+              </td>
+              <td class="text-right">
+                {{ item?.ValorLiquido | currency: 'BRL' }}
+              </td>
+              <td class="text-center">
+                {{ item?.CPFCliente }}
+              </td>
+              <td class="text-center">
+                {{ item?.NomeCliente }}
+              </td>
+              <td class="text-center">
+                {{ item?.Vendedor }}
+              </td>
             </tr>
-          </thead>
-          <tbody class="tbody-data">
-            <ng-container *ngFor="let item of vendasConsumoInternoDetalhes">
-              <tr *ngIf="!item?.Total">
-                <td class="td-btn-detail pl-0">
-                  <button
-                    type="button"
-                    class="btn-detail btn-detail__centered"
-                    (click)="openModalItens(item?.CodigoDocumento)"
-                  >
-                    <em class="icon-plus"></em>
-                  </button>
-                </td>
-                <td class="text-center">
-                  {{ item?.Data }}
-                </td>
-                <td class="text-right">
-                  {{ item?.ValorLiquido | currency: 'BRL' }}
-                </td>
-                <td class="text-center">
-                  {{ item?.CPFCliente }}
-                </td>
-                <td class="text-center">
-                  {{ item?.NomeCliente }}
-                </td>
-                <td class="text-center">
-                  {{ item?.Vendedor }}
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-          <tfoot class="tfoot-data">
-            <ng-container *ngFor="let item of vendasConsumoInternoDetalhes">
-              <tr *ngIf="item?.Total">
-                <td></td>
-                <td>{{ item?.Data }}</td>
-                <td class="text-right">
-                  {{ item?.ValorBruto | currency: 'BRL' }}
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </ng-container>
-          </tfoot>
-        </table>
-      </div>
+          </ng-container>
+        </tbody>
+        <tfoot class="tfoot-data">
+          <ng-container *ngFor="let item of vendasConsumoInternoDetalhes">
+            <tr *ngIf="item?.Total">
+              <td></td>
+              <td>{{ item?.Data }}</td>
+              <td class="text-right">
+                {{ item?.ValorBruto | currency: 'BRL' }}
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </ng-container>
+        </tfoot>
+      </table>
     </div>
-  </ft-card>
+  </div>
+  <!-- </ft-card> -->
 </div>

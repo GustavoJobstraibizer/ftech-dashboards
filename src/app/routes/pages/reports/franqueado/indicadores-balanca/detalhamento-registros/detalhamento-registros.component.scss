@@ -1,0 +1,107 @@
+@import 'mixins';
+
+:host ::ng-deep {
+  .p-datatable-thead {
+    tr {
+      th {
+        background: var(--color-blue-dark);
+        color: #fff;
+
+        p-sorticon {
+          .p-sortable-column-icon {
+            color: #fff;
+          }
+        }
+
+        &:hover {
+          background: var(--color-blue-light-2) !important;
+          color: #2c2c2c !important;
+
+          p-sorticon {
+            .p-sortable-column-icon {
+              color: #2c2c2c !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .p-datatable .p-sortable-column.p-highlight {
+    background: var(--color-blue-light-2) !important;
+    color: #2c2c2c !important;
+
+    p-sorticon {
+      .p-sortable-column-icon {
+        color: #2c2c2c !important;
+      }
+    }
+  }
+
+  .p-datatable .p-datatable-thead > tr > th {
+    padding: 0.75rem 1rem;
+
+    @include mediaUp('lg') {
+      padding: 1rem 1rem;
+    }
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    font-size: var(--space-xs);
+
+    @include mediaUp('lg') {
+      font-size: var(--space-sm);
+    }
+  }
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem 1rem;
+
+  @include mediaUp('md') {
+    flex-direction: row;
+  }
+
+  &__check {
+    display: flex;
+  }
+
+  .filters-icon-left {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+
+    .icon-magnifier {
+      position: absolute;
+      margin-top: -0.5rem;
+      top: 50%;
+      left: 0.5rem;
+    }
+
+    .form-control {
+      padding-left: 2rem;
+    }
+
+    @include mediaUp('md') {
+      margin-left: 1rem;
+    }
+  }
+
+  .clearfix {
+    &:nth-child(2) {
+      margin: 0 1rem;
+    }
+  }
+}
+
+// :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+//   padding: 0.75rem 1rem;
+
+//   @include mediaUp('lg') {
+//     padding: 1rem 1rem;
+//   }
+// }

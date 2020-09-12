@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { BsModalRef } from 'ngx-bootstrap/modal'
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
 import { IVendasFranqueadoDetalhes } from 'src/app/shared/interfaces/vendas-franqueado-detalhes.interface'
 import { FranqueadosService } from './../../../../../../core/services/dashboards/franqueados.service'
 
@@ -15,7 +15,8 @@ export class ItensComponent implements OnInit {
 
   constructor(
     public franqueadosService: FranqueadosService,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -26,5 +27,10 @@ export class ItensComponent implements OnInit {
           this.vendaFranqueadoDetalhes = response['Data']
         })
     }
+  }
+
+  closeModal() {
+    this.bsModalRef.hide()
+    document.body.classList.remove('modal-open')
   }
 }

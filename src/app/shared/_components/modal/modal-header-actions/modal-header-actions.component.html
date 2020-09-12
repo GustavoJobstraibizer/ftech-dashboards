@@ -1,0 +1,19 @@
+<div class="modal-header__actions">
+  <span class="icon-maximize" (click)="maximize(); maximized = !maximized">
+    <i
+      class="pi"
+      [ngClass]="{
+        'pi-window-maximize': !maximized,
+        'pi-window-minimize': maximized
+      }"
+    ></i>
+  </span>
+  <button
+    type="button"
+    class="close pull-right"
+    aria-label="Close"
+    (click)="modalCloseEmit.emit()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

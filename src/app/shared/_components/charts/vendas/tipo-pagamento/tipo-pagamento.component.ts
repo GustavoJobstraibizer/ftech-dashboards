@@ -10,7 +10,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core'
-import { finalize } from 'rxjs/operators'
+import { finalize, take } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
 import { IVendasTipoPagamento } from './../../../../interfaces/vendas-tipo-pagamento.interface'
@@ -59,8 +59,12 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
     this.loading = true
     this.franqueadosDashBoardsService
       .getVendasTipoPagamento(this.filtroFranqueado)
-      .pipe(finalize(() => (this.loading = false)))
+      .pipe(
+        take(1),
+        finalize(() => (this.loading = false))
+      )
       .subscribe((response) => {
+        if (!response.length) return
         this.vendasTipoPagamento = response
         // this.vendasTipoPagamento.Data.map(
         //   (formPag) =>
