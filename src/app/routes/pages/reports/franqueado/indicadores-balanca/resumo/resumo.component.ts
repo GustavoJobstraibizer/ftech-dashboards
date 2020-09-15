@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { IIndicadoresBalanca } from './../../../../../../shared/interfaces/indicadores-balanca.interface'
+import { Component, Input, OnInit } from '@angular/core';
+import { IResumoBalancaTotalizador } from './../../../../../../shared/interfaces/resumo-balanca-totalizador.interface';
 
 @Component({
   selector: 'ft-resumo',
@@ -7,7 +7,7 @@ import { IIndicadoresBalanca } from './../../../../../../shared/interfaces/indic
   styleUrls: ['./resumo.component.scss'],
 })
 export class ResumoComponent implements OnInit {
-  @Input() indicadorBalanca: IIndicadoresBalanca
+  @Input() resumoBalancaTotal: IResumoBalancaTotalizador
 
   constructor() {}
 

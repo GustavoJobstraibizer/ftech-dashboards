@@ -4,6 +4,7 @@ import * as Moment from 'moment/moment';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { LazyLoadEvent } from 'primeng/api';
 import { debounceTime, distinctUntilChanged, finalize, take } from 'rxjs/operators';
+import { ITipoFiltroBalanca } from 'src/app/shared/interfaces/tipo-filtro-balanca.interface';
 import { BalancaService } from './../../../../../../core/services/dashboards/balanca.service';
 import { FranqueadosService } from './../../../../../../core/services/dashboards/franqueados.service';
 import { IResumoBalancaDetalhes } from './../../../../../../shared/interfaces/detalhamento-registros-balanca.interface';
@@ -20,11 +21,7 @@ export class DetalhamentoRegistrosComponent implements OnInit {
   perido: IPeriodoBusca
 
   inputSearch = new FormControl('')
-  public checkFilters = {
-    venda: false,
-    estorno: true,
-    offline: false,
-  }
+  checkFilters: ITipoFiltroBalanca
 
   public pagina = new PaginaBalancaDetalhes()
   public loading = false

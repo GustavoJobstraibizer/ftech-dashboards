@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { take } from 'rxjs/operators';
+import { EFiltroTipoBalanca } from 'src/app/shared/enums/filtro-tipo-balanca.enum';
+import { ITipoFiltroBalanca } from 'src/app/shared/interfaces/tipo-filtro-balanca.interface';
+import { IResumoBalancaTotalizador } from '../../../../../shared/interfaces/resumo-balanca-totalizador.interface';
 import { AbstractFilters } from '../abstract-filters';
 import { BalancaService } from './../../../../../core/services/dashboards/balanca.service';
-import { IIndicadoresBalanca } from './../../../../../shared/interfaces/indicadores-balanca.interface';
 import { IResumoBalanca } from './../../../../../shared/interfaces/resumo-balanca.interface';
 import { PaginaFranqueado } from './../../../../../shared/models/pagina-franquado.model';
 import { PeriodoComponent } from './../../../../../shared/_components/filter/periodo/periodo.component';
@@ -16,7 +18,7 @@ import { DetalhamentoRegistrosComponent } from './detalhamento-registros/detalha
 })
 export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
   implements OnInit, AfterViewInit {
-  indicadorBalanca: IIndicadoresBalanca
+  resumoBalancaTotal: IResumoBalancaTotalizador
   bsModalRef: BsModalRef
 
   pagina = new PaginaFranqueado()
@@ -28,8 +30,6 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
   }
 
   ngOnInit(): void {
-    // this.getContentFromPeriodo()
-    this.getIndicadoresBalanca()
   }
 
   ngAfterViewInit() {
@@ -40,6 +40,7 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
         this.periodo.dataFim = dataFim
         this.periodo.codigoFranqueado = codigoFranqueado
         this.getContentFromPeriodo()
+        this.getIndicadoresBalanca()
       })
   }
 
@@ -55,20 +56,43 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
   }
 
   getIndicadoresBalanca() {
-    this.franqueadoService
-      .getIndicadoresBalanca(this.periodo)
-      .subscribe((response) => {
-        this.indicadorBalanca = response
+    this.balancaService
+      .getResumoBalancaTotalizador(this.periodo)
+      .subscribe((response: IResumoBalancaTotalizador) => {
+        this.resumoBalancaTotal = response
       })
   }
 
-  openModalDetalhesBalanca() {
+  filtroPeriodo(filter: any) {
+    this.periodo = filter
+    this.listResult = []
+    this.getContentFromPeriodo()
+    this.getIndicadoresBalanca()
+  }
+
+  openModalDetalhesBalanca(filtroTipo: EFiltroTipoBalanca) {
     const initialState = {
-      perido: this.periodo
+      perido: this.periodo,
+      checkFilters: this.tipoFiltroBalanca(filtroTipo)
     }
+
     this.bsModalRef = this.modalService.show(DetalhamentoRegistrosComponent, {
       initialState,
       class: 'modal-detalhamento-registros-balanca',
     })
+  }
+
+  tipoFiltroBalanca(filtroTipo: EFiltroTipoBalanca) {
+    const checkFilters: ITipoFiltroBalanca = {
+      venda: false,
+      estorno: false,
+      offline: false
+    }
+    checkFilters[filtroTipo] = true
+    return checkFilters
+  }
+
+  get eFiltroTipo() {
+    return EFiltroTipoBalanca
   }
 }

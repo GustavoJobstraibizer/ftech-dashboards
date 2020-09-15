@@ -27,7 +27,8 @@ export const ApiRoutes = {
     },
     balanca: {
       resumoBalanca: 'dashboards/balanca/recuperarResumoBalanca',
-      resumoBalancaDetalhes: 'dashboards/balanca/recuperarResumoBalancaDetalhes'
+      resumoBalancaDetalhes: 'dashboards/balanca/recuperarResumoBalancaDetalhes',
+      resumoBalancaTotalizador: 'dashboards/balanca/recuperarResumoBalancaTotalizador'
     }
   },
   adm: {
