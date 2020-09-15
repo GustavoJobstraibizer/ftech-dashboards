@@ -3,7 +3,7 @@ import * as am4core from '@amcharts/amcharts4/core'
 import am4lang_pt_BR from '@amcharts/amcharts4/lang/pt_BR'
 import {
   default as am4themes_animated,
-  default as am4themes_kelly,
+  default as am4themes_kelly
 } from '@amcharts/amcharts4/themes/animated'
 import {
   Component,
@@ -11,7 +11,7 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core'
 import { finalize, take } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
@@ -30,6 +30,7 @@ export class MensalComponent extends FtechChartXY
   implements OnInit, OnChanges, OnDestroy {
   @Input() carregarVendasMensal = false
   @Input() codigoFranqueado = 0
+  @Input() filtrosPesquisa: FiltroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
 
   public vendasMensal: any
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
@@ -46,8 +47,10 @@ export class MensalComponent extends FtechChartXY
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.carregarVendasMensal && this.codigoFranqueado) {
+    if (this.carregarVendasMensal && this.codigoFranqueado || this.filtrosPesquisa) {
       this.filtroFranqueado.codigoFranqueado = this.codigoFranqueado
+      this.filtroFranqueado.ano = this.filtrosPesquisa.ano
+      this.filtroFranqueado.mes = this.filtrosPesquisa.mes
       this.getVendasMensal()
     }
   }

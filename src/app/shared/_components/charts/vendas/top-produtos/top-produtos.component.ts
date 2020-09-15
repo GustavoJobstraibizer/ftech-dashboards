@@ -8,7 +8,7 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core'
 import { finalize, take } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
@@ -25,6 +25,7 @@ am4core.useTheme(am4themes_animated)
 export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
   @Input() carregarTopProdutos = false
   @Input() codigoFranqueado = 0
+  @Input() filtrosPesquisa: FiltroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
 
   public topProdutos: IVendasTopProdutos[]
   public topProdTable: IVendasTopProdutos[]
@@ -39,8 +40,10 @@ export class TopProdutosComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.carregarTopProdutos && this.codigoFranqueado) {
+    if (this.carregarTopProdutos && this.codigoFranqueado || this.filtrosPesquisa) {
       this.filtroFranqueado.codigoFranqueado = this.codigoFranqueado
+      this.filtroFranqueado.ano = this.filtrosPesquisa.ano
+      this.filtroFranqueado.mes = this.filtrosPesquisa.mes
       this.getTopProdutos()
     }
   }

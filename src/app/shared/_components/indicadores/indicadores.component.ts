@@ -3,7 +3,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core'
 import { finalize, take } from 'rxjs/operators'
 import { IFaturamento } from '../../interfaces/faturamento.interface'
@@ -18,6 +18,7 @@ import { FiltroFranqueado } from './../../models/filtro-indicadores.model'
 })
 export class IndicadoresComponent implements OnInit, OnChanges {
   @Input() codigoFranqueado = 0
+  @Input() filtrosPesquisa: FiltroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
 
   public month: string
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
@@ -30,7 +31,7 @@ export class IndicadoresComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.month = this._helperService.getReferenceMonth()
+    // this.month = this._helperService.getReferenceMonth()
   }
 
   getFaturamento() {
@@ -47,8 +48,10 @@ export class IndicadoresComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.codigoFranqueado) {
+    if (this.codigoFranqueado || this.filtrosPesquisa) {
       this.filtroFranqueado.codigoFranqueado = this.codigoFranqueado
+      this.filtroFranqueado.ano = this.filtrosPesquisa.ano
+      this.filtroFranqueado.mes = this.filtrosPesquisa.mes
       this.getFaturamento()
     }
   }

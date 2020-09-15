@@ -17,7 +17,7 @@ export class HelperService {
       : null
   }
 
-  getReferenceMonth(): string {
+  getReferenceMonth(date: Date, action?: EDateAction): string {
     const MONTHS = [
       'Janeiro',
       'Fevereiro',
@@ -32,7 +32,16 @@ export class HelperService {
       'Novembro',
       'Dezembro',
     ]
-    return `${MONTHS[new Date().getMonth()]}/${new Date().getFullYear()}`
+
+    switch (action) {
+      case 1:
+        date.setMonth(date.getMonth() + 1)
+        break
+      case 2:
+        date.setMonth(date.getMonth() - 1)
+        break
+    }
+    return `${MONTHS[date.getMonth()]}/${date.getFullYear()}`
   }
 
   getRandomColor() {
@@ -49,4 +58,10 @@ export class HelperService {
     max = Math.floor(max)
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
+}
+
+
+export enum EDateAction {
+  INCREMENT = 1,
+  DECREMENT = 2,
 }
