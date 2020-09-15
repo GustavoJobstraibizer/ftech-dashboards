@@ -68,6 +68,11 @@
 
   &__check {
     display: flex;
+
+    @include mediaDown('md') {
+      flex-direction: column;
+      width: 100%;
+    }
   }
 
   .filters-icon-left {
@@ -92,8 +97,10 @@
   }
 
   .clearfix {
-    &:nth-child(2) {
-      margin: 0 1rem;
+    @include mediaUp('md') {
+      &:nth-child(2) {
+        margin: 0 1rem;
+      }
     }
   }
 }
