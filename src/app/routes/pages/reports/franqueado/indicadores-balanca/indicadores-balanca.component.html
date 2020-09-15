@@ -2,6 +2,7 @@
 
 <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
   <ft-periodo
+    #filters
     [getTodayDate]="true"
     (periodoFilterEmit)="filtroPeriodo($event)"
   ></ft-periodo>
@@ -49,7 +50,7 @@
       <td class="c-pointer" (click)="openModalDetalhesBalanca()">
         <span class="p-column-title">Estorno(%)</span>
         <span class="p-column-value" [tooltip]="verDetalhesTooltip"
-          >{{ resumo.EstornoPercent }}%</span
+          >{{ resumo.PercentualValorEstorno }}%</span
         >
       </td>
       <td class="c-pointer" (click)="openModalDetalhesBalanca()">

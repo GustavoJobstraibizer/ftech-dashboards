@@ -1,10 +1,12 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { take } from 'rxjs/operators';
 import { AbstractFilters } from '../abstract-filters';
 import { BalancaService } from './../../../../../core/services/dashboards/balanca.service';
 import { IIndicadoresBalanca } from './../../../../../shared/interfaces/indicadores-balanca.interface';
 import { IResumoBalanca } from './../../../../../shared/interfaces/resumo-balanca.interface';
 import { PaginaFranqueado } from './../../../../../shared/models/pagina-franquado.model';
+import { PeriodoComponent } from './../../../../../shared/_components/filter/periodo/periodo.component';
 import { DetalhamentoRegistrosComponent } from './detalhamento-registros/detalhamento-registros.component';
 
 @Component({
@@ -13,19 +15,32 @@ import { DetalhamentoRegistrosComponent } from './detalhamento-registros/detalha
   styleUrls: ['./indicadores-balanca.component.scss'],
 })
 export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
-  implements OnInit {
+  implements OnInit, AfterViewInit {
   indicadorBalanca: IIndicadoresBalanca
   bsModalRef: BsModalRef
 
   pagina = new PaginaFranqueado()
+
+  @ViewChild('filters') filters: PeriodoComponent
 
   constructor(public injector: Injector, public modalService: BsModalService, public balancaService: BalancaService) {
     super(injector)
   }
 
   ngOnInit(): void {
-    this.getContentFromPeriodo()
+    // this.getContentFromPeriodo()
     this.getIndicadoresBalanca()
+  }
+
+  ngAfterViewInit() {
+    this.filters.periodoFilterOnInitEmit
+      .pipe(take(1))
+      .subscribe(({ dataInicio, dataFim, codigoFranqueado }) => {
+        this.periodo.dataInicio = dataInicio
+        this.periodo.dataFim = dataFim
+        this.periodo.codigoFranqueado = codigoFranqueado
+        this.getContentFromPeriodo()
+      })
   }
 
   getContentFromPeriodo(): void {
@@ -35,7 +50,6 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
     this.balancaService
       .getResumoBalanca(this.pagina)
       .subscribe((response) => {
-        console.log('response ', response)
         this.listResult = response
       })
   }

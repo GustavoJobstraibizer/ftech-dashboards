@@ -6,5 +6,6 @@ export interface IResumoBalanca {
   VolumeEstorno: number,
   ValorEstorno: number,
   VolumeSistemaOffline: number,
-  ValorSistemaOffline: number
+  ValorSistemaOffline: number,
+  PercentualValorEstorno: number
 }
