@@ -1,32 +1,57 @@
 <div class="indicadores-resumo-balanca">
   <ft-indicador>
-    <span indicador-value>{{ resumoBalancaTotal?.QuantidadePesos || 0 | number }}</span>
+    <span indicador-value *ngIf="!loading">{{ resumoBalancaTotal?.QuantidadePesos || 0 | number }}</span>
+    <ft-skeleton-loader
+      indicador-value
+      *ngIf="loading"
+      [theme]="{ width: '100px', height: '30px', margin: '0 auto' }"
+    ></ft-skeleton-loader>
     <span indicador-footer>Qtde pesos</span>
   </ft-indicador>
 
   <ft-indicador>
-    <span indicador-value>{{
+    <span indicador-value *ngIf="!loading">{{
       resumoBalancaTotal?.TotalKGPesado || 0 | number: '1.3-3'
     }}</span>
+    <ft-skeleton-loader
+      indicador-value
+      *ngIf="loading"
+      [theme]="{ width: '100px', height: '30px', margin: '0 auto' }"
+    ></ft-skeleton-loader>
     <span indicador-footer>Total em KG</span>
   </ft-indicador>
 
   <ft-indicador>
-    <span indicador-value>{{
+    <span indicador-value *ngIf="!loading">{{
       resumoBalancaTotal?.ValorTotal || 0 | currency: 'BRL':'symbol':'1.2-2'
     }}</span>
+    <ft-skeleton-loader
+      indicador-value
+      *ngIf="loading"
+      [theme]="{ width: '100px', height: '30px', margin: '0 auto' }"
+    ></ft-skeleton-loader>
     <span indicador-footer>Valor total / {{ resumoBalancaTotal?.FatorConversaoTotal }}</span>
   </ft-indicador>
 
   <ft-indicador>
-    <span indicador-value>{{
+    <span indicador-value *ngIf="!loading">{{
       resumoBalancaTotal?.TicketMedio || 0 | currency: 'BRL'
     }}</span>
+    <ft-skeleton-loader
+      indicador-value
+      *ngIf="loading"
+      [theme]="{ width: '100px', height: '30px', margin: '0 auto' }"
+    ></ft-skeleton-loader>
     <span indicador-footer>Ticket médio peso</span>
   </ft-indicador>
 
   <ft-indicador>
-    <span indicador-value>{{ resumoBalancaTotal?.VolumeEstorno || 0 | percent }}</span>
+    <span indicador-value *ngIf="!loading">{{ resumoBalancaTotal?.VolumeEstorno || 0 | percent }}</span>
+    <ft-skeleton-loader
+      indicador-value
+      *ngIf="loading"
+      [theme]="{ width: '100px', height: '30px', margin: '0 auto' }"
+    ></ft-skeleton-loader>
     <span indicador-footer>Estorno dos pesos</span>
   </ft-indicador>
 </div>

@@ -15,7 +15,7 @@
   "
 ></ft-button-filter>
 
-<ft-resumo [resumoBalancaTotal]="resumoBalancaTotal"></ft-resumo>
+<ft-resumo [resumoBalancaTotal]="resumoBalancaTotal" [(loading)]="loading"></ft-resumo>
 
 <p-table [value]="listResult" styleClass="p-datatable-responsive-demo" [scrollable]="true" scrollHeight="373px">
   <ng-template pTemplate="header">

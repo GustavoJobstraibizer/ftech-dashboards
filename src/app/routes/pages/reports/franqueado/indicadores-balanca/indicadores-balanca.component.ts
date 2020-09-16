@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { take } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { EFiltroTipoBalanca } from 'src/app/shared/enums/filtro-tipo-balanca.enum';
 import { ITipoFiltroBalanca } from 'src/app/shared/interfaces/tipo-filtro-balanca.interface';
 import { IResumoBalancaTotalizador } from '../../../../../shared/interfaces/resumo-balanca-totalizador.interface';
@@ -20,6 +20,7 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
   implements OnInit, AfterViewInit {
   resumoBalancaTotal: IResumoBalancaTotalizador
   bsModalRef: BsModalRef
+  public loading = false
 
   pagina = new PaginaFranqueado()
 
@@ -56,8 +57,10 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
   }
 
   getIndicadoresBalanca() {
+    this.loading = true
     this.balancaService
       .getResumoBalancaTotalizador(this.periodo)
+      .pipe(take(1), finalize(() => this.loading = false))
       .subscribe((response: IResumoBalancaTotalizador) => {
         this.resumoBalancaTotal = response
       })
