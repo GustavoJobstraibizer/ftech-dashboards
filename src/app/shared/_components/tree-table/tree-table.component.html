@@ -80,6 +80,10 @@
         </ng-container>
       </tbody>
     </table>
+    <ft-empty-content
+        [loading]="loading"
+        *ngIf="!listValues.length"
+      ></ft-empty-content>
   </div>
   <table class="table table-condensed">
     <tfoot class="tfoot-data">

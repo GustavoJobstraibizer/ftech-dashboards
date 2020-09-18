@@ -1,5 +1,9 @@
-<div class="empty-content">
-  <span class="empty-content__message">{{
-    loading ? 'Carregando...' : 'Não há resultados a serem exibidos.'
-  }}</span>
+<div class="empty-content" [ngClass]="{ 'empty-content__loading': loading }">
+  <span class="empty-content__message">
+    <i *ngIf="loading; else noData" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+  </span>
+
+  <ng-template #noData>
+    Não há resultados a serem exibidos.
+  </ng-template>
 </div>

@@ -17,6 +17,6 @@
 ></ft-button-filter>
 
 <ft-card>
-  <ft-tree-table [listValues]="listaVendasPorCategoria"></ft-tree-table>
+  <ft-tree-table [listValues]="listaVendasPorCategoria" [loading]="loading"></ft-tree-table>
   <ft-empty-content *ngIf="!listaVendasPorCategoria.length"></ft-empty-content>
 </ft-card>

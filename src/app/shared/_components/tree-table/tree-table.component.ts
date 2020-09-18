@@ -8,6 +8,7 @@ import { IVendaCategoriaProduto } from '../../interfaces/venda-categoria-produto
 })
 export class TreeTableComponent implements OnInit {
   @Input() listValues: any[] = []
+  @Input() loading = false
 
   public showItems = true
 
