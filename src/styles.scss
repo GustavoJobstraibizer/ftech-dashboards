@@ -128,7 +128,7 @@ table {
         font-size: var(--space-xxs);
 
         @include mediaUp('lg') {
-          font-size: var(--space-sm);
+          font-size: var(--space-xs);
         }
       }
     }
@@ -203,7 +203,6 @@ table {
   width: 100%;
   max-width: 1140px !important;
 }
-
 
 .modal-detalhamento-registros-balanca {
   width: 100%;

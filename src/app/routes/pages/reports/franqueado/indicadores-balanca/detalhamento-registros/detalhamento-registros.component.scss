@@ -49,9 +49,9 @@
   .p-datatable .p-datatable-tbody > tr > td {
     font-size: var(--space-xs);
 
-    @include mediaUp('lg') {
-      font-size: var(--space-sm);
-    }
+    // @include mediaUp('lg') {
+    //   font-size: var(--space-xs);
+    // }
   }
 }
 
