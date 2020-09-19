@@ -1,15 +1,21 @@
-import { AfterViewInit, Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { finalize, take } from 'rxjs/operators';
-import { EFiltroTipoBalanca } from 'src/app/shared/enums/filtro-tipo-balanca.enum';
-import { ITipoFiltroBalanca } from 'src/app/shared/interfaces/tipo-filtro-balanca.interface';
-import { IResumoBalancaTotalizador } from '../../../../../shared/interfaces/resumo-balanca-totalizador.interface';
-import { AbstractFilters } from '../abstract-filters';
-import { BalancaService } from './../../../../../core/services/dashboards/balanca.service';
-import { IResumoBalanca } from './../../../../../shared/interfaces/resumo-balanca.interface';
-import { PaginaFranqueado } from './../../../../../shared/models/pagina-franquado.model';
-import { PeriodoComponent } from './../../../../../shared/_components/filter/periodo/periodo.component';
-import { DetalhamentoRegistrosComponent } from './detalhamento-registros/detalhamento-registros.component';
+import {
+  AfterViewInit,
+  Component,
+  Injector,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
+import { finalize, take } from 'rxjs/operators'
+import { EFiltroTipoBalanca } from 'src/app/shared/enums/filtro-tipo-balanca.enum'
+import { ITipoFiltroBalanca } from 'src/app/shared/interfaces/tipo-filtro-balanca.interface'
+import { IResumoBalancaTotalizador } from '../../../../../shared/interfaces/resumo-balanca-totalizador.interface'
+import { AbstractFilters } from '../abstract-filters'
+import { BalancaService } from './../../../../../core/services/dashboards/balanca.service'
+import { IResumoBalanca } from './../../../../../shared/interfaces/resumo-balanca.interface'
+import { PaginaFranqueado } from './../../../../../shared/models/pagina-franquado.model'
+import { PeriodoComponent } from './../../../../../shared/_components/filter/periodo/periodo.component'
+import { DetalhamentoRegistrosComponent } from './detalhamento-registros/detalhamento-registros.component'
 
 @Component({
   selector: 'ft-indicadores-balanca',
@@ -24,14 +30,24 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
 
   pagina = new PaginaFranqueado()
 
+  checkFilters: ITipoFiltroBalanca = {
+    venda: false,
+    estorno: false,
+    offline: false,
+    todos: true,
+  }
+
   @ViewChild('filters') filters: PeriodoComponent
 
-  constructor(public injector: Injector, public modalService: BsModalService, public balancaService: BalancaService) {
+  constructor(
+    public injector: Injector,
+    public modalService: BsModalService,
+    public balancaService: BalancaService
+  ) {
     super(injector)
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.filters.periodoFilterOnInitEmit
@@ -51,6 +67,7 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
     this.pagina.dataFim = this.periodo.dataFim
     this.balancaService
       .getResumoBalanca(this.pagina)
+      .pipe(take(1))
       .subscribe((response) => {
         this.listResult = response
       })
@@ -60,7 +77,10 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
     this.loading = true
     this.balancaService
       .getResumoBalancaTotalizador(this.periodo)
-      .pipe(take(1), finalize(() => this.loading = false))
+      .pipe(
+        take(1),
+        finalize(() => (this.loading = false))
+      )
       .subscribe((response: IResumoBalancaTotalizador) => {
         this.resumoBalancaTotal = response
       })
@@ -73,10 +93,10 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
     this.getIndicadoresBalanca()
   }
 
-  openModalDetalhesBalanca(filtroTipo: EFiltroTipoBalanca) {
+  openModalDetalhesBalanca(filtroTipo?: EFiltroTipoBalanca) {
     const initialState = {
       perido: this.periodo,
-      checkFilters: this.tipoFiltroBalanca(filtroTipo)
+      checkFilters: this.tipoFiltroBalanca(filtroTipo),
     }
 
     this.bsModalRef = this.modalService.show(DetalhamentoRegistrosComponent, {
@@ -85,14 +105,18 @@ export class IndicadoresBalancaComponent extends AbstractFilters<IResumoBalanca>
     })
   }
 
-  tipoFiltroBalanca(filtroTipo: EFiltroTipoBalanca) {
-    const checkFilters: ITipoFiltroBalanca = {
-      venda: false,
-      estorno: false,
-      offline: false
+  tipoFiltroBalanca(filtroTipo?: EFiltroTipoBalanca) {
+    Object.keys(this.checkFilters).map(
+      (item) => (this.checkFilters[item] = false)
+    )
+
+    if (filtroTipo) {
+      this.checkFilters[filtroTipo] = true
+    } else {
+      this.checkFilters.todos = true
     }
-    checkFilters[filtroTipo] = true
-    return checkFilters
+
+    return this.checkFilters
   }
 
   get eFiltroTipo() {

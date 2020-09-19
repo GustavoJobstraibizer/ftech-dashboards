@@ -35,8 +35,8 @@ export class ButtonFilterComponent implements OnInit {
 
     this.modalService.onHidden.pipe(take(1)).subscribe((data) => {
       if (data && data !== 'backdrop-click') {
-        // this.periodo = JSON.parse(data);
-        // this.getVendasPorHora();
+        console.log(data)
+        localStorage.setItem('currentFilter', data)
         this.filteredValueEmit.emit(JSON.parse(data))
       }
     })

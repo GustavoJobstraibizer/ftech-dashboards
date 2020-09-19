@@ -1,6 +1,8 @@
 <div class="indicadores-resumo-balanca">
   <ft-indicador>
-    <span indicador-value *ngIf="!loading">{{ resumoBalancaTotal?.QuantidadePesos || 0 | number }}</span>
+    <span indicador-value *ngIf="!loading">{{
+      resumoBalancaTotal?.QuantidadePesos || 0 | number
+    }}</span>
     <ft-skeleton-loader
       indicador-value
       *ngIf="loading"
@@ -30,7 +32,9 @@
       *ngIf="loading"
       [theme]="{ width: '100px', height: '30px', margin: '0 auto' }"
     ></ft-skeleton-loader>
-    <span indicador-footer>Valor total / {{ resumoBalancaTotal?.FatorConversaoTotal }}</span>
+    <span indicador-footer
+      >Valor total / {{ resumoBalancaTotal?.FatorConversaoTotal }}</span
+    >
   </ft-indicador>
 
   <ft-indicador>
@@ -46,7 +50,9 @@
   </ft-indicador>
 
   <ft-indicador>
-    <span indicador-value *ngIf="!loading">{{ resumoBalancaTotal?.VolumeEstorno || 0 | percent }}</span>
+    <span indicador-value *ngIf="!loading"
+      >{{ resumoBalancaTotal?.VolumeEstorno || 0 | number: '1.2-2' }}%</span
+    >
     <ft-skeleton-loader
       indicador-value
       *ngIf="loading"

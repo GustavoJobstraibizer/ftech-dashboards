@@ -1,11 +1,10 @@
 export class Pagina {
-
   private _page = 0
   private _size = 10
   private _total = 0
   private _filter = ''
   private _order = ''
-  private _sort = 0
+  private _sort = 'ASC'
   private _execution = 0
 
   constructor() {}
@@ -54,7 +53,7 @@ export class Pagina {
     return this._sort
   }
 
-  set sort(sort: number) {
+  set sort(sort: string) {
     this._sort = sort
   }
 
@@ -91,5 +90,4 @@ export class Pagina {
 
     return this.page >= this.total / this.size
   }
-
 }

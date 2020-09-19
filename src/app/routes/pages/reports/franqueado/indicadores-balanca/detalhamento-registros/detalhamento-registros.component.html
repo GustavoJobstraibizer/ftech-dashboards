@@ -66,7 +66,7 @@
     class="px-3 table-registros-balanca"
     [value]="resumoBalancaDetalhes"
     [scrollable]="true"
-    scrollHeight="500px"
+    scrollHeight="440px"
     [lazy]="true"
     [paginator]="true"
     [totalRecords]="pagina?.total"
@@ -79,10 +79,10 @@
   >
     <ng-template pTemplate="colgroup" let-columns>
       <colgroup>
-        <col style="width: 250px;" />
-        <col style="width: 180px;" />
-        <col style="width: 250px;" />
-        <col style="width: 250px;" />
+        <col style="width: 185px;" />
+        <col style="width: 160px;" />
+        <col style="width: 160px;" />
+        <col style="width: 160px;" />
         <col style="width: 250px;" />
         <col style="width: 250px;" />
         <col style="width: 250px;" />
@@ -93,13 +93,13 @@
         <th pSortableColumn="DataPesagem">
           Data <p-sortIcon field="DataPesagem"></p-sortIcon>
         </th>
-        <th pSortableColumn="NumeroVenda">
+        <th pSortableColumn="NumeroVenda" class="text-right">
           Nº da Venda <p-sortIcon field="NumeroVenda"></p-sortIcon>
         </th>
-        <th pSortableColumn="VolumePeso">
+        <th pSortableColumn="VolumePeso" class="text-right">
           Peso(KG) <p-sortIcon field="VolumePeso"></p-sortIcon>
         </th>
-        <th pSortableColumn="ValorPeso">
+        <th pSortableColumn="ValorPeso" class="text-right">
           Valor(R$) <p-sortIcon field="ValorPeso"></p-sortIcon>
         </th>
         <th pSortableColumn="DescricaoCaixa">
@@ -115,10 +115,18 @@
     </ng-template>
     <ng-template pTemplate="body" let-detalheBalanca>
       <tr>
-        <td>{{ moment(detalheBalanca?.DataPesagem).format('DD/MM/YYYY HH:mm:ss') }}</td>
-        <td>{{ detalheBalanca?.NumeroVenda }}</td>
-        <td>{{ detalheBalanca?.VolumePeso | number: '1.3-3' }}</td>
-        <td>{{ detalheBalanca?.ValorPeso | number: '1.2-2' }}</td>
+        <td>
+          {{
+            moment(detalheBalanca?.DataPesagem).format('DD/MM/YYYY HH:mm:ss')
+          }}
+        </td>
+        <td class="text-right">{{ detalheBalanca?.NumeroVenda }}</td>
+        <td class="text-right">
+          {{ detalheBalanca?.VolumePeso | number: '1.3-3' }}
+        </td>
+        <td class="text-right">
+          {{ detalheBalanca?.ValorPeso | number: '1.2-2' }}
+        </td>
         <td>{{ detalheBalanca?.DescricaoCaixa }}</td>
         <td>{{ detalheBalanca?.OperadorCaixa }}</td>
         <td>{{ detalheBalanca?.Observacao }}</td>
