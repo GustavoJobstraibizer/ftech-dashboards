@@ -4,6 +4,7 @@
   <ft-periodo
     #filters
     [getTodayDate]="true"
+    [showDataFim]="false"
     (periodoFilterEmit)="filtroPeriodo($event)"
   ></ft-periodo>
 </div>
@@ -11,6 +12,7 @@
 <ft-button-filter
   (filteredValueEmit)="filtroPeriodo($event)"
   [getTodayDate]="true"
+  [showDataFim]="false"
   [titleModalFilter]="
     'Selecione um período para visualizar o resumo de indicadores da Balança'
   "
@@ -20,15 +22,6 @@
   [resumoBalancaTotal]="resumoBalancaTotal"
   [(loading)]="loading"
 ></ft-resumo>
-
-<button
-  type="button"
-  class="btn btn-primary btn-lg mb-3 btn-view-details"
-  (click)="openModalDetalhesBalanca()"
->
-  <i class="fas fa-plus mr-2"></i>
-  Visualizar detalhes
-</button>
 
 <p-table
   [value]="listResult"
@@ -59,7 +52,7 @@
       >
         <span class="p-column-title text-left">
           <i class="fas fa-plus mr-2"></i>
-          Pesado(KG)
+          Pesado (KG)
         </span>
         <span
           class="p-column-value"
@@ -73,7 +66,7 @@
         (click)="openModalDetalhesBalanca(eFiltroTipo.ESTORNO)"
       >
         <span class="p-column-title text-left"
-          ><i class="fas fa-plus mr-2"></i>Estorno(KG)</span
+          ><i class="fas fa-plus mr-2"></i>Estorno (KG)</span
         >
         <span
           class="p-column-value"
@@ -87,7 +80,7 @@
         (click)="openModalDetalhesBalanca(eFiltroTipo.ESTORNO)"
       >
         <span class="p-column-title text-left"
-          ><i class="fas fa-plus mr-2"></i>Estorno(%)</span
+          ><i class="fas fa-plus mr-2"></i>Estorno (%)</span
         >
         <span
           class="p-column-value"
@@ -101,7 +94,7 @@
         (click)="openModalDetalhesBalanca(eFiltroTipo.OFFLINE)"
       >
         <span class="p-column-title text-left"
-          ><i class="fas fa-plus mr-2"></i>Sistema fechado(KG)</span
+          ><i class="fas fa-plus mr-2"></i>Sistema fechado (KG)</span
         >
         <span
           class="p-column-value"
@@ -115,7 +108,7 @@
         (click)="openModalDetalhesBalanca(eFiltroTipo.VENDA)"
       >
         <span class="p-column-title text-left"
-          ><i class="fas fa-plus mr-2"></i>Pesado(R$)</span
+          ><i class="fas fa-plus mr-2"></i>Pesado (R$)</span
         >
         <span
           class="p-column-value text-right"
@@ -129,7 +122,7 @@
         (click)="openModalDetalhesBalanca(eFiltroTipo.ESTORNO)"
       >
         <span class="p-column-title text-left"
-          ><i class="fas fa-plus mr-2"></i>Estorno(R$)</span
+          ><i class="fas fa-plus mr-2"></i>Estorno (R$)</span
         >
         <span
           class="p-column-value"
@@ -141,5 +134,14 @@
     </tr>
   </ng-template>
 </p-table>
+
+<button
+  type="button"
+  class="btn btn-primary btn-lg btn-view-details"
+  (click)="openModalDetalhesBalanca()"
+>
+  <i class="fas fa-plus mr-2"></i>
+  Visualizar detalhes
+</button>
 
 <ng-template #verDetalhesTooltip>Clique para mais detalhes</ng-template>

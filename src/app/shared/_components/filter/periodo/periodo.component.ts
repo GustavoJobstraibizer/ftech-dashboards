@@ -16,6 +16,7 @@ export class PeriodoComponent implements OnInit {
   @Output() periodoFilterEmit = new EventEmitter()
   @Output() periodoFilterOnInitEmit = new EventEmitter()
   @Input() getTodayDate = false
+  @Input() showDataFim = true
 
   public formPeriodo: FormGroup
   public items: IListaFranqueadoPerfil[]
