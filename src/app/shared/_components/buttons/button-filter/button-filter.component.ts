@@ -13,6 +13,7 @@ export class ButtonFilterComponent implements OnInit {
 
   public bsModalRef: BsModalRef
   @Input() titleModalFilter = ''
+  @Input() getTodayDate = false
 
   @Output() filteredValueEmit = new EventEmitter()
 
@@ -27,6 +28,7 @@ export class ButtonFilterComponent implements OnInit {
   openModalFiltros() {
     const initialState = {
       title: this.titleModalFilter,
+      getTodayDate: this.getTodayDate,
     }
     this.bsModalRef = this.modalService.show(ModalPeriodoComponent, {
       initialState,

@@ -8,6 +8,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
 })
 export class ModalPeriodoComponent implements OnInit {
   public title = ''
+  public getTodayDate = false
 
   constructor(
     public bsModalRef: BsModalRef,

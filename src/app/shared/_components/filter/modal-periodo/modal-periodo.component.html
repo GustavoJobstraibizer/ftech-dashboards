@@ -14,5 +14,8 @@
   <!-- <div class="mb-3">
     <span>{{ title }}</span>
   </div> -->
-  <ft-periodo (periodoFilterEmit)="filtroPeriodo($event)"></ft-periodo>
+  <ft-periodo
+    [getTodayDate]="getTodayDate"
+    (periodoFilterEmit)="filtroPeriodo($event)"
+  ></ft-periodo>
 </div>
