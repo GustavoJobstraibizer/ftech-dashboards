@@ -84,11 +84,11 @@
             </tr>
           </ng-container>
         </tbody>
+        <ft-empty-content
+          [(loading)]="loading"
+          *ngIf="!vendasFranqueado.length || loading"
+        ></ft-empty-content>
       </table>
-      <ft-empty-content
-        [loading]="loading"
-        *ngIf="!vendasFranqueado.length"
-      ></ft-empty-content>
     </div>
 
     <table class="table table-condensed">

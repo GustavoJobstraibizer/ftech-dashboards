@@ -79,11 +79,11 @@
           </tr>
         </ng-container>
       </tbody>
-    </table>
-    <ft-empty-content
+      <ft-empty-content
         [loading]="loading"
-        *ngIf="!listValues.length"
+        *ngIf="!listValues.length || loading"
       ></ft-empty-content>
+    </table>
   </div>
   <table class="table table-condensed">
     <tfoot class="tfoot-data">

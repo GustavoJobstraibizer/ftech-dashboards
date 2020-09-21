@@ -21,6 +21,8 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 registerLocaleData(localePt);
 
@@ -54,6 +56,7 @@ export function createTranslateLoader(http: HttpClient) {
       closeButton: true,
       progressBar: true,
     }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     TranslateService,

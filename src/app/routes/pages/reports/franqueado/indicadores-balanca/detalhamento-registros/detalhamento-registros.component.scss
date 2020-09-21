@@ -48,10 +48,29 @@
 
   .p-datatable .p-datatable-tbody > tr > td {
     font-size: var(--space-xs);
+  }
 
-    // @include mediaUp('lg') {
-    //   font-size: var(--space-xs);
-    // }
+  .p-datatable .p-paginator-bottom {
+    font-size: var(--space-xs);
+
+    .p-paginator-pages {
+      font-size: var(--space-xs);
+    }
+  }
+
+  .p-datatable .p-datatable-tbody > tr {
+    &.estornado {
+      background: #cf3232;
+      color: #fff;
+    }
+    &.offline {
+      background: #f5bb27;
+      color: #2c2c2c;
+    }
+    &.unknown {
+      background: #c9c9c9;
+      color: #2c2c2c;
+    }
   }
 }
 
@@ -107,4 +126,12 @@
 
 .table-registros-balanca {
   height: calc(100% - 132px);
+}
+
+:host {
+  span,
+  label,
+  button {
+    font-size: var(--space-xs) !important;
+  }
 }

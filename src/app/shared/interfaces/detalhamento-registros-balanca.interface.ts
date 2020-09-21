@@ -6,4 +6,5 @@ export interface IResumoBalancaDetalhes {
   OperadorCaixa: string
   DescricaoCaixa: string
   Observacao: string
+  TipoLinha: number
 }

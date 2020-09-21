@@ -4,7 +4,6 @@
   <ft-periodo
     #filters
     [getTodayDate]="true"
-    [showDataFim]="false"
     (periodoFilterEmit)="filtroPeriodo($event)"
   ></ft-periodo>
 </div>
@@ -12,7 +11,6 @@
 <ft-button-filter
   (filteredValueEmit)="filtroPeriodo($event)"
   [getTodayDate]="true"
-  [showDataFim]="false"
   [titleModalFilter]="
     'Selecione um período para visualizar o resumo de indicadores da Balança'
   "
@@ -86,7 +84,7 @@
           class="p-column-value"
           [tooltip]="verDetalhesTooltip"
           placement="bottom"
-          >{{ resumo.PercentualVolumeEstorno | number: '1.2-2' }}%</span
+          >{{ resumo.PercentualEstorno | number: '1.2-2' }}%</span
         >
       </td>
       <td

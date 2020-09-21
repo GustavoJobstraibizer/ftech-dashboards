@@ -97,10 +97,10 @@
           Nº da Venda <p-sortIcon field="NumeroVenda"></p-sortIcon>
         </th>
         <th pSortableColumn="VolumePeso" class="text-right">
-          Peso(KG) <p-sortIcon field="VolumePeso"></p-sortIcon>
+          Peso (KG) <p-sortIcon field="VolumePeso"></p-sortIcon>
         </th>
         <th pSortableColumn="ValorPeso" class="text-right">
-          Valor(R$) <p-sortIcon field="ValorPeso"></p-sortIcon>
+          Valor (R$) <p-sortIcon field="ValorPeso"></p-sortIcon>
         </th>
         <th pSortableColumn="DescricaoCaixa">
           Caixa <p-sortIcon field="DescricaoCaixa"></p-sortIcon>
@@ -114,7 +114,13 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-detalheBalanca>
-      <tr>
+      <tr
+        [ngClass]="{
+          estornado: detalheBalanca?.TipoLinha == 2,
+          offline: detalheBalanca?.TipoLinha == 3,
+          unknown: detalheBalanca?.TipoLinha == 4
+        }"
+      >
         <td>
           {{
             moment(detalheBalanca?.DataPesagem).format('DD/MM/YYYY HH:mm:ss')

@@ -42,6 +42,12 @@ html {
   cursor: pointer;
 }
 
+@for $i from 1 through 9 {
+  .f-w-#{$i * 100} {
+    font-weight: #{$i * 100};
+  }
+}
+
 label {
   margin-bottom: 4px;
   color: $ft-black-solid;
@@ -121,9 +127,11 @@ input.form-control {
 // Modal
 
 table {
-  tbody {
+  tbody,
+  tfoot {
     tr {
       td[class^='text-'],
+      td,
       td > span {
         font-size: var(--space-xxs);
 
@@ -131,6 +139,12 @@ table {
           font-size: var(--space-xs);
         }
       }
+    }
+  }
+
+  thead {
+    th {
+      font-size: var(--space-xs);
     }
   }
 }
