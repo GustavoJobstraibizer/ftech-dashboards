@@ -13,6 +13,8 @@ export class ButtonFilterComponent implements OnInit {
 
   public bsModalRef: BsModalRef
   @Input() titleModalFilter = ''
+  @Input() getTodayDate = false
+  @Input() showDataFim = true
 
   @Output() filteredValueEmit = new EventEmitter()
 
@@ -27,6 +29,8 @@ export class ButtonFilterComponent implements OnInit {
   openModalFiltros() {
     const initialState = {
       title: this.titleModalFilter,
+      getTodayDate: this.getTodayDate,
+      showDataFim: this.showDataFim,
     }
     this.bsModalRef = this.modalService.show(ModalPeriodoComponent, {
       initialState,
@@ -35,8 +39,7 @@ export class ButtonFilterComponent implements OnInit {
 
     this.modalService.onHidden.pipe(take(1)).subscribe((data) => {
       if (data && data !== 'backdrop-click') {
-        // this.periodo = JSON.parse(data);
-        // this.getVendasPorHora();
+        localStorage.setItem('currentFilter', data)
         this.filteredValueEmit.emit(JSON.parse(data))
       }
     })

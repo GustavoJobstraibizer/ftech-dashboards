@@ -8,7 +8,7 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core'
 import { finalize, take } from 'rxjs/operators'
 import { FiltroFranqueado } from 'src/app/shared/models/filtro-indicadores.model'
@@ -37,6 +37,7 @@ const colors = [
 })
 export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
   @Input() codigoFranqueado = 0
+  @Input() filtrosPesquisa: FiltroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
   public vendasTipoPagamento: IVendasTipoPagamento[]
   public filtroFranqueado = new FiltroFranqueado(this.codigoFranqueado)
   public chart: am4charts.PieChart
@@ -126,9 +127,10 @@ export class TipoPagamentoComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes?.codigoFranqueado?.currentValue) {
-      this.filtroFranqueado.codigoFranqueado =
-        changes.codigoFranqueado.currentValue
+    if (changes?.codigoFranqueado?.currentValue || this.filtrosPesquisa) {
+      this.filtroFranqueado.codigoFranqueado = this.codigoFranqueado
+      this.filtroFranqueado.ano = this.filtrosPesquisa.ano
+      this.filtroFranqueado.mes = this.filtrosPesquisa.mes
       this.getVendasTipoPagto()
     }
   }

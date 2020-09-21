@@ -1,3 +1,5 @@
+@import 'mixins';
+
 :host ::ng-deep {
   .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
     display: none;
@@ -22,6 +24,17 @@
         font-weight: 600;
       }
     }
+  }
+}
+
+.btn-view-details {
+  width: 100%;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: var(--space-xs);
+
+  @include mediaUp('lg') {
+    width: initial;
   }
 }
 

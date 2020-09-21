@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
 
 @Component({
   selector: 'ft-modal-periodo',
@@ -7,24 +7,26 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   styleUrls: ['./modal-periodo.component.scss'],
 })
 export class ModalPeriodoComponent implements OnInit {
-  public title = '';
+  public title = ''
+  public getTodayDate = false
+  public showDataFim = true
 
   constructor(
     public bsModalRef: BsModalRef,
     public modalService: BsModalService
   ) {}
 
-  @Output() filtersApplied = new EventEmitter();
+  @Output() filtersApplied = new EventEmitter()
 
   ngOnInit(): void {}
 
   filtroPeriodo(filter) {
-    this.modalService.setDismissReason(JSON.stringify(filter));
+    this.modalService.setDismissReason(JSON.stringify(filter))
     // this.modalService.hide(1);
-    this.bsModalRef.hide();
+    this.bsModalRef.hide()
   }
 
   closeModal() {
-    this.bsModalRef.hide();
+    this.bsModalRef.hide()
   }
 }

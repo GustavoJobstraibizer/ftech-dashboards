@@ -79,6 +79,10 @@
           </tr>
         </ng-container>
       </tbody>
+      <ft-empty-content
+        [loading]="loading"
+        *ngIf="!listValues.length || loading"
+      ></ft-empty-content>
     </table>
   </div>
   <table class="table table-condensed">

@@ -25,6 +25,11 @@ export const ApiRoutes = {
       vendasConsumoInternoDetalhado:
         'dashboards/franqueados/vendasConsumoInternoDetalhado',
     },
+    balanca: {
+      resumoBalanca: 'dashboards/balanca/recuperarResumoBalanca',
+      resumoBalancaDetalhes: 'dashboards/balanca/recuperarResumoBalancaDetalhes',
+      resumoBalancaTotalizador: 'dashboards/balanca/recuperarResumoBalancaTotalizador'
+    }
   },
   adm: {
     listaPessoaFranqueado:

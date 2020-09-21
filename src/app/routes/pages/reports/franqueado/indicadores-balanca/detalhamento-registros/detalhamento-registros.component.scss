@@ -48,9 +48,28 @@
 
   .p-datatable .p-datatable-tbody > tr > td {
     font-size: var(--space-xs);
+  }
 
-    @include mediaUp('lg') {
-      font-size: var(--space-sm);
+  .p-datatable .p-paginator-bottom {
+    font-size: var(--space-xs);
+
+    .p-paginator-pages {
+      font-size: var(--space-xs);
+    }
+  }
+
+  .p-datatable .p-datatable-tbody > tr {
+    &.estornado {
+      background: #cf3232;
+      color: #fff;
+    }
+    &.offline {
+      background: #f5bb27;
+      color: #2c2c2c;
+    }
+    &.unknown {
+      background: #c9c9c9;
+      color: #2c2c2c;
     }
   }
 }
@@ -68,6 +87,11 @@
 
   &__check {
     display: flex;
+
+    @include mediaDown('md') {
+      flex-direction: column;
+      width: 100%;
+    }
   }
 
   .filters-icon-left {
@@ -92,16 +116,22 @@
   }
 
   .clearfix {
-    &:nth-child(2) {
-      margin: 0 1rem;
+    @include mediaUp('md') {
+      &:nth-child(2) {
+        margin: 0 1rem;
+      }
     }
   }
 }
 
-// :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-//   padding: 0.75rem 1rem;
+.table-registros-balanca {
+  height: calc(100% - 132px);
+}
 
-//   @include mediaUp('lg') {
-//     padding: 1rem 1rem;
-//   }
-// }
+:host {
+  span,
+  label,
+  button {
+    font-size: var(--space-xs) !important;
+  }
+}

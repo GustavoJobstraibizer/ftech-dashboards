@@ -68,8 +68,10 @@
         <ng-container *ngFor="let item of consumoInterno">
           <tr *ngIf="item?.Total">
             <td></td>
-            <td>Total</td>
-            <td class="text-right">{{ item?.ValorTotal | currency: 'BRL' }}</td>
+            <td class="f-w-600">Total</td>
+            <td class="text-right f-w-600">
+              {{ item?.ValorTotal | currency: 'BRL' }}
+            </td>
           </tr>
         </ng-container>
       </tfoot>

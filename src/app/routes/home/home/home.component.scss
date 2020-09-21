@@ -1,6 +1,39 @@
 @import 'variables';
 @import 'mixins';
 
+.filter-month-reference {
+  margin-top: var(--space-sm);
+  &__input {
+    text-align: center;
+    font-weight: 600;
+    max-width: 250px;
+    height: 50px;
+    font-size: 1rem;
+
+    @include mediaUp('lg') {
+      font-size: 1.3rem;
+    }
+  }
+
+  button {
+    padding: 0 var(--space-sm);
+
+    @include mediaUp('lg') {
+      padding: 0 var(--space-default);
+    }
+  }
+
+  &--btn-left {
+    border-top-left-radius: var(--space-xxs);
+    border-bottom-left-radius: var(--space-xxs);
+  }
+
+  &--btn-right {
+    border-top-right-radius: var(--space-xxs) !important;
+    border-bottom-right-radius: var(--space-xxs) !important;
+  }
+}
+
 .chart-container {
   display: grid;
   grid-template-areas:

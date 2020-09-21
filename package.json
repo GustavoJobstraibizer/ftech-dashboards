@@ -8,7 +8,8 @@
     "build:qa": "ng build",
     "build:prod": "ng build --prod --configuration=production && cp ./web.config dist/dashboards-fetch",
     "build:demo": "ng build --prod --configuration=demo",
-    "build:deploy": "ng build --prod --base-href https://GustavoJobstraibizer.github.io/ftech-dashboards/",
+    "build:deploy": "ng build --prod --base-href https://GustavoJobstraibizer.github.io/ftech-dashboards/ && npm run ngh",
+    "ngh": "ngh --dir dist/dashboards-fetch",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

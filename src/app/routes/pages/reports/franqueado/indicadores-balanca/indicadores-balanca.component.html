@@ -2,6 +2,7 @@
 
 <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
   <ft-periodo
+    #filters
     [getTodayDate]="true"
     (periodoFilterEmit)="filtroPeriodo($event)"
   ></ft-periodo>
@@ -9,75 +10,136 @@
 
 <ft-button-filter
   (filteredValueEmit)="filtroPeriodo($event)"
+  [getTodayDate]="true"
   [titleModalFilter]="
     'Selecione um período para visualizar o resumo de indicadores da Balança'
   "
 ></ft-button-filter>
 
-<ft-resumo [indicadorBalanca]="indicadorBalanca"></ft-resumo>
+<ft-resumo
+  [resumoBalancaTotal]="resumoBalancaTotal"
+  [(loading)]="loading"
+></ft-resumo>
 
-<p-table [value]="listResult" styleClass="p-datatable-responsive-demo">
+<p-table
+  [value]="listResult"
+  styleClass="p-datatable-responsive-demo"
+  [scrollable]="true"
+  scrollHeight="373px"
+>
   <ng-template pTemplate="header">
     <tr>
       <th>Caixa</th>
-      <th>Pesado(KG)</th>
-      <th>Estorno(KG)</th>
-      <th>Estorno(%)</th>
-      <th>Sistema fechado(KG)</th>
-      <th>Pesado(R$)</th>
-      <th>Estorno(R$)</th>
-      <th>Sistema fechado(KG)</th>
+      <th class="text-right">Pesado (KG)</th>
+      <th class="text-right">Estorno (KG)</th>
+      <th class="text-right">Estorno (%)</th>
+      <th class="text-right">Sistema fechado (KG)</th>
+      <th class="text-right">Pesado (R$)</th>
+      <th class="text-right">Estorno (R$)</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-resumo>
     <tr [ngClass]="{ 'p-footer-total': resumo?.UltimaLinha }">
       <td>
         <span class="p-column-title">Caixa</span>
-        <span class="p-column-value">{{ resumo.Caixa }}</span>
+        <span class="p-column-value">{{ resumo?.DescricaoCaixa }}</span>
       </td>
-      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
-        <span class="p-column-title">Pesado(KG)</span>
-        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
-          resumo.PesadoKG | number: '1.2-3'
-        }}</span>
-      </td>
-      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
-        <span class="p-column-title">Estorno(KG)</span>
-        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
-          resumo.EstornoKG | number: '1.3-3'
-        }}</span>
-      </td>
-      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
-        <span class="p-column-title">Estorno(%)</span>
-        <span class="p-column-value" [tooltip]="verDetalhesTooltip"
-          >{{ resumo.EstornoPercent }}%</span
+      <td
+        class="c-pointer text-right"
+        (click)="openModalDetalhesBalanca(eFiltroTipo.VENDA)"
+      >
+        <span class="p-column-title text-left">
+          <i class="fas fa-plus mr-2"></i>
+          Pesado (KG)
+        </span>
+        <span
+          class="p-column-value"
+          [tooltip]="verDetalhesTooltip"
+          placement="bottom"
+          >{{ resumo.VolumePeso | number: '1.2-3' }}</span
         >
       </td>
-      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
-        <span class="p-column-title">Sistema fechado(KG)</span>
-        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
-          resumo.SistemaFechado | number: '1.3-3'
-        }}</span>
+      <td
+        class="c-pointer text-right"
+        (click)="openModalDetalhesBalanca(eFiltroTipo.ESTORNO)"
+      >
+        <span class="p-column-title text-left"
+          ><i class="fas fa-plus mr-2"></i>Estorno (KG)</span
+        >
+        <span
+          class="p-column-value"
+          [tooltip]="verDetalhesTooltip"
+          placement="bottom"
+          >{{ resumo.VolumeEstorno | number: '1.3-3' }}</span
+        >
       </td>
-      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
-        <span class="p-column-title">Pesado(R$)</span>
-        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
-          resumo.PesadoMon | number: '1.2-2'
-        }}</span>
+      <td
+        class="c-pointer text-right"
+        (click)="openModalDetalhesBalanca(eFiltroTipo.ESTORNO)"
+      >
+        <span class="p-column-title text-left"
+          ><i class="fas fa-plus mr-2"></i>Estorno (%)</span
+        >
+        <span
+          class="p-column-value"
+          [tooltip]="verDetalhesTooltip"
+          placement="bottom"
+          >{{ resumo.PercentualEstorno | number: '1.2-2' }}%</span
+        >
       </td>
-      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
-        <span class="p-column-title">Estorno(R$)</span>
-        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
-          resumo.EstornoMon | number: '1.2-2'
-        }}</span>
+      <td
+        class="c-pointer text-right"
+        (click)="openModalDetalhesBalanca(eFiltroTipo.OFFLINE)"
+      >
+        <span class="p-column-title text-left"
+          ><i class="fas fa-plus mr-2"></i>Sistema fechado (KG)</span
+        >
+        <span
+          class="p-column-value"
+          [tooltip]="verDetalhesTooltip"
+          placement="bottom"
+          >{{ resumo.VolumeSistemaOffline | number: '1.3-3' }}</span
+        >
       </td>
-      <td class="c-pointer" (click)="openModalDetalhesBalanca()">
-        <span class="p-column-title">Sistema fechado (KG)</span>
-        <span class="p-column-value" [tooltip]="verDetalhesTooltip">{{
-          resumo.SistemaFechadoKG | number: '1.3-3'
-        }}</span>
+      <td
+        class="c-pointer text-right"
+        (click)="openModalDetalhesBalanca(eFiltroTipo.VENDA)"
+      >
+        <span class="p-column-title text-left"
+          ><i class="fas fa-plus mr-2"></i>Pesado (R$)</span
+        >
+        <span
+          class="p-column-value text-right"
+          [tooltip]="verDetalhesTooltip"
+          placement="bottom"
+          >{{ resumo.ValorPeso | number: '1.2-2' }}</span
+        >
+      </td>
+      <td
+        class="c-pointer text-right"
+        (click)="openModalDetalhesBalanca(eFiltroTipo.ESTORNO)"
+      >
+        <span class="p-column-title text-left"
+          ><i class="fas fa-plus mr-2"></i>Estorno (R$)</span
+        >
+        <span
+          class="p-column-value"
+          [tooltip]="verDetalhesTooltip"
+          placement="bottom"
+          >{{ resumo.ValorEstorno | number: '1.2-2' }}</span
+        >
       </td>
     </tr>
   </ng-template>
 </p-table>
+
+<button
+  type="button"
+  class="btn btn-primary btn-lg btn-view-details"
+  (click)="openModalDetalhesBalanca()"
+>
+  <i class="fas fa-plus mr-2"></i>
+  Visualizar detalhes
+</button>
+
 <ng-template #verDetalhesTooltip>Clique para mais detalhes</ng-template>

@@ -1,13 +1,26 @@
 <div class="home-container">
   <div class="d-flex flex-column">
     <h2 class="home-title text-center">
-      Indicadores do franqueado - Mês de referência <strong>{{ month }}</strong>
+      Indicadores do franqueado - Mês de referência
+      <!-- <strong>{{ month }}</strong> -->
     </h2>
+
+    <div class="filter-month-reference">
+      <div class="input-group d-flex justify-content-center">
+        <div class="input-group-prepend">
+          <button class="btn btn-primary filter-month-reference--btn-left" type="button" (click)="decrementMonthReference()"><i class="far fa-arrow-alt-circle-left fa-lg"></i></button>
+        </div>
+        <input type="text" class="form-control filter-month-reference__input" disabled [value]="month">
+        <div class="input-group-prepend">
+          <button class="btn btn-primary filter-month-reference--btn-right" type="button" (click)="incrementMonthReference()"><i class="far fa-arrow-alt-circle-right fa-lg"></i></button>
+        </div>
+      </div>
+    </div>
 
     <hr class="w-100" />
 
     <div class="content-indicador">
-      <ft-indicadores [(codigoFranqueado)]="codigoFranqueado"></ft-indicadores>
+      <ft-indicadores [(codigoFranqueado)]="codigoFranqueado" [(filtrosPesquisa)]="filtrosPesquisa"></ft-indicadores>
 
       <div class="content-filter col-12 col-sm-12 col-md-8 col-lg-8 col-xl-4">
         <div
@@ -33,6 +46,7 @@
     >
       <chart-tipo-pagamento
         [(codigoFranqueado)]="codigoFranqueado"
+        [(filtrosPesquisa)]="filtrosPesquisa"
       ></chart-tipo-pagamento>
     </ft-card>
 
@@ -48,6 +62,7 @@
       <chart-mensal
         [carregarVendasMensal]="carregarValores.carregarVendasMensal"
         [(codigoFranqueado)]="codigoFranqueado"
+        [(filtrosPesquisa)]="filtrosPesquisa"
       ></chart-mensal>
     </ft-card>
 
@@ -63,6 +78,7 @@
       <chart-historico
         [carregarHistorico]="carregarValores.carregarHistorico"
         [(codigoFranqueado)]="codigoFranqueado"
+        [(filtrosPesquisa)]="filtrosPesquisa"
       ></chart-historico>
     </ft-card>
 
@@ -78,6 +94,7 @@
       <chart-acumulados
         [carregarVendasAcc]="carregarValores.carregaVendasAcumuladas"
         [(codigoFranqueado)]="codigoFranqueado"
+        [(filtrosPesquisa)]="filtrosPesquisa"
       ></chart-acumulados>
     </ft-card>
 
@@ -89,6 +106,7 @@
       <chart-top-produtos
         [carregarTopProdutos]="carregarValores.carregaTopProdutos"
         [(codigoFranqueado)]="codigoFranqueado"
+        [(filtrosPesquisa)]="filtrosPesquisa"
       ></chart-top-produtos>
     </ft-card>
   </section>
