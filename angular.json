@@ -45,11 +45,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-              // "src/manifest.webmanifest"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
               "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
@@ -104,8 +100,6 @@
                   "maximumError": "10kb"
                 }
               ]
-              // "serviceWorker": true,
-              // "ngswConfigPath": "ngsw-config.json"
             },
             "demo": {
               "fileReplacements": [
