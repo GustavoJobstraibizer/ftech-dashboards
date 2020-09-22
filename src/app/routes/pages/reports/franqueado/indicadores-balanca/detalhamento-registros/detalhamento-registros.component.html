@@ -18,7 +18,7 @@
             <input
               type="checkbox"
               [(ngModel)]="checkFilters.venda"
-              (change)="filtroDetalhes()"
+              (change)="this.checkFilters.todos = false; filtroDetalhes()"
               name="venda"
             />
             <span class="fa fa-check"></span>Pesado e vendido</label
@@ -31,7 +31,7 @@
             <input
               type="checkbox"
               [(ngModel)]="checkFilters.estorno"
-              (change)="filtroDetalhes()"
+              (change)="this.checkFilters.todos = false; filtroDetalhes()"
               name="estorno"
             />
             <span class="fa fa-check"></span>Estorno</label
@@ -44,7 +44,7 @@
             <input
               type="checkbox"
               [(ngModel)]="checkFilters.offline"
-              (change)="filtroDetalhes()"
+              (change)="this.checkFilters.todos = false; filtroDetalhes()"
               name="offline"
             />
             <span class="fa fa-check"></span>Sistema Fechado</label
