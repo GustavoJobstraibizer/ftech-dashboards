@@ -1,11 +1,9 @@
-import { ModalPeriodoComponent } from './../../../../../shared/_components/filter/modal-periodo/modal-periodo.component';
-import { PeriodoComponent } from './../../../../../shared/_components/filter/periodo/periodo.component';
-import { IVendasHora } from './../../../../../shared/interfaces/vendas-hora.interface';
-import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service';
-import { Component, OnInit } from '@angular/core';
-import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { take } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core'
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
+import { finalize, take } from 'rxjs/operators'
+import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface'
+import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
+import { IVendasHora } from './../../../../../shared/interfaces/vendas-hora.interface'
 
 @Component({
   selector: 'ft-vendas-hora',
@@ -17,10 +15,12 @@ export class VendasHoraComponent implements OnInit {
     dataInicio: null,
     dataFim: null,
     codigoFranqueado: 0,
-  };
+  }
 
-  public vendas: IVendasHora[];
-  public bsModalRef: BsModalRef;
+  public loading = false
+
+  public vendas: IVendasHora[]
+  public bsModalRef: BsModalRef
 
   constructor(
     public franqueadosService: FranqueadosService,
@@ -28,37 +28,42 @@ export class VendasHoraComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getVendasPorHora();
+    this.getVendasPorHora()
   }
 
   getVendasPorHora() {
+    this.loading = true
     this.franqueadosService
       .getVendasPorHora(
         this.periodo.dataInicio,
         this.periodo.dataFim,
         this.periodo.codigoFranqueado
       )
+      .pipe(
+        take(1),
+        finalize(() => (this.loading = false))
+      )
       .subscribe((response) => {
-        this.vendas = response;
-        this.vendas.map(this.ultimaLinha.bind(this));
-      });
+        this.vendas = response
+        this.vendas.map(this.ultimaLinha.bind(this))
+      })
   }
 
   ultimaLinha(venda: IVendasHora, index: number) {
     if (index + 1 >= this.vendas.length) {
-      venda.UltimaLinha = true;
-      return venda;
+      venda.UltimaLinha = true
+      return venda
     }
 
     if (index + 1 >= this.vendas.length - 1) {
-      venda.PenultimaLinha = true;
-      return venda;
+      venda.PenultimaLinha = true
+      return venda
     }
   }
 
   filtroPeriodo(filter: any) {
-    this.periodo = filter;
-    this.getVendasPorHora();
+    this.periodo = filter
+    this.getVendasPorHora()
   }
 
   // openModalFiltros() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
+import { finalize, take } from 'rxjs/operators'
 import { IPeriodoBusca } from 'src/app/shared/interfaces/periodo-busca.interface'
 import { FranqueadosService } from './../../../../../core/services/dashboards/franqueados.service'
 import { IVendasConsumoInterno } from './../../../../../shared/interfaces/vendas-consumo-interno.interface'
@@ -17,6 +18,8 @@ export class ConsumoInternoComponent implements OnInit {
     codigoFranqueado: 0,
   }
 
+  public loading = false
+
   public consumoInterno: IVendasConsumoInterno[] = []
   bsModalRef: BsModalRef
 
@@ -30,11 +33,16 @@ export class ConsumoInternoComponent implements OnInit {
   }
 
   getVendasConsumoInterno() {
+    this.loading = true
     this.franqueadosService
       .getVendasConsumoInterno(
         this.periodo.dataInicio,
         this.periodo.dataFim,
         this.periodo.codigoFranqueado
+      )
+      .pipe(
+        take(1),
+        finalize(() => (this.loading = false))
       )
       .subscribe((data) => {
         this.consumoInterno = data

@@ -213,5 +213,8 @@
       </tbody>
     </table>
   </div>
-  <ft-empty-content *ngIf="!vendas?.length"></ft-empty-content>
+  <ft-empty-content
+    [(loading)]="loading"
+    *ngIf="!vendas.length || loading"
+  ></ft-empty-content>
 </ft-card>
