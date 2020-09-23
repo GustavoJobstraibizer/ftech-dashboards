@@ -59,6 +59,10 @@
             </tr>
           </ng-container>
         </tbody>
+        <ft-empty-content
+          [(loading)]="loading"
+          *ngIf="!consumoInterno.length || loading"
+        ></ft-empty-content>
       </table>
     </div>
     <ft-empty-content *ngIf="!consumoInterno?.length"></ft-empty-content>
