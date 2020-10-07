@@ -1,8 +1,8 @@
 .p-datatable-thead {
   tr {
     th {
-      background: var(--color-blue-dark);
-      color: #fff;
+      background: var(--color-blue-dark) !important;
+      color: #fff !important;
 
       // p-sorticon {
       //   .p-sortable-column-icon {
