@@ -1,0 +1,29 @@
+.p-datatable-thead {
+  tr {
+    th {
+      background: var(--color-blue-dark);
+      color: #fff;
+
+      // p-sorticon {
+      //   .p-sortable-column-icon {
+      //     color: #fff;
+      //   }
+      // }
+
+      // &:hover {
+      //   background: var(--color-blue-light-2) !important;
+      //   color: #2c2c2c !important;
+
+      //   p-sorticon {
+      //     .p-sortable-column-icon {
+      //       color: #2c2c2c !important;
+      //     }
+      //   }
+      // }
+    }
+  }
+}
+
+.p-datatable-scrollable-header-box {
+  padding: 0 !important;
+}
