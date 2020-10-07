@@ -4,22 +4,22 @@
       background: var(--color-blue-dark) !important;
       color: #fff !important;
 
-      // p-sorticon {
-      //   .p-sortable-column-icon {
-      //     color: #fff;
-      //   }
-      // }
+      p-sorticon {
+        .p-sortable-column-icon {
+          color: #fff;
+        }
+      }
 
-      // &:hover {
-      //   background: var(--color-blue-light-2) !important;
-      //   color: #2c2c2c !important;
+      &:hover {
+        background: var(--color-blue-light-2) !important;
+        color: #2c2c2c !important;
 
-      //   p-sorticon {
-      //     .p-sortable-column-icon {
-      //       color: #2c2c2c !important;
-      //     }
-      //   }
-      // }
+        p-sorticon {
+          .p-sortable-column-icon {
+            color: #2c2c2c !important;
+          }
+        }
+      }
     }
   }
 }
